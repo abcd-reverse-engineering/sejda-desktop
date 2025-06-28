@@ -1,5 +1,5 @@
-# desktop
-Sejda Desktop Editor source code
+# Sejda PDF Tools Desktop
+Sejda PDF Editor & Tools Desktop source code
 
 No modifications, no cracking. Some running errors in the program.
 
