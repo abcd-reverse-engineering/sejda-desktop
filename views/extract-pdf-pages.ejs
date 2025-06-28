@@ -1,0 +1,76 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #specificPagesWrap {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 10px;
+  }
+</style>
+
+<section id="task-content" data-task="extractPages" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Extract PDF Pages') %></h1>
+      <h2><%= __('Get a new document containing only the desired pages.') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+  <%- include('partials/pdf-page-thumbnails'); %>
+
+  <div class="centered bottom-fixed step2" style="display:none">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="extractPages"/>
+
+      <div class="container">
+        <div class="row">
+          <div>
+            <label><%= __('Selected pages') %>:</label>
+            <div data-toggle="buttons" class="btn-group">
+              <label class="btn btn-default btn-xs predefined-pages-selector">
+                <input value="odd" name="pages" type="radio">
+                <%= __('All Odd Pages') %>
+                <span class="input-help">
+                  <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Get a new document containing only the odd pages 1,3,5,7,etc. from the original."></i>
+                </span>
+              </label>
+              <label class="btn btn-default btn-xs predefined-pages-selector">
+                <input value="even" name="pages" type="radio"> <%= __('All Even Pages') %>
+                <span class="input-help">
+                  <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Get a new document containing only the even pages 2,4,6,8,etc. from the original."></i>
+                </span>
+              </label>
+              <label class="btn btn-default active btn-xs specific-pages-selector">
+                <input value="none" name="pages" type="radio"> <%= __('Specific pages') %>
+              </label>
+            </div>
+          </div>
+          <div id="specificPagesWrap">
+            <div class="input-group">
+              <input value="" min="1" placeholder="Example: 1-4,8-10,13,15-"
+                     class="form-control input-lg thumbs-multiple-select" type="text" name="pages"
+                     id="specificPages" data-validator="page-ranges">
+
+              <div class="input-group-addon input-help">
+                <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                   title="Enter page ranges like 1-4,8-10,13,15-. You get one document containing pages 1-4, 8-10, 13 and 15-end."></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row head-space">
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Extract pages') %></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'extracted' }); %>
+<%- include('partials/task-screen-after'); %>

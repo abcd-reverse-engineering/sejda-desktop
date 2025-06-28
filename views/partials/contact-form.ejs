@@ -1,0 +1,46 @@
+<section>
+  <div class="modal fade" id="contactFormModal" style="z-index: 4000">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="row centered contact-form-row" style="margin: 20px 40px;">
+            <h3 style="margin-bottom: 10px;">Contact SEJDA.COM support</h3>
+            <h5 style="margin-bottom: 30px;">Email us at <a href="mailto:<%=manifest.support.email%>"><%=manifest.support.email%></a> or use the form below</h5>
+            
+            <div id="contactSuccess" class="alert alert-success" style="display: none">
+              <i class="fa fa-check-circle" style="margin-right: 5px;"></i> Thank you, your message was sent. <br/>
+              We will get in touch soon.
+            </div>
+            <div id="bugReportResponseMessage" class="alert alert-success" style="display: none">
+              <i class="fal fa-shield-check" style="margin-right: 5px;"></i> Thank you for the bug report.<br/>
+              <span class="remote-response"></span>
+            </div>
+            
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="contact-msg">Message</label>
+                <textarea id="contact-msg" class="form-control" name="message" style="min-height: 100px; padding: 15px" required="required" placeholder="Message"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Your email address</label>
+                <input type="email" class="form-control" id="contact-email" name="email" placeholder="Email (so we can reply)">
+              </div>
+              <div class="form-group">
+                <label for="allowAccessLastTask" style="margin-top: 10px;">Reporting a problem?</label>
+              </div>
+              <div class="checkbox" style="max-width: 405px; margin: auto; margin-top: -15px; text-align: left;">
+                <label><input type="checkbox" id="allowAccessLastTask" name="allowAccessLastTask" value="true" style="margin: 5px; margin-right: 15px;"> Share data from the last task performed.</label>
+                <p class="help-block" style="font-size: 12px; padding-left: 33px; margin-top: 0;">We'll use this data for troubleshooting purposes only.</p>
+              </div>
+              <button type="submit" class="btn btn-default" id="sendMessageBtn" style="margin-top: 20px; padding-left: 30px; padding-right: 30px;">Send message</button>
+              <input type="hidden" name="suflet" value="iluzie">
+              <input type="hidden" name="about" value="<%=manifest.productName%> message">
+              <input type="hidden" name="debugInfo" value=""/>
+            </form>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</section>

@@ -1,0 +1,172 @@
+<%- include('partials/task-screen-before'); %>
+
+<link rel="stylesheet" href="public/css/jquery.minicolors.css">
+
+<section id="task-content" data-task="headerFooter" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Add PDF Header & Footer') %></h1>
+      <h2><%= __('Apply page numbers or text labels to PDF files') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="headerFooter"/>
+      <input name="pattern" value="" type="hidden">
+
+      <div class="container">
+        <div class="row head-space-xl" style="max-width: 500px; margin: auto">
+          <div class="dropdown">
+            <label><%= __('Customize Style') %></label>
+            <div class="hf-format-customize" data-id="hf-pages-arabic">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg" name="hf-format-customize[]" value="Page">
+                <div class="input-group-addon input-lg" style="min-width: 150px">1</div>
+                <input type="hidden" name="hf-format-customize[]" value="[PAGE_ARABIC]">
+              </div>
+            </div>
+            <div class="hf-format-customize" data-id="hf-pages-roman" style="display: none">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg" value="Page" name="hf-format-customize[]">
+                <div class="input-group-addon input-lg" style="min-width: 150px">VII</div>
+                <input type="hidden" name="hf-format-customize[]" value="[PAGE_ROMAN]">
+              </div>
+            </div>
+            <div class="hf-format-customize" data-id="hf-page-of-total" id="hf-page-of-total" style="display: none">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg" value="Page" name="hf-format-customize[]">
+                <div class="input-group-addon input-lg">2</div>
+                <input type="hidden" name="hf-format-customize[]" value="[PAGE_ARABIC]">
+                <input type="text" class="form-control input-lg" value="of" name="hf-format-customize[]">
+                <div class="input-group-addon input-lg">45</div>
+                <input type="hidden" name="hf-format-customize[]" value="[TOTAL_PAGES_ARABIC]">
+              </div>
+            </div>
+            <div class="hf-format-customize" data-id="hf-filename" id="hf-filename" style="display: none">
+              <div class="input-group">
+                <div class="input-group-addon input-lg" style="border-left: 1px #CCC solid;">Filename</div>
+                <input type="hidden" name="hf-format-customize[]" value="[BASE_NAME]">
+              </div>
+            </div>
+            <div class="hf-format-customize" data-id="hf-text-only" id="hf-text-only" style="display: none">
+              <input type="text" name="hf-format-customize[]" class="form-control input-lg" value="Draft version">
+            </div>
+            <button class="btn btn-default btn-xs btn-link dropdown-toggle style-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right dropdown-menu-right style-dropdown-menu" role="menu">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:///" data-value="hf-pages-arabic"><%= __('Page 1, Page 2, Page 3') %></a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:///" data-value="hf-pages-roman"><%= __('Page I, Page II, Page III') %></a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:///" data-value="hf-page-of-total"><%= __('Page 2 of 45') %></a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:///" data-value="hf-filename"><%= __('Filename') %></a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:///" data-value="hf-text-only"><%= __('Text only') %></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+          <div id="hf-preview"></div>
+        </div>
+
+        <div class="row">
+          <label><%= __('Location on page') %></label>
+          <select class="form-control input-lg" name="pageLocation" style="width: 100%; max-width: 400px; display: block; margin: auto;">
+            <option value="top-left">Header left</option>
+            <option value="top-center" selected>Header center</option>
+            <option value="top-right">Header right</option>
+            <option value="bottom-left">Footer left</option>
+            <option value="bottom-center">Footer center</option>
+            <option value="bottom-right">Footer right</option>
+          </select>
+        </div>
+
+        <div class="row head-space-xl">
+          <label>Font</label><br>
+          <div data-toggle="buttons" class="btn-group">
+            <label class="btn btn-default btn-xs active times-new-roman">
+              <input checked="" value="Times-Roman" name="font" type="radio"> Times New Roman
+            </label>
+            <label class="btn btn-default btn-xs helvetica">
+              <input value="Helvetica" name="font" type="radio"> Helvetica
+            </label>
+            <label class="btn btn-default btn-xs courier">
+              <input value="Courier" name="font" type="radio"> Courier
+            </label>
+          </div>
+          <select style="vertical-align: middle" class="input-lg" name="fontSize">
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option selected="selected" value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="18">18</option>
+            <option value="20">20</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+            <option value="28">28</option>
+          </select>
+          <input type="hidden" name="color" class="minicolors-input" value="#000000" size="7">
+        </div>
+
+        <div class="row head-space-xl">
+          <label><%= __('Document Margins') %></label><br>
+          <div data-toggle="buttons" class="btn-group">
+            <label class="btn btn-default btn-xs active">
+              <input checked="" value="false" name="addMargins" type="radio"> <%= __('Leave unchanged') %>
+            </label>
+            <label class="btn btn-default btn-xs">
+              <input value="true" name="addMargins" type="radio"> <%= __('Increase margins') %>
+              <span class="input-help">
+                        <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="Increase document margins to avoid overlapping existing text."></i>
+                      </span>
+            </label>
+          </div>
+        </div>
+
+        <div id="hf-more-options" style="display: none" class="row head-space more-options">
+          <div class="row" style="text-align: left; margin-top: 10px;">
+            <div class="col-sm-9">
+              <label class="light"><%= __('Apply only to pages') %></label><br/>
+              <div class="input-group">
+                <input value="" min="1" placeholder="Example: 1-10 or 12- or odd or even or 2,4,6,10"
+                       class="form-control input-lg thumbs-multiple-select" type="text" name="pages"
+                       id="specificPages" data-validator="page-ranges-or-predefined">
+
+                <div class="input-group-addon input-help">
+                  <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Don't want to apply the header to the whole document?<br/> Enter page ranges like <code>1-10,13,15-</code> or <code>even</code> <code>odd</code>.<br/>Header or footer will only be applied to these specific pages."></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <label class="light"><%= __('Start numbering from') %></label><br/>
+                <input style="width: 130px" value="1" class="input-lg" name="pageCountStartFrom" type="text">
+                <span class="input-help">
+                <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                   title="Helpful, for example, when skipping over a 3 pages Introduction that's already numbered with romans."></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row head-space" style="margin-bottom: 30px; margin-top: 30px;">
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Add header/footer') %> <i class="fal fa-chevron-right"></i></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><%= __('More options') %></a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'updated' }); %>
+<%- include('partials/task-screen-after'); %>

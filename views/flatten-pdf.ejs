@@ -1,0 +1,90 @@
+<%- include('partials/task-screen-before'); %>
+
+<section id="task-content" data-task="crop" data-can-rotate="false" data-multiple-files="true">
+    <div class="container centered">
+        <div class="row">
+            <h1><%= __('Flatten PDF') %></h1>
+            <h2><%= __('Makes fillable PDFs read-only') %>. <%= __('Print & scan in one step') %></h2>
+        </div>
+    </div>
+
+    <%- include('partials/file-upload'); %>
+    <%- include('partials/loading'); %>
+    <%- include('partials/pdf-files-summary'); %>
+
+    <div class="centered step2" style="display:none; margin-top: 40px">
+        <form class="form-inline task-form" autocomplete="off">
+            <input type="hidden" name="type" value="flatten"/>
+            <input type="hidden" name="outputFilenamePattern" value="" />
+
+            <div class="container centered">
+                <div class="row">
+                    <label><%= __('Choose an option') %>:</label>
+                    <br/>
+                    <div data-toggle="buttons" class="btn-group">
+                        <label class="btn btn-default btn-xs active">
+                            <input value="all" name="flattenMode" type="radio" checked="checked">
+                            <%= __('Flatten everything') %>
+                            <span class="input-help">
+                    <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                       title="Choose this option if you want to convert PDF pages into un-editable versions. Each page will be converted to an image, so text cannot be copied or modified."></i>
+                  </span>
+                        </label>
+                        <label class="btn btn-default btn-xs">
+                            <input value="onlyforms" name="flattenMode" type="radio">
+                            <%= __('Flatten only form fields') %>
+                            <span class="input-help">
+                    <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                       title="Choose this option if you want to turn a fillable PDF into a read-only version, so existing fields cannot be changed anymore. Affects only form fields"></i>
+                  </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="more-options" style="display: none; padding-bottom: 40px;">
+                    <div class="row head-space-xl flatten-everything-option">
+                        <label><%= __('Image resolution') %>:</label>
+                        <br/>
+                        <div data-toggle="buttons" class="btn-group">
+                            <label class="btn btn-default btn-xs">
+                                <input value="75" name="resolution" type="radio">
+                                75 dpi
+                                <span class="input-help">
+                          <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                             title="Choose this for smallest size."></i>
+                        </span>
+                            </label>
+                            <label class="btn btn-default btn-xs">
+                                <input value="100" name="resolution" type="radio">
+                                100 dpi
+                            </label>
+                            <label class="btn btn-default btn-xs active">
+                                <input value="150" name="resolution" type="radio">
+                                150 dpi
+                                <span class="input-help">
+                          <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                             title="A balance between resolution and file size."></i>
+                        </span>
+                            </label>
+                            <label class="btn btn-default btn-xs">
+                                <input value="220" name="resolution" type="radio">
+                                220 dpi
+                                <span class="input-help">
+                          <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                             title="A very good resolution but larger file size."></i>
+                        </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 40px;">
+                    <button type="submit" class="btn btn-default btn-medium"><%= __('Flatten PDF') %></button>
+                    <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><%= __('More options') %></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'flattened' }); %>
+<%- include('partials/task-screen-after'); %>

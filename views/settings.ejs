@@ -1,0 +1,115 @@
+<%- include('partials/regular-screen-before'); %>
+
+<style>
+  #settingsForm {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    text-align: left;
+  }
+
+  h4 {
+    margin-bottom: 20px;
+  }
+
+  #langOpts .dropdown-menu li a {
+    font-size: 16px;
+  }
+
+  .output-filenames-opts-row .radio {
+    margin-bottom: 25px;
+  }
+
+  .tool-warning {
+    color: #664d03;
+    background-color: rgba(252,232,186,0.4);
+    margin: auto;
+    max-width: 550px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-left: -10px;
+    font-size: 14px;
+  }
+</style>
+
+<section id="content" style="margin-bottom: 40px">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('General Settings') %></h1>
+    </div>
+    <form id="settingsForm">
+      <div class="row">
+        <h3><%= __('Error Reporting') %></h3>
+        <h4><%= __('Send automatic error reports when the software encounters errors') %>.</h4>
+
+        <label class="radio-inline">
+          <input type="radio" name="autoReportErrors" value="true"> <%= __('Yes') %>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="autoReportErrors" value="false"> <%= __('No') %>
+        </label>
+      </div>
+      <div class="row" style="margin-top: 30px">
+        <h3>Language</h3>
+        <h4><%= __('Please select a language') %>.</h4>
+        <div class="dropdown" id="langOpts">
+          <button class="btn btn-secondary btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span class="caption">English</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="javascript://" data-value="en">English</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="javascript://" data-value="de">Deutsch</a></li>
+            <li><a href="javascript://" data-value="es">Español</a></li>
+            <li><a href="javascript://" data-value="fr">Français</a></li>
+            <li><a href="javascript://" data-value="it">Italiano</a></li>
+            <li><a href="javascript://" data-value="pt">Português</a></li>
+            <li><a href="javascript://" data-value="pl">Polski</a></li>
+            <li><a href="javascript://" data-value="ro">Română</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row output-filenames-opts-row" style="margin-top: 30px">
+        <h3><%= __('Output Filename Options') %></h3>
+        <h4><%= __('Select your preferred format for naming output files') %>.</h4>
+
+        <label class="radio light">
+          <input type="radio" name="outputFilenameAffixOpts" value="prefix"> 
+          <%= __('Prefix - Add at Start') %> 
+          <span class="input-help-inline"><%= __('Prepends a specified identifier to the beginning of the filename. Eg: edited_original.pdf') %> </span>
+        </label>
+        <label class="radio light">
+          <input type="radio" name="outputFilenameAffixOpts" value="suffix"> 
+          <%= __('Suffix - Add at End') %>
+          <span class="input-help-inline"><%= __('Appends a specified identifier to the end of the filename, before the file extension.') %> Eg: original_edited.pdf</span>
+        </label>
+        <label class="radio light">
+          <input type="radio" name="outputFilenameAffixOpts" value="none"> 
+          <%= __('Keep Original - No Change') %>
+          <span class="input-help-inline"><%= __('Leaves the filename unchanged.') %> Eg: original.pdf</span>
+          <p class="tool-warning">
+            <%= __('Warning: Not recommended. Always make a backup of your original files before overwriting them.') %>
+          </p>
+        </label>
+      </div>
+      <div class="row">
+        <h3><%= __('Recent files') %></h3>
+        <h4><%= __('Show the list of recently used files') %>.</h4>
+
+        <label class="radio-inline">
+          <input type="radio" name="showRecentFiles" value="true"> <%= __('Yes') %>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="showRecentFiles" value="false"> <%= __('No') %>
+        </label>
+      </div>
+      <div class="row centered" style="margin-top: 50px; margin-bottom: 50px;">
+        <a href="javascript://" class="btn btn-xs btn-secondary" id="resetDefaultsBtn"><%= __('Reset to defaults') %></a>
+        <a href="javascript://" onclick="window.history.back();" class="btn btn-xs"><i class="fal fa-check" style="margin-right: 5px"></i> <%= __('Done') %></a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('partials/regular-screen-after'); %>

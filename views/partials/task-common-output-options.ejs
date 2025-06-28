@@ -1,0 +1,9 @@
+<script>
+  window.TaskCommonOutputInitOpts = {
+    onlyDirectory: <%= locals.onlyDirectory || false %>,
+    onlyFile: <%= locals.onlyFile || false %>,
+    extension: '<%= locals.extension || '' %>',
+    outputFilenameAffix: '<%= locals.outputFilenameAffix %>',
+    outputFilenamePattern: '<%= locals.outputFilenamePattern || '' %>'
+  };
+</script>

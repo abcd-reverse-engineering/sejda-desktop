@@ -1,0 +1,153 @@
+<div class="container-fluid mega-menu" style="display: none" id="megaMenu">
+    <div class="mega-menu-inner">
+        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="container">
+            <div class="row">
+                <div class="col col-sm-2 col-md-5ths">
+                    <ul class="popular">
+                        <li class="header">
+                            <%= __('Popular') %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col col-sm-2 col-md-5ths">
+                    <ul>
+                        <li class="header"><%= __('Merge') %></li>
+                        <li>
+                            <a href="alternate-mix-pdf.ejs"  title="Mixes pages from 2 or more documents, alternating between them"><%= __('Alternate & Mix') %></a>
+                        </li>
+                        <li>
+                            <a href="merge-pdf.ejs"  title="Combine multiple PDFs and images into one"><%= __('Merge') %></a>
+                        </li>
+                        <li>
+                            <a href="visually-combine-reorder-pdf.ejs" class="shrinked" title="Merge pages from different documents, reorder pages if needed"><%= __('Combine & Reorder') %></a>
+                        </li>
+                        <li class="header lower">
+                            <%= __('Split') %>
+                        </li>
+                        <li>
+                            <a href="extract-pdf-pages.ejs"  title="Get a new document containing only the desired pages"><%= __('Extract Pages') %></a>
+                        </li>
+                        <li>
+                            <a href="split-pdf.ejs"  title="Split specific page ranges or extract every page into a separate document"><%= __('Split by pages') %></a>
+                        </li>
+                        <li>
+                            <a href="split-pdf-by-outline.ejs" class="shrinked" title="Extract chapters to separate documents based on the bookmarks in the table of contents"><%= __('Split by bookmarks') %></a>
+                        </li>
+                        <li>
+                            <a href="split-pdf-down-the-middle.ejs"  title="Split two page layout scans, A3 to double A4 or A4 to double A5"><%= __('Split in half') %></a>
+                        </li>
+                        <li>
+                            <a href="split-pdf-by-size.ejs"  title="Get multiple smaller documents with specific file sizes"><%= __('Split by size') %></a>
+                        </li>
+                        <li>
+                            <a href="split-pdf-by-text.ejs"  title="Extract separate documents when specific text changes from page to page"><%= __('Split by text') %></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col col-sm-2 col-md-5ths">
+                    <ul>
+                        <li class="header">
+                            <%= __('Edit & Sign') %>
+                        </li>
+                        <li>
+                            <a href="pdf-editor.ejs"  title="Edit & Sign PDF files, Fill PDF forms. Add text, links, images and shapes. Edit existing PDF text. Annotate PDF"><%= __('Edit') %></a>
+                        </li>
+                        <li>
+                            <a href="sign-pdf.ejs"  title="Fill and Sign PDF"><%= __('Fill & Sign') %></a>
+                        </li>
+                        <li class="header lower">
+                            <%= __('Compress') %>
+                        </li>
+                        <li>
+                            <a href="compress-pdf.ejs"  title="Reduce the size of your PDF"><%= __('Compress') %></a>
+                        </li>
+                        <li class="header lower">
+                            <%= __('Security') %>
+                        </li>
+                        <li>
+                            <a href="encrypt-pdf.ejs"  title="Protect file with password and permissions"><%= __('Protect') %></a>
+                        </li>
+                        <li>
+                            <a href="decrypt-pdf.ejs"  title="Remove restrictions and password from PDF files"><%= __('Unlock') %></a>
+                        </li>
+                        <li>
+                            <a href="watermark-pdf.ejs"  title="Add image or text watermark to PDF documents"><%= __('Watermark') %></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col col-sm-2 col-md-5ths">
+                    <ul>
+                        <li class="header">
+                            <%= __('Convert from PDF') %>
+                        </li>
+                        <li>
+                            <a href="pdf-to-excel.ejs"  title="Convert PDF to Excel or CSV. Extract table data from PDF"><%= __('PDF to Excel') %></a>
+                        </li>
+                        <li>
+                            <a href="pdf-to-jpg.ejs"  title="Get pages converted to JPG, PNG or TIFF images"><%= __('PDF to JPG') %></a>
+                        </li>
+                        <li>
+                            <a href="extract-text-from-pdf.ejs"  title="Copies all text from the PDF document and extracts it to a separate text file"><%= __('PDF to Text') %></a>
+                        </li>
+                        <li>
+                            <a href="pdf-to-word.ejs"  title="Creates a Microsoft Word .docx with text and images from PDF, optimizing for legibility"><%= __('PDF to Word') %></a>
+                        </li>
+                        <li class="header lower">
+                            <%= __('Convert to PDF') %>
+                        </li>
+                        <li>
+                            <a href="jpg-to-pdf.ejs"  title="Convert Images to PDF"><%= __('JPG to PDF') %></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col col-sm-2 col-md-5ths">
+                    <ul>
+                        <li class="header">
+                            <%= __('Other') %>
+                        </li>
+                        <li>
+                            <a href="bates-numbering-pdf.ejs"   title="Bates stamp multiple files at once"><%= __('Bates Numbering') %></a>
+                        </li>
+                        <li>
+                            <a href="crop-pdf.ejs"  title="Trim PDF margins, change PDF page size"><%= __('Crop') %></a>
+                        </li>
+                        <li>
+                            <a href="delete-pdf-pages.ejs"  title="Remove pages from a PDF document"><%= __('Delete Pages') %></a>
+                        </li>
+                        <li>
+                            <a href="extract-images-from-pdf.ejs"  title="Extract images from PDF"><%= __('Extract Images') %></a>
+                        </li>
+                        <li>
+                            <a href="grayscale-pdf.ejs"  title="Convert PDF text and images to grayscale"><%= __('Grayscale') %></a>
+                        </li>
+                        <li>
+                            <a href="header-footer-pdf.ejs"  title="Apply page numbers or text labels to PDF files"><%= __('Header & Footer') %></a>
+                        </li>
+                        <li>
+                            <a href="n-up-pdf.ejs"  title="Print multiple pages per sheet per paper. A5 plan as 4-up on A3 or A4 2-up on A3"><%= __('N-up') %></a>
+                        </li>
+                        <li>
+                            <a href="ocr-pdf.ejs" title="Convert PDF scans to searchable text and PDFs. Extract text from scans"><%= __('OCR') %></a>
+                        </li>
+                        <li>
+                            <a href="repair-pdf.ejs"  title="Recover data from a corrupted or damaged PDF document"><%= __('Repair') %></a>
+                        </li>
+                        <li>
+                            <a href="resize-pdf.ejs"  title="Add page margins and padding, Change PDF page size"><%= __('Resize') %></a>
+                        </li>
+                        <li>
+                            <a href="rotate-pdf-pages.ejs"  title="Rotate and save PDF pages permanently"><%= __('Rotate') %></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="centered">
+                    <input type="text" class="form-control input-sm" placeholder="Quickly find a tool" id="searchTools">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

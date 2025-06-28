@@ -1,0 +1,126 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #pdfBookmarks {
+    border: 1px #CCC solid;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    overflow-y: scroll;
+    padding-left: 20px;
+    overflow-x: hidden;
+    height: 400px;
+    margin-bottom: 30px;
+    background-color: #f2f2f2;
+  }
+
+  #pdfBookmarks ol {
+    margin: 0;
+    padding: 0;
+    margin-left: 25px;
+  }
+
+  #pdfBookmarks > ol {
+    margin-left: 0;
+  }
+
+  #pdfBookmarks li {
+    list-style: none;
+  }
+
+  #pdfBookmarks .fal {
+    font-size: 16px;
+    margin-right: 3px;
+    vertical-align: middle;
+    margin-left: -9px;
+  }
+
+  #bookmarksLevelSelector .radio-inline input {
+    cursor: pointer;
+  }
+
+  #bookmarksLevelSelector .radio-inline {
+    margin-right: 10px;
+  }
+</style>
+
+<section id="task-content" data-task="splitByBookmarks" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Split PDF by table of contents') %></h1>
+      <h2><%= __('Extract chapters to separate documents based on the bookmarks in the table of contents') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="splitByBookmarks"/>
+      <input type="hidden" name="outputFilenamePattern" value="[FILENUMBER]_[BOOKMARK_NAME_STRICT]"/>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div id="pdfBookmarks">Loading document table of contents...</div>
+          </div>
+          <div class="col-md-6">
+            <div class="alert alert-warning" id="no-toc-warning" style="display: none">
+              <i class="fal fa-exclamation-triangle"></i> No table of contents found in the document
+            </div>
+            <div class="row">
+              <label>
+                <%= __('Bookmark level') %>
+                <span class="input-help">
+                  <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="The outline is organized as a tree, top being level 1, their immediate children being level 2 and so on. Pick a set of outline items based on their level."></i>
+                </span>
+              </label>
+              <div data-toggle="buttons" class="btn-group" id="bookmarksLevelSelector" disabled="disabled">
+                <label class="btn btn-default btn-xs disabled"><input value="1" name="bookmarksLevel" type="radio" disabled="disabled">1 </label>
+                <label class="btn btn-default btn-xs disabled"><input value="2" name="bookmarksLevel" type="radio" disabled="disabled">2 </label>
+                <label class="btn btn-default btn-xs disabled"><input value="3" name="bookmarksLevel" type="radio" disabled="disabled">3 </label>
+              </div>
+            </div>
+            <div class="row" style="width: 80%; margin: auto; margin-top: 20px;">
+              <label>
+                <%= __('Only bookmarks containing text') %> <span class="light">(optional)</span>
+                <span class="input-help">
+                  <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Only outline items that contain the selected string will be taken into account, and the rest ignored."></i>
+                </span>
+              </label>
+              <input name="bookmarksExpression" id="bookmarksExpression" type="text" class="form-control input-lg" placeholder="Example: Chapter" value="">
+            </div>
+          </div>
+        </div>
+        <div class="more-options head-space-xl" style="display: none">
+          <div class="row">
+            <label><%= __('Missing final paragraphs?') %></label>
+          </div>
+          <div class="row">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="includePageAfter" value="true"><%= __('Include extra page at the end') %>
+                <span class="input-help">
+                            <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                               title="Useful when splitting text documents. If you find that sometimes the last paragraphs from a chapter are missing. This option will add one extra page at the end of each split document."></i>
+                          </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Split by bookmarks') %></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><%= __('More options') %></a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { onlyDirectory: true, outputFilenamePattern: '[FILENUMBER]_[BOOKMARK_NAME_STRICT]' }); %>
+<%- include('partials/task-screen-after'); %>

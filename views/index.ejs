@@ -1,0 +1,18 @@
+<%- include('partials/regular-screen-before'); %>
+
+<%- include('partials/news'); %>
+<%- include('partials/licensing/licensing'); %>
+
+<section id="content">
+  <div class="container centered">
+    <div class="row homepage-title">
+
+      <h1><%=manifest.productName%></h1>
+      <h2><%=manifest.productDescription%></h2>
+
+    </div>
+  </div>
+  <%- include('partials/homepage/tasks'); %>
+</section>
+
+<%- include('partials/regular-screen-after'); %>

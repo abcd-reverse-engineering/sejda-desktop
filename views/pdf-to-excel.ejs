@@ -1,0 +1,59 @@
+<%- include('partials/task-screen-before'); %>
+
+<section id="task-content" data-task="pdfToExcelNext" data-multiple-files="true">
+<div class="container centered">
+  <div class="row">
+    <h1><%= __('PDF to Excel or CSV') %></h1>
+    <h2><%= __('Convert PDF to Excel or CSV. Extract table data from PDF') %></h2>
+  </div>
+</div>
+
+<%- include('partials/file-upload', { pages: 10 }); %>
+<%- include('partials/loading'); %>
+<%- include('partials/pdf-files-summary'); %>
+
+<section class="page-loading" style="display: none">
+  <div class="progress-radial progress-0">
+    <div class="overlay">0%</div>
+  </div>
+  <div>Loading page <span class="currentPage"></span> of <span class="totalPages"></span> , please wait...</div>
+</section>
+
+<section class="scroll-here-step2">
+  <div class="centered" style="display: none" id="edit-pages-wrap">
+    <div id="edit-pages">
+    </div>
+  </div>
+</section>
+
+<div class="centered step2" style="display:none; margin-top: 40px">
+  <form class="form-inline task-form" autocomplete="off">
+    <input type="hidden" name="type" value="pdfToExcelNext"/>
+    <input type="hidden" name="exportFormat" value="excel"/>
+
+    <div class="container centered">
+      <div class="row">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="true" name="singleSheet">
+            <%= __('All tables in a single spreadsheet') %>
+          </label>
+          <span class="input-help">
+            <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+               title="Different tables are by default written to separate sheets. This option forces them all into one single sheet."></i>
+          </span>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 40px">
+        <button id="submit-task-form-btn-csv" type="button" class="btn btn-secondary btn-medium"><%= __('Convert PDF to CSV') %></button>
+        <button id="submit-task-form-btn" type="button" class="btn btn-default btn-medium"><%= __('Convert PDF to Excel') %></button>
+      </div>
+    </div>
+  </form>
+</div>
+
+  <script class="pageScripts" data-src="public/js/pages/pdf-to-excel.min.js"></script>
+</section>
+
+<%- include('partials/task-common-output-options', { extension: '.xlsx' }); %>
+<%- include('partials/task-screen-after'); %>

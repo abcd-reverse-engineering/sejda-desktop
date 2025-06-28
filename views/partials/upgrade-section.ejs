@@ -1,0 +1,83 @@
+<section class="upgrade-section" style="display: none">
+  <h2>
+    <span id="tasks-per-hour-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 3 tasks per day.") %>
+      <br/>
+      Upgrade to continue now, or take a break for <span class="wait-countdown-clock">23:59:59</span>.
+    </span>
+    <span id="pages-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 200 pages per document.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="batch-files-reason" class="upgrade-reason" style="display: none;">
+      <%= __("Free users are limited to a single file per task.") %>
+      <br/>
+      Upgrade to batch process multiple files at once.
+    </span>
+    <span id="free-pages-per-task-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 50 pages.") %>
+      <br>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="files-per-task-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 30 files per task.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="file-size-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 50 MB per document.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="image-file-size-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 5 MB per image file.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="page-count-per-visual-merge-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 50 pages per visual combine.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="page-count-per-merge-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 50 pages per merge.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="page-count-per-pdf-to-jpg-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 20 pages per document.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="page-count-per-split-by-text-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 10 pages per text split.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="page-count-per-pdf-to-excel-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 10 pages per excel conversion.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="jpg-resolution-reason" class="upgrade-reason" style="display: none;">
+      <%= __("Image resolution for free users is limited to 72 dpi.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="page-count-per-ocr-reason" class="upgrade-reason" style="display: none;">
+      <%= __("You reached your free limit of 10 pages per OCR.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+    <span id="file-count-per-rename-reason" class="upgrade-reason" style="display: none;">
+      <%= __("Free users are limited to 5 files per Rename task.") %>
+      <br/>
+      Upgrade to continue processing this task.
+    </span>
+  </h2>
+  <a href="<%= manifest.buyUrl %>" target="_parent" class="btn btn-default upgrade-btn">Upgrade</a>
+  <a href="javascript://" data-dismiss="modal" class="btn btn-link btn-flat-secondary buy-later-btn">Later</a>
+
+  <a class="already-customer-link existing-license-btn" href="javascript://">Already upgraded? Enter your license key</a>
+</section>

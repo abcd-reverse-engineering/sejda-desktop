@@ -1,0 +1,322 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  .bottom-task-options {
+    margin-top: -200px;
+  }
+
+  .can-select {
+    display: none;
+  }
+
+  .btn-group.upload-btn-group.main .fileinput-button {
+    min-width: 367px;
+    text-align: center;
+  }
+
+  .add-mark {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 260px;
+    width: 30px;
+    position: absolute;
+    z-index: 2;
+    margin-left: 5px;
+    pointer-events: none;
+  }
+
+  .add-mark.before {
+    margin-left: -35px;
+  }
+
+  .add-mark .fal {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #555;
+    border-radius: 20px;
+    padding: 5px;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0.4;
+    pointer-events: all;
+  }
+
+  .add-mark.hover .fal,
+  .add-mark .fal:hover,
+  .add-mark.selected .fal {
+    background-color: #0282e5;
+    color: #FFF;
+    opacity: 1;
+  }
+
+  .local-files-chooser .fileinput-button input,
+  .local-files-chooser .fileinput-link input {
+    height: 30px;
+  }
+
+  .dropdown-submenu {
+    position: relative;
+  }
+
+  .dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+  }
+
+  .dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #777;
+    margin-top: 7px;
+    margin-right: -2px;
+  }
+
+  .dropdown-submenu.pulled-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    border-radius: 6px 0 6px 6px;
+  }
+</style>
+
+<section id="task-content" data-task="merge" data-can-sort="true" data-can-reorder="true" data-can-delete="true" data-can-rotate="true" data-can-duplicate="true" data-can-move="true" data-multiple-files="true" data-drop-files-once="false">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Merge PDF') %></h1>
+      <h2><%= __('Combine multiple PDFs and images into one') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload', { pages: 50, fileTypes: 'pdf,png,gif,jpg,jpeg,tif,tiff,bmp'}); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-page-thumbnails'); %>
+  <%- include('partials/pages-picker-modal'); %>
+
+  <div class="centered step2 bottom-fixed" id="taskOptionsPanel" style="display:none;">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="merge"/>
+      <input type="hidden" name="mode" value="file"/>
+      <input type="hidden" name="outputFilename" value=""/>
+
+      <div class="container">
+        <section class="more-options" style="display: none">
+          <div class="row head-space-xl">
+            <label><lift:locS>Pages</lift:locS></label>
+          </div>
+          <div class="row centered aligned-checkbox-wrap">
+            <div class="row aligned-checkbox">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="true" name="blankPageIfOdd" class="remembered">
+                  <lift:locS>Double sided printing</lift:locS>
+                </label>
+                <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Adds a blank page at the end of documents with odd number of pages."></i>
+                    </span>
+              </div>
+            </div>
+            <div class="row aligned-checkbox">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="true" name="normalizePageSizes" class="remembered">
+                  <lift:locS>Make all pages same size</lift:locS>
+                </label>
+                <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Merged pages will be resized so they all have the same width, based on the dimensions of the first page."></i>
+                    </span>
+              </div>
+            </div>
+            <div class="row aligned-checkbox">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="true" name="firstInputCoverTitle"  class="remembered">
+                  <lift:locS>First document is a cover/title</lift:locS>
+                </label>
+                <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="We'll insert the generated Table of Contents after all pages from the first input document."></i>
+                      </span>
+              </div>
+            </div>
+            <div class="row aligned-checkbox">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="true" name="filenameFooter" class="remembered">
+                  <lift:locS>Add filename to page footer</lift:locS>
+                </label>
+                <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="Merged pages will have the name of the original document they belonged to in the footer."></i>
+                      </span>
+              </div>
+            </div>
+          </div>
+          <div class="row head-space-xl">
+            <label><lift:locS>Bookmarks (outline)</lift:locS></label>
+          </div>
+          <div class="row head-space">
+            <div>
+              <div data-toggle="buttons" class="btn-group remembered" style="margin-left: 0;">
+                <label class="btn btn-default btn-xxs active">
+                  <input value="retain" name="outlinePolicy" type="radio">
+                  <lift:locS>Keep all</lift:locS>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="discard" name="outlinePolicy" type="radio">
+                  <lift:locS>Discard all</lift:locS>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="one_entry_each_doc" name="outlinePolicy" type="radio"> <lift:locS>One entry each doc</lift:locS>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="retain_as_one_entry" name="outlinePolicy" type="radio"> <lift:locS>Keep all, under one entry each doc</lift:locS>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row head-space-xl">
+            <label><lift:locS>Table of Contents</lift:locS></label>
+          </div>
+          <div class="row head-space">
+            <div>
+              <div data-toggle="buttons" class="btn-group remembered" style="margin-left: 0;">
+                <label class="btn btn-default btn-xxs active">
+                  <input value="none" name="tocPolicy" type="radio">
+                  <lift:locS>None</lift:locS>
+                  </span>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="file_names" name="tocPolicy" type="radio"> <lift:locS>Based on file names</lift:locS>
+                  </span>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="doc_titles" name="tocPolicy" type="radio"> <lift:locS>Based on document titles</lift:locS>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row head-space-xl">
+            <label><lift:locS>Form Fields</lift:locS></label>
+          </div>
+          <div class="row head-space" style="margin-bottom: 30px;">
+            <div>
+              <div data-toggle="buttons" class="btn-group remembered" style="margin-left: 0;">
+                <label class="btn btn-default btn-xxs">
+                  <input value="none" name="acroFormPolicy" type="radio">
+                  <lift:locS>Discard</lift:locS>
+                  <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Removes all form fields from the resulting document"></i>
+                    </span>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="merge" name="acroFormPolicy" type="radio"> <lift:locS>Merge</lift:locS>
+                  <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Merges all forms found in input documents."></i>
+                    </span>
+                </label>
+                <label class="btn btn-default btn-xxs active">
+                  <input value="merge_renaming" name="acroFormPolicy" type="radio" checked="checked"> <lift:locS>Merge (Rename existing)</lift:locS>
+                  <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Merges all forms found in input documents, renaming existing fields."></i>
+                    </span>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="flatten" name="acroFormPolicy" type="radio"> <lift:locS>Flatten</lift:locS>
+                  <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Select this option if you want to discard any editable form fields, keeping visible their currently filled in values."></i>
+                    </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="row head-space-xl">
+          
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>Merge PDF files</lift:locS></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><lift:locS>More options</lift:locS></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div id="globalBtns" style="display: none">
+  <div aria-label="Tools" role="group" class="btn-group wrap">
+    <div id="addMoreFilesBtn" class="btn-group upload-btn-group secondary-upload-btn-group can-add-more">
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <i class="fal fa-file-pdf"></i> <lift:locS>Add Files</lift:locS>
+        <span class="caret"></span>
+      </button>
+      <ul id="add-files-moving-menu" class="dropdown-menu dropdown-xs">
+        <li><a href="javascript://" class="local-files-chooser">
+          <span class="fileinput-button">
+            <i class="fal fa-folder icon"></i> <lift:locS>Local Files</lift:locS>
+            <form action="" method="post" enctype="multipart/form-data">
+              <input class="fileupload" type="file" name="file" data-url="" data-scope="task-file" multiple="multiple" title="Upload" accept=".pdf">
+            </form>
+          </span>
+        </a></li>
+      </ul>
+    </div>
+    <div id="addMorePagesBtn" class="btn-group upload-btn-group secondary-upload-btn-group can-add-more can-pick-pages">
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <i class="fal fa-copy"></i> <lift:locS>Add Pages</lift:locS>
+        <span class="caret"></span>
+      </button>
+      <ul id="add-pages-moving-menu" class="dropdown-menu dropdown-xs">
+        <li><a href="javascript://" class="local-files-chooser">
+          <span class="fileinput-button">
+            <i class="fal fa-folder icon"></i> <lift:locS>Local Files</lift:locS>
+            <form action="" method="post" enctype="multipart/form-data">
+              <input class="fileupload can-pick-pages" type="file" name="file" data-url="" data-scope="task-file" title="Upload" accept=".pdf">
+            </form>
+          </span>
+        </a></li>
+        <li class="divider" role="separator"></li>
+        <li><a class="add-blank-page-btn" href="javascript://"><i class="fal fa-file" style="margin-right: 8px;margin-left: 5px;"></i> Blank Page</a></li>
+      </ul>
+    </div>
+    <div class="btn-group">
+      <button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+        <i class="fal fa-sort-alpha-down"></i>
+        <lift:locS>Reorder</lift:locS>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu sort-filenames-opts">
+        <li><a class="sort-btn" data-sort-order="name-asc" title="By filenames, alphabetically"><i class="fal fa-sort-alpha-down"></i> <lift:locS>File names</lift:locS>, A-Z</a></li>
+        <li><a class="sort-btn" data-sort-order="name-desc" title="By filenames, alphabetically, descending order"><i class="fal fa-sort-alpha-up"></i> <lift:locS>File names</lift:locS>, Z-A</a></li>
+        <li><a class="sort-btn" data-sort-order="lastmod-asc" title="By last modified date, oldest first"><i class="fal fa-sort-numeric-down"></i> <lift:locS>Last modified, oldest first</lift:locS></a></li>
+        <li><a class="sort-btn" data-sort-order="lastmod-desc" title="By last modified date, newest first"><i class="fal fa-sort-numeric-up"></i> <lift:locS>Last modified, newest first</lift:locS></a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="global-help-hint" style="display: none"></div>
+</div>
+
+<!-- moves at runtime under body -->
+<section class="adhoc-tools-menu">
+  <ul id="addMarkDropdownMenu" class="dropdown-menu dropdown-xs add-mark-opts" style="display: none">
+    <li class="add-files-menu-item dropdown-submenu"><a href="javascript://"><lift:locS>Add Files</lift:locS></a></li>
+    <li class="add-pages-menu-item dropdown-submenu can-pick-pages"><a href="javascript://"><lift:locS>Add Pages</lift:locS></a></li>
+  </ul>
+</section>
+
+<%- include('partials/task-common-output-options', { onlyFile: true, outputFilenameAffix: 'merged' }); %>
+<%- include('partials/task-screen-after'); %>

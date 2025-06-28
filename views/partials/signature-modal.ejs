@@ -1,0 +1,246 @@
+<section>
+  <style>
+    #signatureCameraCapture {
+      border: 1px #EEE solid;
+      margin-bottom: 20px;
+    }
+
+    #signatureCameraCaptureVideoClip {
+      text-align: center;
+      margin: auto;
+    }
+
+    #signatureCameraCaptureVideo {
+      margin: auto;
+      text-align: center;
+      height: 140px !important;
+      margin-top: 155px;
+    }
+
+    #signatureCameraCaptureVideo video {
+      zoom: 200%;
+      -moz-transform:  scale(2);
+      -moz-transform-origin: left center;
+      margin: -50% auto auto -50%;
+      clip-path: polygon(120px 220px, 520px 220px, 520px 90px, 120px 90px);
+    }
+
+    @-moz-document url-prefix() {
+      #signatureCameraCaptureVideo {
+        height: 300px !important;
+        margin-top: auto;
+      }
+
+      #signatureCameraCaptureVideo video {
+        margin-left: -640px;
+        margin-top: 80px;
+      }
+    }
+
+    #signatureCameraCaptureDone {
+      text-align: center;
+    }
+
+    .signatureColorPicker {
+      text-align: center;
+    }
+
+    .signatureColorPicker i {
+      cursor: pointer;
+      border: 3px transparent solid;
+      border-radius: 20px;
+      padding: 3px;
+      font-size: 20px;
+    }
+
+    .signatureColorPicker i.active {
+      border-color: #DDD;
+    }
+
+    .signatureColorPicker i:hover {
+      border-color: #F3F3F3;
+    }
+
+    .signature-image-version.selected, .signature-image-version:hover {
+      border-color: #0282e5;
+    }
+
+    .signature-image-version {
+      display: inline-block;
+      padding: 20px;
+      border: 3px transparent solid;
+      border-radius: 5px;
+      margin: 0 10px 0 10px;
+      background-image: linear-gradient(
+              45deg
+              , #F5F5F5 25%, transparent 25%), linear-gradient(
+              -45deg
+              , #F5F5F5 25%, transparent 25%), linear-gradient(
+              45deg
+              , transparent 75%, #F5F5F5 75%), linear-gradient(
+              -45deg
+              , transparent 75%, #F5F5F5 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      cursor: pointer;
+    }
+
+    .signature-image-version p {
+      margin-top: 20px;
+      color: #666;
+      margin-bottom: -60px;
+    }
+
+    .signature-image-version img {
+      max-width: 200px;
+    }
+  </style>
+
+  <!-- preload fonts -->
+  <div class="fontPreload" style="font-family: Stalemate; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Over the Rainbow'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Caveat'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Cedarville Cursive'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Dancing Script'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Give You Glory'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Kristi'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Mr De Haviland'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Norican'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Reenie Beanie'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Satisfy'; font-size: 1px;">.</div>
+  <div class="fontPreload" style="font-family: 'Zeyada'; font-size: 1px;">.</div>
+
+  <!-- Create signature modal -->
+  <div id="createSignatureModal" class="modal app-modal" style="display: none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-title"><lift:locS>Create signature</lift:locS></div>
+        </div>
+        <div class="modal-body">
+          <div class="checkbox save-signature">
+            <label>
+              <input type="checkbox" checked="checked" id="saveSignatureCheck" name="saveSignature"> <lift:locS>Save signature</lift:locS>
+            </label>
+          </div>
+          <ul class="nav nav-tabs" id="signatureNavTabs">
+            <li role="presentation" class="active"><a data-target="#signature-typed"><i class="fal fa-keyboard"></i> <lift:locS>Type</lift:locS></a></li>
+            <li role="presentation"><a data-target="#signature-drawn"><i class="fal fa-signature"></i> <lift:locS>Draw</lift:locS></a></li>
+            <li>
+              <a class="fileinput-link" id="signature-image-link">
+                <i class="fal fa-file-image"></i> <%= __('Image') %>
+                <form id="signatureImageUploadForm" action="" method="post" enctype="multipart/form-data">
+                  <input class="signature-filepicker" type="file" name="file" title="Upload" accept=".jpg,.jpeg,.gif,.tiff,.tif,.bmp,.png,.webp">
+                </form>
+              </a>
+            </li>
+            <li role="presentation"><a data-target="#signature-camera"><i class="fal fa-camera-alt"></i> <lift:locS>Camera</lift:locS></a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content" id="signatureTabContent">
+            <div role="tabpanel" class="tab-pane active centered" id="signature-typed">
+              <div class="form-group" style="max-width: 400px; margin: auto;">
+                <input type="text" id="signatureName" class="form-control" value="Alex Appleseed">
+              </div>
+              <div id="signatureTypeColorPicker" class="signatureColorPicker form-group" style="max-width: 400px; margin: auto; margin-bottom: 20px; margin-top: 20px;">
+                <i class="fas fa-circle" style="color: #4d6de6"></i>
+                <i class="fas fa-circle" style="color: #2b4ea1"></i>
+                <i class="fas fa-circle" style="color: #3524fe"></i>
+                <i class="fas fa-circle" style="color: #0000FF"></i>
+                <i class="fas fa-circle" style="color: #555555"></i>
+                <i class="fas fa-circle" style="color: #333333"></i>
+                <i class="fas fa-circle active" style="color: #000000"></i>
+              </div>
+              <div id="signaturePreviewWrap">
+                <div class="signaturePreview first" style="font-family: Stalemate;"></div>
+                <div class="signaturePreview" style="font-family: 'Over the Rainbow';"></div>
+                <div class="signaturePreview" style="font-family: 'Caveat';"></div>
+                <div class="signaturePreview" style="font-family: 'Cedarville Cursive';"></div>
+                <div class="signaturePreview" style="font-family: 'Dancing Script';"></div>
+                <div class="signaturePreview" style="font-family: 'Give You Glory';"></div>
+                <div class="signaturePreview" style="font-family: 'Kristi';"></div>
+                <div class="signaturePreview" style="font-family: 'Mr De Haviland';"></div>
+                <div class="signaturePreview" style="font-family: 'Norican';"></div>
+                <div class="signaturePreview" style="font-family: 'Reenie Beanie';"></div>
+                <div class="signaturePreview" style="font-family: 'Satisfy';"></div>
+                <div class="signaturePreview" style="font-family: 'Zeyada';"></div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="signature-drawn">
+              <div id="signatureDrawColorPicker" class="signatureColorPicker form-group" style="max-width: 400px; margin: auto; margin-bottom: 20px; margin-top: 20px;">
+                <i class="fas fa-circle" style="color: #4d6de6"></i>
+                <i class="fas fa-circle" style="color: #2b4ea1"></i>
+                <i class="fas fa-circle" style="color: #3524fe"></i>
+                <i class="fas fa-circle" style="color: #0000FF"></i>
+                <i class="fas fa-circle" style="color: #555555"></i>
+                <i class="fas fa-circle" style="color: #333333"></i>
+                <i class="fas fa-circle active" style="color: #000000"></i>
+              </div>
+              <p style="color: #AAA; text-align: center;"><lift:locS>Sign your name using your mouse or touchpad.</lift:locS></p>
+              <div id="signaturePad">
+                <a id="signaturePadClearBtn" href="javascript://"><i class="fal fa-times-circle" style="margin-right: 5px;"></i></a>
+                <canvas id="signaturePadCanvas" width="820px" height="300px"></canvas>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="signature-camera">
+              <div id="signatureCameraCaptureStep1">
+                <div id="signatureCameraColorPicker" class="signatureColorPicker form-group" style="max-width: 400px; margin: auto; margin-bottom: 20px; margin-top: 20px;">
+                  <i class="fas fa-circle" style="color: #4d6de6"></i>
+                  <i class="fas fa-circle" style="color: #2b4ea1"></i>
+                  <i class="fas fa-circle" style="color: #3524fe"></i>
+                  <i class="fas fa-circle" style="color: #0000FF"></i>
+                  <i class="fas fa-circle" style="color: #555555"></i>
+                  <i class="fas fa-circle" style="color: #333333"></i>
+                  <i class="fas fa-circle active" style="color: #000000"></i>
+                </div>
+                <p style="color: #AAA; text-align: center;"><lift:locS>Click 'Allow' in the pop-up above to activate your camera</lift:locS></p>
+                <p style="color: #AAA; text-align: center; margin-top: -10px;"><lift:locS>Sign on a white piece of paper and hold it in front of the camera.</lift:locS></p>
+                <div id="signatureCameraCapture">
+                  <div id="signatureCameraCaptureVideoClip">
+                    <div id="signatureCameraCaptureVideo"></div>
+                  </div>
+                </div>
+                <div style="text-align: right">
+                  <a class="btn btn-medium" id="signatureCameraTakePictureBtn">Take picture</a>
+                </div>
+              </div>
+              <div id="signatureCameraCaptureDone" style="display: none">
+                <canvas id="signatureCameraCaptureCanvas" style="display: none"></canvas>
+                <canvas id="signatureCameraCaptureCanvas2" style="display: none"></canvas>
+                <canvas id="signatureCameraCaptureCanvas3"></canvas>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane centered" id="signature-image">
+              <div style="margin-bottom: 40px">
+                <div style="margin-bottom: 10px">
+                  <label><lift:locS>Choose an image version</lift:locS>:</label>
+                </div>
+                <div class="signature-image-version" id="signatureImageOriginal">
+                  <img src="" />
+                  <p><lift:locS>Original</lift:locS></p>
+                </div>
+                <div class="signature-image-version" id="signatureImageOptimized0">
+                  <img src="" />
+                  <p><lift:locS>Transparent</lift:locS> A</p>
+                </div>
+                <div class="signature-image-version" id="signatureImageOptimized1">
+                  <img src="" />
+                  <p><lift:locS>Transparent</lift:locS> B</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer centered">
+          <div class="disclaimer" style="color: #999;padding: 10px;margin-top: -20px;margin-bottom: 20px;">
+            <lift:locS>Sejda does not guarantee that the signature provided through this tool is legally binding.</lift:locS>
+          </div>
+
+          <button type="button" class="btn btn-medium btn-ok wide" style="margin-right: 15px;"><lift:locS>Save</lift:locS></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

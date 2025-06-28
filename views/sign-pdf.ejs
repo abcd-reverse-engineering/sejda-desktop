@@ -1,0 +1,233 @@
+<%- include('partials/task-screen-before'); %>
+
+<link rel="stylesheet" href="public/css/pdf-editor/fonts.css" />
+<link rel="stylesheet" href="public/css/pdf-editor/pdf-editor.css" />
+<link rel="stylesheet" href="public/css/pdf-editor/pdf-editor-desktop-only.css" />
+
+<style>
+  .fine-print {
+    margin-bottom: 20px;
+    color: #737373;
+    font-size: 15px;
+  }
+
+  .dropdown-menu.forms-opts {
+    width: 187px;
+  }
+</style>
+
+<section id="task-content" data-task="fillSign" data-multiple-files="false">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Fill & sign PDF') %><span class="beta">BETA</span></h1>
+      <h2><%= __('Add signature to PDF. Fill out PDF forms') %></h2>
+
+      <div id="text-editable-menu" class="text-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button class="btn btn-default font-bold-opts" title="Bold">
+              <i class="far fa-bold"></i>
+            </button>
+          </div>
+          <div class="btn-group" role="group">
+            <button class="btn btn-default font-italic-opts" title="Italic">
+              <i class="far fa-italic"></i>
+            </button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Font size">
+              <i class="far fa-text-height"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu font-size-opts">
+              <li>
+                <input type="number" name="fontSize2" value="10" step="0.1" />
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Font family">
+              Font
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu font-family-opts">
+              <li><a href="javascript://" id="addMoreFontsBtn"><i class="fal fa-font"></i><i class="fal fa-plus" style="margin-right: 5px; font-size: 8px;"></i> More fonts...</a></li>
+              <li class="divider" role="separator"></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Arimo', sans-serif;" data-font="'Arimo',serif">Arimo</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Carlito', sans-serif;" data-font="'Carlito',serif">Carlito <span class="alt">(Calibri)</span></a></li>
+              <li><a href="javascript://" class="built-in courier" data-font="'Courier New',monospace">Courier</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'DejaVu Sans', sans-serif;" data-font="'DejaVu Sans',serif">DejaVu Sans <span class="alt">(Verdana)</span></a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Droid Serif', serif;" data-font="'Droid Serif',serif">Droid Serif</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'EB Garamond', serif;" data-font="'EB Garamond',serif">EB Garamond</a></li>
+              <li><a href="javascript://" class="built-in helvetica" data-font="Helvetica,sans-serif">Helvetica</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Lato', sans-serif;" data-font="'Lato',sans-serif">Lato</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Liberation Sans', sans-serif;" data-font="'Liberation Sans',sans-serif">Liberation Sans <span class="alt">(Arial)</span></a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Noto Sans', sans-serif;" data-font="'Noto Sans',sans-serif">Noto Sans</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Open Sans', sans-serif;" data-font="'Open Sans',sans-serif">Open Sans</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Open Sans Condensed', sans-serif;" data-font="'Open Sans Condensed',sans-serif">Open Sans Condensed</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Oranienbaum', serif;" data-font="'Oranienbaum',serif">Oranienbaum</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Sans', sans-serif;" data-font="'PT Sans',sans-serif">PT Sans</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Sans Caption', sans-serif;" data-font="'PT Sans Caption',sans-serif">PT Sans Caption</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Sans Narrow', sans-serif;" data-font="'PT Sans Narrow',sans-serif">PT Sans Narrow</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Serif', serif;" data-font="'PT Serif',serif">PT Serif</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Serif Caption', serif;" data-font="'PT Serif Caption',serif">PT Serif Caption</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Roboto', serif;" data-font="'Roboto',serif">Roboto</a></li>
+              <li><a href="javascript://" class="built-in times-new-roman" data-font="'Times New Roman',serif">Times New Roman</a></li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Color">
+              Color
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu color-opts dropdown-menu-color-opts">
+                <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <button class="btn btn-default move-btn lift:locTooltip" title="Move">
+            <i class="fal fa-arrows-alt"></i>
+          </button>
+          <button class="btn btn-default clone-btn lift:locTooltip" title="Duplicate">
+            <i class="far fa-clone"></i>
+          </button>
+          <button class="btn btn-default delete-opts" title="Delete">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="image-editable-menu" class="image-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <button class="btn btn-default rotate-opts" title="Rotate">
+            <i class="far fa-redo"></i>
+          </button>
+          <div class="btn-group clone-opts-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Repeat on all pages">
+              <i class="far fa-clone"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu clone-opts">
+              <form>
+                <div class="checkbox field-multiselect-group">
+                  <label><input type="checkbox" name="imageRepeatOnAllPagesCheck"> <lift:locS>Repeat on all pages</lift:locS></label>
+                </div>
+              </form>
+            </div>
+          </div>
+          <button class="btn btn-default delete-opts" title="Delete">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+
+  <section class="step3a" style="display: none">
+    <section class="page-loading" style="display: none;">
+      <div class="progress-radial progress-5">
+        <div class="overlay">1%</div>
+      </div>
+      <div><lift:locS>Loading, please wait...</lift:locS></div>
+    </section>
+
+    <div class="centered" style="display: none" id="edit-pages-wrap">
+      <form id="imageUploadForm" action="" method="post" enctype="multipart/form-data" style="display: none">
+        <input style="display: none" class="image-fileupload" type="file" name="file" data-url="" data-scope="editor-image" accept=".jpg,.jpeg,.gif,.tiff,.tif,.bmp,.png,.webp" data-allows-paste="true">
+      </form>
+      <div id="global-help-hint" style="display: none"></div>
+      <div id="edit-pages" class="fill-sign-mode">
+        <div id="thumbs-menu" class="tools-menu thumbs-menu" style="display: none">
+          <div class="btn-group">
+            <button id="navOpenBtn" type="button" class="btn btn-default tooltip-single-line lift:locTooltip" title="Navigate through the document.">
+              <i class="fal fa-th-large"></i></button>
+          </div>
+        </div>
+        <div id="tools-menu" class="tools-menu edit-menu" style="display: none">
+          <div class="btn-group wrap" role="group" aria-label="Tools">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default tooltip-single-line" title="Add new text" data-tool="text">
+                <i class="fal fa-i-cursor"></i><i class="fal fa-font" style="margin-left:-4px;"></i> <span class="btn-caption">Text</span></button>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" title="Fill out forms" data-tool="form" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fab fa-wpforms"></i> <span class="btn-caption">Forms</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu forms-opts">
+                <li class="dropdown-header">Fill existing forms</li>
+                <li class="default">
+                  <section class="non-interactive-forms-opts">
+                    <a href="javascript://" class="activate-text-tool"><i class="fal fa-i-cursor"></i><i class="fal fa-font"></i></a>
+                    <a href="javascript://"><img class="action-repeatable" loading="lazy" data-src="/images/pages/pdf-editor/forms-xmark.png" style="width: 20px"></a>
+                    <a href="javascript://"><img class="action-repeatable" loading="lazy" data-src="/images/pages/pdf-editor/forms-checkmark.png" style="width: 20px"></a>
+                    <a href="javascript://"><img class="action-repeatable" loading="lazy" data-src="/images/pages/pdf-editor/forms-black-dot.png" style="width: 20px"></a>
+                  </section>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line" title="Add signature" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tool="sign">
+                <i class="fal fa-signature"></i> <span class="btn-caption">Sign</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu sign-opts">
+                <section class="scrollable-entries">
+                  <li class="sign-entry default">
+                    <a href="javascript://"><img loading="lazy" data-src="/images/pages/pdf-editor/sample-signature.png"/></a>
+                    <span class="sign-entry-delete">×</span>
+                  </li>
+                </section>
+                <li role="separator" class="divider"></li>
+                <li style="margin-top: 10px; margin-bottom: 10px;">
+                  <button type="button" id="add-signature-link" class="btn btn-secondary">
+                    <i class="fal fa-plus"></i> New Signature
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" data-tool="undo"><i class="fal fa-undo"></i> <span class="btn-caption">Undo</span></button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: none"><canvas id="image-rotation-canvas"></canvas><canvas id="image-resize-canvas"></canvas></div>
+  </section>
+
+  <div class="centered step3a bottom-fixed" style="display:none;">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="fillSign"/>
+      <input type="hidden" name="elapsedTime" value="" />
+      <input type="hidden" name="recovered" value="false" />
+
+      <div class="centered submit-button-container">
+        <button id="save-pdf-btn" type="submit" class="btn btn-default btn-medium"><lift:locS>Apply changes</lift:locS> <i class="fal fa-chevron-right"></i></button>
+      </div>
+    </form>
+  </div>
+
+  <%- include('partials/pdf-editor-modals'); %>
+  <%- include('partials/signature-modal'); %>
+
+  <div id="selectionBorder" style="display:none"></div>
+
+  <script>
+    window.PdfEditorSettings = {
+      defaultText: 'Type your text',
+      uploadImages: false,
+      fileOverFreeQuotaWarnings: true,
+      browserZoomWarnings: false,
+      recoveryEnabled: false
+    };
+  </script>
+  <script class="pageScripts" data-src="public/js/pages/pdf-editor-desktop.min.obfuscated.js"></script>
+  <script class="pageScripts" data-src="public/js/pages/pdf-editor-page.min.js"></script>
+</section>
+
+<%- include('partials/task-common-output-options', { onlyFile: true, outputFilenameAffix: 'edited' }); %>
+<%- include('partials/task-screen-after'); %>

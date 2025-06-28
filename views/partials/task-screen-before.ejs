@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('head'); %>
+
+<body>
+<div id="toast-msg-box"></div>
+<section id="body-wrap">
+<div class="container-fluid">
+  <header>
+    <%- include('user-header'); %>
+  </header>
+</div>
+
+<script>
+  const thisPage = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1)
+  window.sejdaContext.general.prefs.set({ startPage: thisPage })
+</script>
+
+<%- include('news'); %>
+<%- include('licensing/licensing'); %>

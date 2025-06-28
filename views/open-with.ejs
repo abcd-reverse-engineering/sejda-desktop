@@ -1,0 +1,43 @@
+<%- include('partials/regular-screen-before', { bodyCssClass: 'viewer' }); %>
+
+<style>
+  #viewerFrameWarning {
+    background-color: rgba(56, 56, 61, 1);
+    clear: both;
+    color: #EEE;
+    font-size: 14px;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  #viewerFrame {
+    width: 100%;
+    height: calc(100vh - 40px);
+    padding-top: 0;
+    border: 0;
+  }
+</style>
+
+<section id="content">
+  <section id="singleFileOpener" style="display: none">
+    <div class="container-fluid centered">
+      <iframe id="viewerFrame" frameBorder="0" src=""></iframe>
+      <div id="viewerFrameWarning"><%= __('This is a read-only preview. No changes can be made here. To edit, compress, or merge your PDF, select the appropriate option from the top menu.') %></div>
+    </div>
+  </section>
+
+  <section id="multipleFilesOpener" style="display: none">
+    <div class="container centered">
+      <div class="row">
+        <h1><%= __('Select a tool to open files with') %> <i class="fal fa-angle-right"></i></h1>
+        <h2 id="files-selected-notice"></h2>
+      </div>
+    </div>
+
+    <%- include('partials/homepage/tasks'); %>
+  </section>
+</section>
+
+<%- include('partials/regular-screen-after'); %>

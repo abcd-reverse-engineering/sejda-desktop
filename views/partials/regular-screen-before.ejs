@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<%- include('head'); %>
+
+<body class="<%= locals.bodyCssClass || '' %>">
+<div id="toast-msg-box"></div>
+<div class="container-fluid">
+  <header>
+      <%- include('user-header'); %>
+  </header>
+</div>
+
+<%- include('news'); %>
+<%- include('licensing/licensing'); %>

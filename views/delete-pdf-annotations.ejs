@@ -1,0 +1,111 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #types .row label {
+    font-weight: normal;
+    margin-right: 8px;
+    cursor: pointer;
+    min-width: 191px;
+    text-align: left;
+  }
+</style>
+
+<section id="task-content" data-task="deleteAnnotations" data-multiple-files="pro" data-can-magnify="false">
+  <div class="container centered">
+    <div class="row">
+      <h1><lift:locS>Delete PDF annotations</lift:locS></h1>
+      <h2><lift:locS>Batch remove highlights, strikeouts or any other annotations from a PDF document</lift:locS>.</h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="deleteAnnotations"/>
+      <input type="hidden" name="outputFilenamePattern" value="" />
+
+      <div class="container centered">
+        <div id="types" class="form-group head-space-xl" style="margin-top: 40px;">
+          <label><lift:locS>Annotations to remove</lift:locS>:</label>
+          <div class="row">
+            <div class="col-xs-12">
+              <label>
+                <input value="all" name="annotationTypes[]" type="checkbox" checked="checked"> <lift:locS>All</lift:locS>
+              </label></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <label>
+                <input value="highlight" name="annotationTypes[]" type="checkbox" checked="checked"> Highlight
+              </label>
+              <label>
+                <input value="strikeout" name="annotationTypes[]" type="checkbox" checked="checked"> Strikeout
+              </label>
+              <label>
+                <input value="underline" name="annotationTypes[]" type="checkbox" checked="checked"> Underline
+              </label>
+              <label>
+                <input value="ink" name="annotationTypes[]" type="checkbox" checked="checked"> Ink / Draw
+              </label>
+            </div>
+            <div class="col-xs-4">
+              <label>
+                <input value="polygon" name="annotationTypes[]" type="checkbox" checked="checked"> Polygon
+              </label>
+              <label>
+                <input value="square" name="annotationTypes[]" type="checkbox" checked="checked"> Square
+              </label>
+              <label>
+                <input value="circle" name="annotationTypes[]" type="checkbox" checked="checked"> Circle
+              </label>
+              <label>
+                <input value="line" name="annotationTypes[]" type="checkbox" checked="checked"> Line / Arrow
+              </label>
+              <label>
+                <input value="polyline" name="annotationTypes[]" type="checkbox" checked="checked"> Polyline
+              </label>
+            </div>
+            <div class="col-xs-4">
+              <label>
+                <input value="text" name="annotationTypes[]" type="checkbox" checked="checked"> Text
+              </label>
+              <label>
+                <input value="freetext" name="annotationTypes[]" type="checkbox" checked="checked"> Free text
+              </label>
+              <label>
+                <input value="popup" name="annotationTypes[]" type="checkbox" checked="checked"> Popup / Comment
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row head-space-xl" style="max-width: 300px; margin: auto; margin-top: 40px;">
+          <div>
+            <label><lift:locS>Only from specific pages</lift:locS>:</label>
+            <div id="specificPagesWrap">
+              <div class="input-group">
+                <input value="" min="1" placeholder="Examples: 1-10,13,14,100-"
+                       class="form-control input-lg thumbs-multiple-select tooltip-on-focus" type="text" name="pages"
+                       id="specificPages" data-validator="page-ranges-or-empty">
+
+                <div class="input-group-addon input-help">
+                  <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Type 1-10 to process the first 10 pages. Type 15- to process all pages after page 15. Type 1,2,3 to process pages 1, 2 and 3"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 40px;">
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>Remove annotations</lift:locS></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'updated' }); %>
+<%- include('partials/task-screen-after'); %>

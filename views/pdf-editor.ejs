@@ -1,0 +1,703 @@
+<%- include('partials/task-screen-before'); %>
+
+<link rel="stylesheet" href="public/css/pdf-editor/fonts.css" />
+<link rel="stylesheet" href="public/css/pdf-editor/pdf-editor.css" />
+<link rel="stylesheet" href="public/css/pdf-editor/pdf-editor-desktop-only.css" />
+
+<section id="task-content" data-task="edit" data-multiple-files="false" data-free-max-file-size="100">
+  
+  <style>
+    #startWithBlankDocument {
+      display: block !important;
+    }
+  </style>
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('PDF Editor') %><span class="beta">BETA</span></h1>
+      <h2><%= __('Edit & Sign PDF files, Fill PDF forms') %></h2>
+      <h2 style="margin-top: -10px;"><%= __('Add text, links, images and shapes') %>. <%= __('Edit existing PDF text and links') %>. <%= __('Annotate PDF') %></h2>
+
+      <div id="text-editable-menu" class="text-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button class="btn btn-default font-bold-opts lift:locTooltip" title="Bold">
+              <i class="far fa-bold"></i>
+            </button>
+          </div>
+          <div class="btn-group" role="group">
+            <button class="btn btn-default font-italic-opts lift:locTooltip" title="Italic">
+              <i class="far fa-italic"></i>
+            </button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Font size">
+              <i class="far fa-text-height"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu font-size-opts">
+              <li>
+                <input type="number" name="fontSize2" value="10" />
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Font family">
+              Font
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu font-family-opts">
+              <li><a href="javascript://" id="addMoreFontsBtn"><i class="fal fa-font"></i><i class="fal fa-plus" style="margin-right: 5px; font-size: 8px;"></i> <lift:locS>More fonts...</lift:locS></a></li>
+              <li class="divider" role="separator"></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Arimo', sans-serif;" data-font="'Arimo',serif">Arimo</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Carlito', sans-serif;" data-font="'Carlito',serif">Carlito <span class="alt">(Calibri)</span></a></li>
+              <li><a href="javascript://" class="built-in courier" data-font="'Courier New',monospace">Courier</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'DejaVu Sans', sans-serif;" data-font="'DejaVu Sans',serif">DejaVu Sans <span class="alt">(Verdana)</span></a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Droid Serif', serif;" data-font="'Droid Serif',serif">Droid Serif</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'EB Garamond', serif;" data-font="'EB Garamond',serif">EB Garamond</a></li>
+              <li><a href="javascript://" class="built-in helvetica" data-font="Helvetica,sans-serif">Helvetica</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Lato', sans-serif;" data-font="'Lato',sans-serif">Lato</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Liberation Sans', sans-serif;" data-font="'Liberation Sans',sans-serif">Liberation Sans <span class="alt">(Arial)</span></a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Noto Sans', sans-serif;" data-font="'Noto Sans',sans-serif">Noto Sans</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Open Sans', sans-serif;" data-font="'Open Sans',sans-serif">Open Sans</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Open Sans Condensed', sans-serif;" data-font="'Open Sans Condensed',sans-serif">Open Sans Condensed</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Oranienbaum', serif;" data-font="'Oranienbaum',serif">Oranienbaum</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Sans', sans-serif;" data-font="'PT Sans',sans-serif">PT Sans</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Sans Caption', sans-serif;" data-font="'PT Sans Caption',sans-serif">PT Sans Caption</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Sans Narrow', sans-serif;" data-font="'PT Sans Narrow',sans-serif">PT Sans Narrow</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Serif', serif;" data-font="'PT Serif',serif">PT Serif</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'PT Serif Caption', serif;" data-font="'PT Serif Caption',serif">PT Serif Caption</a></li>
+              <li><a href="javascript://" class="built-in" style="font-family: 'Roboto', serif;" data-font="'Roboto',serif">Roboto</a></li>
+              <li><a href="javascript://" class="built-in times-new-roman" data-font="'Times New Roman',serif">Times New Roman</a></li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Color">
+              <lift:locS>Color</lift:locS>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu color-opts dropdown-menu-color-opts">
+              <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <button class="btn btn-default text-to-link-opts lift:locTooltip" title="Create a link">
+            <i class="far fa-link"></i>
+          </button>
+          <button class="btn btn-default move-btn lift:locTooltip" title="Move">
+            <i class="fal fa-arrows-alt"></i>
+          </button>
+          <button class="btn btn-default clone-btn lift:locTooltip" title="Duplicate">
+            <i class="far fa-clone"></i>
+          </button>
+          <button class="btn btn-default delete-opts lift:locTooltip" title="Delete">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="shape-editable-menu" class="shape-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Border width">
+              <i class="far fa-minus"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu border-size-opts">
+              <li><a href="javascript://"><div style="height: 1px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 2px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 3px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 4px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 6px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 8px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 12px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 18px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Border color">
+              <i class="far fa-square"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu border-color-opts dropdown-menu-color-opts">
+              <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Background color">
+              <i class="fal fa-palette"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu background-color-opts dropdown-menu-color-opts">
+              <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <button class="btn btn-default clone-btn lift:locTooltip" title="Duplicate">
+            <i class="far fa-clone"></i>
+          </button>
+          <button class="btn btn-default delete-opts lift:locTooltip" title="Delete">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="line-editable-menu" class="line-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Line width">
+              <i class="far fa-minus"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu stroke-size-opts">
+              <li><a href="javascript://"><div style="height: 1px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 2px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 3px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 4px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 6px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Color">
+              <i class="far fa-palette"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu stroke-color-opts dropdown-menu-color-opts">
+              <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <button class="btn btn-default clone-btn lift:locTooltip" title="Duplicate">
+            <i class="far fa-clone"></i>
+          </button>
+          <button class="btn btn-default delete-opts lift:locTooltip" title="Delete">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="link-editable-menu" class="link-editable-menu edit-menu" style="display: none">
+        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <form autocomplete="off">
+          <div class="form-group">
+            <label for="fieldName"><lift:locS>Link properties</lift:locS></label>
+            <div class="radio">
+              <label>
+                <input type="radio" name="kind" value="uri" checked >
+                <lift:locS>Link to external URL</lift:locS>
+                <input type="text" class="form-control input-xs" name="targetURL" placeholder="https://example.com">
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="kind" value="mailto" checked>
+                <lift:locS>Link to email address</lift:locS>
+                <input type="text" class="form-control input-xs" name="targetEmailAddress" placeholder="you@example.com">
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="kind" value="tel">
+                <lift:locS>Link to phone number</lift:locS>
+                <input type="text" class="form-control input-xs" name="targetTel" placeholder="+1234567890">
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="kind" value="page">
+                <lift:locS>Link to internal page</lift:locS>
+                <input type="text" class="form-control input-xs" name="targetPage" placeholder="2">
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-link btn-xs delete-opts lift:locTooltip" title="Delete link"><i class="fal fa-trash"></i> <lift:locS>Delete link</lift:locS></button>
+          </div>
+        </form>
+      </div>
+
+      <div id="attachment-editable-menu" class="attachment-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <button class="btn btn-default download-opts lift:locTooltip" title="Download">
+            <i class="far fa-arrow-to-bottom"></i>
+          </button>
+          <button class="btn btn-default delete-opts lift:locTooltip" title="Delete">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="ff-editable-menu" class="ff-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <div class="btn-group border-color-opts-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Border color">
+              <i class="far fa-square"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu border-color-opts dropdown-menu-color-opts">
+              <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <div class="btn-group text-align-opts-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Text alignment">
+              <i class="far fa-align-left"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu text-align-opts dropdown-menu-text-align-opts">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" data-align="left"><i class="far fa-align-left"></i></button>
+                <button type="button" class="btn btn-default" data-align="center"><i class="far fa-align-center"></i></button>
+                <button type="button" class="btn btn-default" data-align="right"><i class="far fa-align-right"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group font-size-opts-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Font size">
+              <i class="far fa-text-height"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu font-size-opts">
+              <li>
+                <input type="text" name="fontSize2" value="10" />
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Color">
+              <i class="far fa-palette"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu text-color-opts dropdown-menu-color-opts">
+              <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <div class="btn-group props-opts-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Field properties">
+              <i class="far fa-list-alt"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu props-opts">
+              <form>
+                <div class="form-group">
+                  <label for="fieldName"><lift:locS>Field name</lift:locS></label>
+                  <input type="text" class="form-control input-xs" name="fieldName" id="fieldName" placeholder="field1">
+                  <label style="font-weight: normal; margin-top: 10px; display: none" id="fieldNameNotUniqueWarning">
+                    <lift:locS>Name is already used.</lift:locS> <lift:locS>There are</lift:locS> <span class="other-fields-with-same-name-count"></span> <lift:locS>other fields with the same name.</lift:locS>
+                    <span class="input-help">
+                            <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                               title="You should use an unique field name, unless you want the fields with the same name to have the same value."></i>
+                        </span>
+                  </label>
+                </div>
+                <div class="form-group field-radiogroup-group">
+                  <label><lift:locS>Radio group</lift:locS></label>
+                  <label style="font-weight: normal">
+                    There <span class="radiogroup-size">are 1 radios</span> in this group.
+                    <span class="input-help">
+                            <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                               title="Radio buttons with the same name are grouped together. Only one can be selected."></i>
+                        </span>
+                  </label>
+                </div>
+                <div class="form-group field-value-group">
+                  <label for="fieldValue"><lift:locS>Field value</lift:locS></label>
+                  <input type="text" class="form-control input-xs" name="fieldValue" id="fieldValue" placeholder="value1">
+                </div>
+                <div class="form-group field-options-group">
+                  <label for="fieldOptions"><lift:locS>Options</lift:locS> <span style="font-size: 11px; font-weight: 100">(<lift:locS>one per line</lift:locS>)</span></label>
+                  <textarea class="form-control input-xs" name="fieldOptions" id="fieldOptions" rows="3"></textarea>
+                </div>
+                <div class="checkbox field-multiselect-group">
+                  <label><input type="checkbox" name="fieldMultiselect"> <lift:locS>Allow multiple selections</lift:locS></label>
+                </div>
+                <div class="checkbox field-comb-group">
+                  <label><input type="checkbox" name="fieldComb"> <lift:locS>Divide into</lift:locS>
+                    <input type="text" name="fieldCombOfCharsLength" class="form-control input-xs" value="8">
+                    <lift:locS>boxes</lift:locS>
+                    <span class="input-help">
+                          <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                             title="Comb of characters. Text field divided into equally spaced boxes for individual characters."></i>
+                        </span>
+                  </label>
+                </div>
+                <div class="checkbox field-required-group">
+                  <label><input type="checkbox" name="fieldRequired"> <lift:locS>Field is mandatory</lift:locS></label>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="btn-group" role="group">
+            <button class="btn btn-default clone-btn lift:locTooltip" title="Duplicate field">
+              <i class="far fa-clone"></i>
+            </button>
+          </div>
+          <div class="btn-group" role="group">
+            <button class="btn btn-default delete-opts lift:locTooltip" title="Delete">
+              <i class="far fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <section style="display: none">
+        <div id="ff-text-template"><input name="noautocomplete" type="text" autocomplete="off" value="Default value2" /></div>
+        <div id="ff-textarea-template"><textarea name="noautocomplete"></textarea></div>
+        <div id="ff-checkbox-template"><input name="noautocomplete" type="checkbox" /></div>
+        <div id="ff-radio-template"><input name="noautocomplete" type="radio"/> </div>
+        <div id="ff-dropdown-template"><select name="noautocomplete"><option><lift:locS>Option 1</lift:locS></option><option><lift:locS>Option 2</lift:locS></option><option><lift:locS>Option 3</lift:locS></option></select></div>
+        <div id="ff-signature-template"><div class="signature"></div></div>
+      </section>
+
+      <div id="image-editable-menu" class="image-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <button class="btn btn-default rotate-opts lift:locTooltip" title="Rotate">
+            <i class="far fa-redo"></i>
+          </button>
+          <div class="btn-group clone-opts-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Repeat on all pages">
+              <i class="far fa-clone"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu clone-opts">
+              <form>
+                <div class="checkbox field-multiselect-group">
+                  <label><input type="checkbox" name="imageRepeatOnAllPagesCheck"> <lift:locS>Repeat on all pages</lift:locS></label>
+                </div>
+              </form>
+            </div>
+          </div>
+          <button class="btn btn-default delete-opts lift:locTooltip" title="Delete">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="existingimage-editable-menu" class="existingimage-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <button class="btn btn-default delete-opts lift:locTooltip" title="Delete image">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="highlight-editable-menu" class="highlight-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Change color">
+              <i class="fal fa-palette"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu highlight-color-opts dropdown-menu-color-opts">
+              <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <button class="btn btn-default hide-annotations-opts lift:locTooltip" title="Hide all annotations">
+            <i class="far fa-eye-slash"></i>
+          </button>
+          <button class="btn btn-default delete-opts lift:locTooltip" title="Remove annotation">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="draw-editable-menu" class="draw-editable-menu edit-menu" style="display: none">
+        <div class="btn-group" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Line width">
+              <i class="far fa-minus"></i>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu border-size-opts">
+              <li><a href="javascript://"><div style="height: 1px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 2px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 3px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 4px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 5px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 6px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 8px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+              <li><a href="javascript://"><div style="height: 12px; background-color: #000; width: 100%; margin: 5px 0;"></div></a></li>
+            </ul>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Line color">
+              <i class="far fa-palette"></i>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu border-color-opts dropdown-menu-color-opts">
+              <%- include('partials/pdf-editor-color-opts'); %>
+            </div>
+          </div>
+          <button class="btn btn-default hide-annotations-opts lift:locTooltip" title="Hide all annotations">
+            <i class="far fa-eye-slash"></i>
+          </button>
+          <button class="btn btn-default delete-opts lift:locTooltip" title="Remove annotation">
+            <i class="far fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+
+  <section class="step3a" style="display: none">
+    <section class="page-loading" style="display: none;">
+      <div class="progress-radial progress-5">
+        <div class="overlay">1%</div>
+      </div>
+      <div><lift:locS>Loading, please wait...</lift:locS></div>
+    </section>
+
+    <div class="centered" style="display: none" id="edit-pages-wrap">
+      <form id="imageUploadForm" action="" method="post" enctype="multipart/form-data" style="display: none">
+        <input style="display: none" class="image-fileupload" type="file" name="file" data-url="" data-scope="editor-image" accept=".jpg,.jpeg,.gif,.tiff,.tif,.bmp,.png,.webp" data-allows-paste="true">
+      </form>
+      <form id="attachmentUploadForm" action="" method="post" enctype="multipart/form-data" class="" style="display: none">
+        <input style="display: none" class="attachment-fileupload" type="file" name="file" data-url="" data-scope="editor-attachment" accept="*" data-allows-paste="false">
+      </form>
+      <div id="global-help-hint" style="display: none"></div>
+      <div id="edit-pages">
+        <div id="thumbs-menu" class="tools-menu thumbs-menu" style="display: none">
+          <div class="btn-group-vertical">
+            <button id="navOpenBtn" type="button" class="btn btn-default tooltip-single-line lift:locTooltip" title="Navigate through the document">
+              <i class="fal fa-th-large"></i></button>
+            <button id="attachmentsOpenBtn" type="button" class="btn btn-default tooltip-single-line lift:locTooltip" title="Attachments">
+              <i class="fal fa-paperclip"></i></button>
+          </div>
+        </div>
+        <div id="tools-menu" class="tools-menu edit-menu" style="display: none">
+          <div class="btn-group wrap" role="group" aria-label="Tools">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default tooltip-single-line lift:locTooltip" title="Add text. Change or delete existing text." data-tool="text">
+                <i class="fal fa-i-cursor"></i><i class="fal fa-font" style="margin-left:-4px;"></i> <span class="btn-caption"><lift:locS>Text</lift:locS></span></button>
+              <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" title="More text related tools." data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu text-opts">
+                <li><a href="javascript://" data-tool="text-replace"><i class="fal fa-search" style="margin-right: 5px;"></i> <lift:locS>Find &amp; Replace</lift:locS></a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default tooltip-single-line lift:locTooltip" title="Add links. Change existing links." data-tool="link"><i class="fal fa-link"></i> <span class="btn-caption"><lift:locS>Links</lift:locS></span></button>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle lift:locTooltip" title="Fill out forms. Add new form fields" data-tool="form" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fab fa-wpforms"></i> <span class="btn-caption"><lift:locS>Forms</lift:locS></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu forms-opts">
+                <li class="text-divider" role="separator">
+                  <lift:locS>Add text and symbols</lift:locS>
+                </li>
+                <li class="default">
+                  <section class="non-interactive-forms-opts">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <a href="javascript://" class="activate-text-tool icon-only"><i class="fal fa-i-cursor"></i><i class="fal fa-font"></i></a>
+                      </div>
+                      <div class="col-xs-6">
+                        <a href="javascript://" class="icon-only"><img class="action-repeatable" loading="lazy" data-src="/images/pages/pdf-editor/forms-xmark.png" style="width: 20px"></a>
+                        <a href="javascript://" class="icon-only"><img class="action-repeatable" loading="lazy" data-src="/images/pages/pdf-editor/forms-checkmark.png" style="width: 20px"></a>
+                        <a href="javascript://" class="icon-only"><img class="action-repeatable" loading="lazy" data-src="/images/pages/pdf-editor/forms-black-dot.png" style="width: 20px"></a>
+                      </div>
+                    </div>
+                  </section>
+                </li>
+                <li class="text-divider" role="separator"><lift:locS>Add new form fields</lift:locS></li>
+                <li class="default" style="margin-bottom: 10px">
+                  <section class="add-new-form-field-opts">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <a href="javascript://" data-ff-kind="text" title="Text box (single line)" class="with-tooltip tooltip-delayed lift:locTooltip"><img class="icon" loading="lazy" data-src="/images/pages/pdf-editor/forms-textfield.svg">Text</a>
+                        <a href="javascript://" data-ff-kind="textarea" title="Textarea (multiple lines)" class="with-tooltip tooltip-delayed lift:locTooltip"><img class="icon" loading="lazy" data-src="/images/pages/pdf-editor/forms-textarea.svg">Text multiline</a>
+                        <a href="javascript://" data-ff-kind="dropdown" title="Dropdown list with multiple options" class="with-tooltip tooltip-delayed lift:locTooltip"><img class="icon" loading="lazy" data-src="/images/pages/pdf-editor/forms-dropdown.svg">Drop-down list</a>
+                      </div>
+                      <div class="col-xs-6">
+                        <a href="javascript://" data-ff-kind="radio" title="Radio option" class="with-tooltip tooltip-delayed lift:locTooltip"><i class="far fa-dot-circle"></i><lift:locS>Radio button</lift:locS></a>
+                        <a href="javascript://" data-ff-kind="checkbox" title="Checkbox" class="with-tooltip tooltip-delayed lift:locTooltip"><img class="icon" loading="lazy" data-src="/images/pages/pdf-editor/forms-checkbox.svg">Checkbox</a>
+                        <a href="javascript://" data-ff-kind="signature" title="Signature box for others to sign" class="with-tooltip tooltip-delayed lift:locTooltip"><img class="icon" loading="lazy" data-src="/images/pages/pdf-editor/forms-signature.png">Signature box</a>
+                      </div>
+                    </div>
+                  </section>
+                </li>
+                <li class="text-divider" role="separator"><lift:locS>Change existing form fields</lift:locS></li>
+                <li class="default" style="margin-bottom: 10px">
+                  <section class="change-existing-form-field-opts">
+                    <div class="row">
+                      <div class="col-xs-11">
+                        <a id="changeFormFieldsToEditModeBtn" href="javascript://" title="Toggle between editing or filling out form fields" class="with-tooltip tooltip-delayed lift:locTooltip">
+                          <i class="fal fa-toggle-off"></i>
+                          <i class="fal fa-toggle-on" style="display: none"></i>
+                          <lift:locS>Form Edit mode</lift:locS>
+                        </a>
+                        <a id="changeTabOrderBtn" href="javascript://">
+                          <i class="fal fa-sort-alt"></i><lift:locS>Change tab order</lift:locS>
+                        </a>
+                      </div>
+                      <div class="col-xs-1"></div>
+                    </div>
+                  </section>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group" id="imagesDropdownBtnGroup">
+              <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" title="Add images. Delete existing images." data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tool="image">
+                <i class="fal fa-image"></i> <span class="btn-caption"><lift:locS>Images</lift:locS></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu image-opts">
+                <li class="image-entry default">
+                  <a href="javascript://"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPEAAABVCAYAAACYRgLxAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABMFJREFUeNrsndtx2kAUQJcMDcj//oFxBbgEXAIuQS4BSrBLQCVYJZgSTAUZ+yf/UQkKSlYZBoP2SvsUPmdmByfDY73W2Xv3oWVS17UCgPEyaSSubu8wGWBkZL9+TprHHzQFwLhBYoCRM70UogEgPc4NfYnEAKTTAIDEAIDEAEgMAEgMAEgMAEgMgMQAgMQAgMQAgMQASAwASAwASAwASAyAxACAxACAxADwhWmoD/p9e5cfHlaWb7PTj/ujn13jop6fR2WvH0OyOJR3w3OqQ5nrxxTb0MRGt+0p60N5DtnYN5HPpZsG/KzsUJaW73H6+lLLXCRWz1P2uq6FJ2nOSST5PZvnvST6t5Z8BlxBOt309tsm0OseOFUWOjp8BIhQWY/PyFEAiVMh05K8a2FSruer7nh8RmFplJoFiJiAxL0j3tsIIkzuMXPIPT8fkDhItNuO4OJ89hAFVzq6+n4NIHEQtomn1spDNM4t5AckdsKko9wfypPqt7T0pvzMYnbV8+ZQHtW/2WgTS4cdjc34dp3Y31pSLl0HL8LXb4bWsVlSOi5ILKdZpmmWaB50kSzVZBEu0EoL/Kg7HYnIIaJ6ZWgnxsZE4qA0vfBcnV/sP3dxxxrzFcq8hu1CYtOy0qegHqTUSBycSkc7SUSOeYGa0moX6bRpWakQ1MNlag9ILOZTOLaJmSqaxvCZI4lNHclekLmQUiNxtJTVtDd5pq53GcW0RFQetU8peC+2MyJxkimrq7Fnipii5+6kwzNlBURjJE4yZXWVtg6NlLZ178owloZ5g+Lk36VlpwBI7AXJLHWsSRuTFDa3KZqWlYoBWUuo/dS1RYErlFi6ZhxDYJMQ+4HvLblbqbzwf5Wg3oDE35ZWrma3mORupdKig8gMncO+R4Q+HQKwnxqJr5quVK+5t/lVmJLaHBKQC97bpuNg8wcSB0Uy3t0lVudG3s3A10oiZTkwSkvH24DEwSVOjSfPUbiykLwdFjA2HgHTK/k9JKlfKpG4jcBDx8KS2WPJjR+ZsF0LT+2wQz8kblkKLupKDZ8FdsleR2CbuuRC+VaO2nbhqe0e0I90ukVyPGmRSF03lkLESHFJqYnEXpGe3uFa4l1Hqjsz1PfeYiwcY2/zSnc+FbogsUva0y1zocCuD29/6KjXR4doM2V31vM6Ulv7Op8avmE6PdMX8rtQYJtlnCFUgov9WQ2bTV+qeBswSKmJxGLeDAL3vYhtlnGGUuiOJhOk1WMRqZ0RZ0aZSCyKNpfKEIHLCL+DJBoveqbGM2WebZYeEHeuPCXeicAVpdN9BI45Iy3ZbNHn7C/p2N9nfdlPjcTBouCjir+kJBmLt4fcK8HzJDf+207eSdqM/dRI7JUmnZxHSqEvSWESaykQQ7KsVDqqrwn2UyOxc9qD8uYqzbVMybLM1iDpWtAGhaO2lBzqx9gYia0vskILe6/lfVHhv8TbZTTuSqslE3ouhw7cojhCJnVdq+r27v+RJ1kCX0sBAOc55yqHAgCQTgMAEgMAEgMgMQAgMQAgMQAgMQASAwASAwASAwASAyAxACAxACAxACAxABIDABIDABIDABIDIDEAIDEAuOPLtyIeH4kJAERiAEBiAOji7zdAAMB4+SPAACC4BF2/j5LPAAAAAElFTkSuQmCC"/></a>
+                  <span class="image-entry-delete">×</span>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li style="margin-top: 10px; margin-bottom: 10px;">
+                      <span type="button" class="fileinput-link btn btn-secondary" id="upload-image-link">
+                        <i class="fal fa-plus"></i> <lift:locS>New Image</lift:locS>
+                        <input id="image-filepicker" class="image-filepicker lift:locTooltip" type="file" name="file" title="Upload an image" accept=".jpg,.jpeg,.gif,.tiff,.tif,.bmp,.png,.webp">
+                      </span>
+                </li>
+                <li style="margin-top: 10px; margin-bottom: 10px;">
+                  <span id="deleteExistingImagesBtn" href="javascript://" class="btn btn-tertiary"><lift:locS>Delete existing image</lift:locS></span>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li style="margin-top: 10px; margin-bottom: 10px;">
+                      <span id="createStampBtn" href="javascript://" class="btn btn-tertiary">
+                        <i class="fal fa-stamp"></i> <lift:locS>New Stamp</lift:locS>
+                      </span>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group" id="signDropdownBtnGroup">
+              <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" title="Add signature" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tool="sign">
+                <i class="fal fa-signature"></i> <span class="btn-caption"><lift:locS>Sign</lift:locS></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu sign-opts">
+                <section class="scrollable-entries">
+                  <li class="sign-entry default">
+                    <a href="javascript://"><img loading="lazy" data-src="/images/pages/pdf-editor/sample-signature.png"/></a>
+                    <span class="sign-entry-delete">×</span>
+                  </li>
+                </section>
+                <li role="separator" class="divider"></li>
+                <li style="margin-top: 10px; margin-bottom: 10px;">
+                  <button type="button" id="add-signature-link" class="btn btn-secondary">
+                    <i class="fal fa-plus"></i> <lift:locS>New Signature</lift:locS>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default lift:locTooltip" title="Whiteout" data-tool="whiteout" style=""><i class="fal fa-eraser"></i> <span class="btn-caption"><lift:locS>Whiteout</lift:locS></span></button>
+            </div>
+            <div class="btn-group">
+              <button id="annotateMenuBtn" type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" title="Highlight, underline, strike out text. Draw freehand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fal fa-highlighter" style="margin-left: -5px;"></i> <span class="btn-caption"><lift:locS>Annotate</lift:locS></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu annotate-opts">
+                <li><a id="toggleHighlighAnnotsBtn" href="javascript://" class="lift:locTooltip" title="Show or hide annotations"><i class="fal fa-toggle-on" style="display: none"></i> <i class="fal fa-toggle-off"></i> <lift:locS>Show annotations</lift:locS></a></li>
+                <li role="separator" class="text-divider"><lift:locS>Text</lift:locS></li>
+                <li>
+                  <a href="javascript://" title="Strikethrough text" id="strikethroughBtn" class="lift:locTooltip"><span><i class="fal fa-strikethrough"></i> <lift:locS>Strike out</lift:locS></span>
+                    <i class="fal fa-circle" style="color: rgb(255, 0, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,191,255)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,0,0)"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript://" title="Highlight text" id="highlightBtn" class="lift:locTooltip">
+                    <span><i class="fal fa-highlighter"></i> <lift:locS>Highlight</lift:locS></span>
+                    <i class="fal fa-circle" style="color: #FFD500"></i>
+                    <i class="fal fa-circle" style="color: rgb(255, 0, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0, 255, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,191,255)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,0,0)"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript://" title="Underline text" id="underlineBtn">
+                    <span><i class="fal fa-underline"></i> <lift:locS>Underline</lift:locS></span>
+                    <i class="fal fa-circle" style="color: #FFD500"></i>
+                    <i class="fal fa-circle" style="color: rgb(255, 0, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0, 255, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,191,255)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,0,0)"></i>
+                  </a>
+                </li>
+                <li role="separator" class="text-divider"><lift:locS>Freehand</lift:locS></li>
+                <li>
+                  <a href="javascript://" title="Highlight freehand" id="highlightFreehandBtn" class="lift:locTooltip">
+                    <span><i class="fal fa-highlighter"></i> <lift:locS>Highlight</lift:locS></span>
+                    <i class="fal fa-circle" style="color: #FFD500"></i>
+                    <i class="fal fa-circle" style="color: rgb(255, 0, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0, 255, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,191,255)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,0,0)"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript://" title="Draw freehand" id="drawBtn" class="lift:locTooltip">
+                    <span><i class="fal fa-draw-polygon"></i> <lift:locS>Draw</lift:locS></span>
+                    <i class="fal fa-circle" style="color: #FFD500"></i>
+                    <i class="fal fa-circle" style="color: rgb(255, 0, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0, 255, 0)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,191,255)"></i>
+                    <i class="fal fa-circle" style="color: rgb(0,0,0)"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" title="Add rectangles, ellipse, circles, lines or arrows." data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tool="shape">
+                <i class="fal fa-shapes"></i> <span class="btn-caption"><lift:locS>Shapes</lift:locS></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu shape-opts">
+                <li><a href="javascript://" class="shape-opt" data-shape="ellipse"><i class="fal fa-circle"></i> <lift:locS>Ellipse</lift:locS></a></li>
+                <li><a href="javascript://" class="shape-opt" data-shape="rectangle"><i class="fal fa-square"></i> <lift:locS>Rectangle</lift:locS></a></li>
+                <li><a href="javascript://" class="line-opt" data-shape="line"><i class="fal fa-minus fa-rotate-45"></i> <lift:locS>Line</lift:locS></a></li>
+                <li><a href="javascript://" class="line-opt" data-shape="arrow"><i class="fal fa-arrow-right fa-rotate-45"></i> <lift:locS>Arrow</lift:locS></a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default lift:locTooltip" title="Undo" data-tool="undo" style=""><i class="fal fa-backspace"  style="margin-right: 5px;"></i> <span class="btn-caption"><lift:locS>Undo</lift:locS></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: none"><canvas id="image-rotation-canvas"></canvas><canvas id="image-resize-canvas"></canvas></div>
+  </section>
+
+  <div class="centered step3a bottom-fixed" style="display:none;">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="edit"/>
+      <input type="hidden" name="elapsedTime" value="" />
+      <input type="hidden" name="recovered" value="false" />
+
+      <div class="centered submit-button-container">
+        <button id="save-pdf-btn" type="submit" class="btn btn-default btn-medium"><lift:locS>Apply changes</lift:locS> <i class="fal fa-chevron-right"></i></button>
+      </div>
+    </form>
+  </div>
+
+  <%- include('partials/pdf-editor-modals'); %>
+  <%- include('partials/signature-modal'); %>
+
+  <div id="selectionBorder" style="display:none"></div>
+
+  <script>
+    window.PdfEditorSettings = {
+      defaultText: 'Type your text',
+      uploadImages: false,
+      fileOverFreeQuotaWarnings: true,
+      browserZoomWarnings: false,
+      recoveryEnabled: false,
+      enforcePerms: false
+    };
+  </script>
+  <script class="pageScripts" data-src="public/js/pages/pdf-editor-desktop.min.obfuscated.js"></script>
+  <script class="pageScripts" data-src="public/js/pages/pdf-editor-page.min.js"></script>
+</section>
+
+<%- include('partials/task-common-output-options', { onlyFile: true, outputFilenameAffix: 'edited' }); %>
+<%- include('partials/task-screen-after'); %>

@@ -1,0 +1,43 @@
+<%- include('partials/task-screen-before'); %>
+
+<section id="task-content" data-task="splitBySize" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Split PDF by file size') %></h1>
+      <h2><%= __('Get multiple smaller documents with specific file sizes') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="splitBySize"/>
+
+      <div class="container">
+        <div class="row">
+
+          <label><%= __('Maximum size for the largest split document') %></label>
+
+          <div class="input-group" style="width: 300px; margin: auto;">
+            <input value="10.0" min="1" class="form-control input-lg" type="text" name="size">
+            <div class="input-group-addon input-lg">MB</div>
+            <div class="input-group-addon input-help">
+              <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                 title="A 23 MB document could be split into 3 smaller documents of max 10 MB."></i>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 30px">
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Split PDF by size') %></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { onlyDirectory: true, outputFilenamePattern: '[FILENUMBER]_[BASENAME]' }); %>
+<%- include('partials/task-screen-after'); %>

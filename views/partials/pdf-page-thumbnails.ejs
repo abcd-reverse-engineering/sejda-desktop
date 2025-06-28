@@ -1,0 +1,52 @@
+<section>
+  <div class="row centered noselect" style="display: none" id="pdf-canvas-wrap">
+    <div class="selection-help">
+      <div class="can-toggle-view-mode" style="display: none; margin-bottom: 15px;">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="mode" value="page"/> Pages view
+          </label>
+          <label class="btn btn-default btn-xs active">
+            <input type="radio" name="mode" value="file"/> Files view
+          </label>
+        </div>
+      </div>
+
+      <span class="can-select" style="color: #AAA;"><%= __('Click pages to select') %>.
+        <span class="can-select-multiple"><%= __('Shift, Ctrl to select multiple') %>.</span>
+        <span class="can-clear-selection" style="display: none">
+          <a href="javascript://" class="clear-selection-btn"><%= __('Reset selection') %></a>
+        </span>
+        <br/>
+      </span>
+
+      <div class="thumbs-size-panel pull-right">
+        <i class="fal fa-search-minus decrease" style="font-size: 16px" title="Smaller thumbnails"></i>
+        <input type="range" min="100" max="400" value="150" name="thumbsSize" id="thumbsSizeInput" title="Adjust thumbnail size" data-toggle="tooltip" data-placement="top">
+        <i class="fal fa-search-plus increase" style="font-size: 16px" title="Bigger thumbnails"></i>
+      </div>
+    </div>
+
+    <section id="pdf-canvas" class="noselect">
+      <section id="tools-menu" class="tools-menu"></section>
+      <ol id="pdf-canvas-list" class="pdf-page-wrap-parent"></ol>
+      <ol id="pdf-canvas-list2" class="pdf-page-wrap-parent" style="display: none"></ol>
+    </section>
+  </div>
+
+  <!-- Delete page confirm modal -->
+  <div id="deletePagesModal" class="modal app-modal" style="display: none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-title">There are <span class="num"></span> other pages selected, would you like to remove those as well?</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light btn-xs btn-yes" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-primary btn-xs btn-no" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

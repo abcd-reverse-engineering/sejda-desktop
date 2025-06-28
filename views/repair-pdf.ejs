@@ -1,0 +1,31 @@
+<%- include('partials/task-screen-before'); %>
+
+<section id="task-content" data-task="repair" data-multiple-files="pro">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Repair PDF') %></h1>
+      <h2><%= __('Recover data from a corrupted or damaged PDF document') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="repair"/>
+
+      <div class="container">
+        <div class="row head-space">
+          <p class="help-block head-space" style="opacity: 0.5"><%= __('The repaired PDF might not have all contents from original file') %></p>
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Repair PDF') %></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'repaired' }); %>
+<%- include('partials/task-screen-after'); %>

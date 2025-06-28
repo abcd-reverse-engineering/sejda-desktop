@@ -1,0 +1,297 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  input[name=marginTop], input[name=marginLeft], input[name=marginRight], input[name=marginBottom] {
+    width: 90px;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  input[name=pageSizeWidth],
+  input[name=pageSizeHeight] {
+    width: 100px;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .aligned-label {
+    margin-top: 8px;
+  }
+
+  .page-size-details {
+    color: #AAA;
+    margin-left: 10px;
+  }
+
+  .pdf-page-size-new+.pdf-page-size {
+    text-decoration: line-through;
+    margin-top: -10px;
+  }
+
+  .pdf-page-size-new {
+    color: #0282e5;
+    opacity: 1;
+  }
+
+  h4.related {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  h4.related .fa {
+    font-size: 12px;
+    /* margin-left: 5px; */
+    margin-right: 5px;
+  }
+
+  input.input-lg[step] {
+    padding-right: 6px;
+  }
+
+  #addMarginsSection {
+    max-width: 700px;
+    margin: auto;
+  }
+
+  #addMarginsSection label,
+  #addMarginsSection input {
+    vertical-align: sub;
+  }
+
+  #addMarginsSection .col-label,
+  #addMarginsSection .col-input {
+    float: left;
+    width: 90px;
+  }
+
+  #addMarginsSection .inch-cm-toggle {
+    float: right
+  }
+
+  #addMarginsSection .col-label {
+    padding-top: 5px;
+    text-align: right;
+    padding-right: 0;
+  }
+
+  #addMarginsSection .col-input {
+    padding-left: 10px;
+    padding-right: 0;
+  }
+
+  #addMarginsSection .col-input + #addMarginsSection .col-label {
+    margin-left: 20px;
+  }
+
+  .inch-cm-toggle {
+    display: inline-block;
+    margin-left: 20px;
+  }
+</style>
+
+<section id="task-content" data-task="resizePages" data-multiple-files="pro" data-can-magnify="false">
+  <div class="container centered">
+    <div class="row">
+      <h1><lift:locS>Resize PDF</lift:locS></h1>
+      <h2><lift:locS>Add page margins and padding, Change PDF page size</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 80px;" id="step2Choices">
+    <div class="row">
+      <label><lift:locS>Choose an option</lift:locS></label>
+    </div>
+    <div class="row">
+      <a class="btn btn-medium btn-secondary default btn-choice" data-choice="add-margins">
+        <div class="icons" style="font-size: 20px;">
+              <span class="fa-stack">
+                <i class="fal fa-file fa-stack-2x"></i>
+                <i class="fal fa-align-left fa-stack-1x"></i>
+              </span>
+          <i class="fal fa-angle-right"></i>
+          <span class="fa-stack">
+                <i class="fal fa-file fa-stack-2x"></i>
+                <i class="fal fa-align-left fa-stack-1x" style="font-size: 10px;"></i>
+              </span>
+        </div>
+        <div class="text">&nbsp;</div>
+        <strong><lift:locS>Add margins and padding</lift:locS> <i class="fal fa-arrow-right"></i></strong>
+      </a>
+      <a class="btn btn-medium btn-secondary btn-choice" data-choice="change-page-size">
+        <div class="icons">
+          <i class="fal fa-file-alt"></i><i class="fal fa-angle-right"></i><i class="fal fa-file-alt" style="font-size: 40px"></i>
+        </div>
+        <div class="text">&nbsp;</div>
+        <strong><lift:locS>Change page size</lift:locS> <i class="fal fa-arrow-right"></i></strong>
+      </a>
+      <a class="btn btn-medium btn-secondary btn-choice hidden" data-choice="compress">
+        <div class="icons"><i class="fal fa-file-pdf"></i><i class="fal fa-angle-right"></i><i class="fal fa-file-pdf" style="font-size:15px"></i></div>
+        <div class="text">120MB <i class="fal fa-angle-right"></i> 60KB</div>
+        <strong><lift:locS>Reduce the file size</lift:locS> <i class="fal fa-arrow-right"></i></strong>
+      </a>
+    </div>
+    <div class="row head-space-xl" style="margin-top: 30px;">
+      <button id="step2ChoicesContinueBtn" class="btn btn-default btn-medium"><lift:locS>Continue</lift:locS> <i class="fal fa-angle-right"></i></button>
+      <a class="btn btn-link btn-medium btn-more-choice-options" href="javascript://"><lift:locS>More options</lift:locS></a>
+    </div>
+  </div>
+
+  <%- include('partials/pdf-page-thumbnails'); %>
+
+  <div class="centered step3 bottom-fixed" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="resizePages"/>
+      <input type="hidden" name="pages" id="specificPages" />
+      <input type="hidden" name="pageSize" value="" />
+
+      <div class="container centered">
+        <div class="row head-space-xl">
+          <section id="addMarginsSection" style="display: none">
+            <div class="row">
+              <label class="aligned-label"><lift:locS>Margins</lift:locS>:</label>
+            </div>
+            <div class="row">
+              <div class="col-label">
+                <label class="light"><lift:locS>Top</lift:locS></label>
+              </div>
+              <div class="col-input">
+                <input value="0.0" class="input-lg form-control" name="marginTop" type="number" step="0.01" min="0" max="100" placeholder="2.5"/>
+              </div>
+              <div class="col-label">
+                <label class="light"><lift:locS>Left</lift:locS></label>
+              </div>
+              <div class="col-input">
+                <input value="0.0" class="input-lg form-control" name="marginLeft" type="number" step="0.01" min="0" max="100" placeholder="2.5"/>
+              </div>
+              <div class="col-label">
+                <label class="light"><lift:locS>Right</lift:locS></label>
+              </div>
+              <div class="col-input">
+                <input value="0.0" class="input-lg form-control" name="marginRight" type="number" step="0.01" min="0" max="100" placeholder="2.5"/>
+              </div>
+              <div class="col-buttons">
+                <div class="inch-cm-toggle">
+                  <div data-toggle="buttons" class="btn-group">
+                    <label class="btn btn-default btn-xs active">
+                      <input value="inch" name="unit" type="radio">inch
+                    </label>
+                    <label class="btn btn-default btn-xs">
+                      <input value="cm" name="unit" type="radio">cm
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-label">
+                <label class="light"><lift:locS>Bottom</lift:locS></label>
+              </div>
+              <div class="col-input">
+                <input value="0.0" class="input-lg form-control" name="marginBottom" type="number" step="0.01" min="0" max="100" placeholder="2.5"/>
+              </div>
+            </div>
+          </section>
+          <section id="changePageSizeSection"  style="display: none">
+            <div class="row">
+              <label class="aligned-label"><lift:locS>Page size</lift:locS>:</label>
+            </div>
+            <div class="row" style="margin-bottom: 20px;">
+              <div class="row">
+                <select name="pageSize" id="pageSize" class="selectpicker dropup" data-style="btn-xs btn-select">
+                  <option value="custom">Custom size</option>
+                  <option data-divider="true"></option>
+                  <option value="a1" data-dims-inch="23.39x33.11" data-dims-cm="59.5x84.1">A1</option>
+                  <option value="a2" data-dims-inch="16.54x23.39" data-dims-cm="42x59.4">A2</option>
+                  <option value="a3" data-dims-inch="11.69x16.54" data-dims-cm="29.7x42">A3</option>
+                  <option value="a4" data-dims-inch="8.27x11.69" data-dims-cm="21x29.7" selected="selected">A4</option>
+                  <option value="a5" data-dims-inch="5.83x8.27" data-dims-cm="14.8x21">A5</option>
+                  <option value="a6" data-dims-inch="4.14x5.83" data-dims-cm="10.5x14.8">A6</option>
+                  <option data-divider="true"></option>
+                  <option value="letter" data-dims-inch="8.5x11" data-dims-cm="21.6x27.9">Letter</option>
+                  <option value="legal" data-dims-inch="8.5x14" data-dims-cm="21.6x35.6">Legal</option>
+                  <option value="ledger" data-dims-inch="11x17" data-dims-cm="43.2x27.9">Ledger</option>
+                  <option value="tabloid" data-dims-inch="17x11" data-dims-cm="27.9x43.2">Tabloid</option>
+                  <option value="executive" data-dims-inch="7.25x10.55" data-dims-cm="18.4x26.7">Executive</option>
+                </select>
+              </div>
+              <section id="pageCustomSizeOpts" style="margin-top: 20px; display: none;">
+                <div class="row">
+                  <label class="aligned-label"><lift:locS>Dimensions</lift:locS>:</label>
+                </div>
+                <div class="row">
+                  <label class="light"><lift:locS>Width</lift:locS></label>
+                  <input value="0.000" class="input-lg form-control" name="pageSizeWidth" type="number" placeholder="8.27" step="0.001"/>
+                  <label class="light"><lift:locS>Height</lift:locS></label>
+                  <input value="0.000" class="input-lg form-control" name="pageSizeHeight" type="number" placeholder="11.69" step="0.001"/>
+                  <div class="inch-cm-toggle">
+                    <div data-toggle="buttons" class="btn-group">
+                      <label class="btn btn-default btn-xs active">
+                        <input value="inch" name="unit" type="radio">inch
+                      </label>
+                      <label class="btn btn-default btn-xs">
+                        <input value="cm" name="unit" type="radio">cm
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
+        <div class="row">
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>Resize PDF</lift:locS></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div id="flattenCroppedModal" class="modal app-modal" style="display: none">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-title">
+          <lift:locS>Flatten cropped documents before making changes</lift:locS>
+        </div>
+      </div>
+      <div class="modal-body">
+        <lift:locS>Your document has been cropped. Adjusting the margins will expand the crop area, revealing hidden content. To make the crop permanent and remove hidden content, flatten the document first.</lift:locS><br/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-no btn-light btn-xs"><lift:locS>Cancel</lift:locS></button>
+        <!-- sejda desktop different -->
+        <a href="./flatten-pdf.ejs" class="btn btn-yes btn-xs"><lift:locS>Flatten</lift:locS> <i style="margin-left: 10px;" class="fal fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="globalBtns" style="display: none">
+  <div aria-label="Tools" role="group" class="btn-group wrap">
+    <div class="btn-group">
+      <button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+        <i class="fal fa-mouse-pointer"></i>
+        <lift:locS>Page Selection</lift:locS>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu selection-opts">
+        <li><a class="page-section-quick-action" data-action="select-all" href="javascript://"><lift:locS>Select All</lift:locS></a></li>
+        <li><a class="page-section-quick-action" data-action="select-odd" href="javascript://"><lift:locS>Odd pages Only</lift:locS></a></li>
+        <li><a class="page-section-quick-action" data-action="select-even" href="javascript://"><lift:locS>Even pages Only</lift:locS></a></li>
+        <li class="divider"></li>
+        <li><a class="page-section-quick-action" data-action="select-none" href="javascript://"><lift:locS>Deselect All</lift:locS></a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="global-help-hint" style="display: none"></div>
+</div>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'resized' }); %>
+<%- include('partials/task-screen-after'); %>

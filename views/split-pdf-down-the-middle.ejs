@@ -1,0 +1,206 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #blended-canvas {
+    background-color: white;
+    -webkit-box-shadow: 0 3px 6px -2px rgba(50,50,50,.3);
+    -moz-box-shadow: 0 3px 6px -2px rgba(50,50,50,.3);
+    box-shadow: 0 3px 6px -2px rgba(50,50,50,.3);
+  }
+
+  #page-area-selector canvas {
+    display: none;
+  }
+
+  img.jsplit {
+    -webkit-box-shadow: 0 3px 6px -2px rgba(50,50,50,.6);
+    -moz-box-shadow: 0 3px 6px -2px rgba(50,50,50,.6);
+    box-shadow: 0 3px 6px -2px rgba(50,50,50,.6);
+  }
+
+  #page-area-selector {
+    text-align: center;
+    padding-bottom: 160px;
+    margin-bottom: 0;
+  }
+
+  #jsplit-holder {
+    margin: auto;
+    position: relative;
+    display: inline-block;
+  }
+
+  #split-part1 {
+    background-color: rgba(0,187,136,0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #split-part1 .inner {
+    background: url(public/images/stripes.gif);
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+  }
+
+  #split-part2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ui-resizable-handle {
+    background-color: #0b8;
+  }
+
+  .ui-resizable-s {
+    cursor: row-resize;
+    height: 2px;
+    bottom: -2px;
+  }
+
+  .ui-resizable-e {
+    cursor: col-resize;
+    width: 2px;
+    right: -2px;
+  }
+
+  #page-area-selector-content {
+    display: inline-block;
+  }
+
+  .page-tools-menu {
+    margin-top: 25px;
+    float: right;
+    margin-left: 10px;
+  }
+
+  .page-tools-menu .btn {
+    color: #0282e5;
+    border-color: #0282e5;
+    font-size: 16px;
+    padding: 3px 10px;
+    font-weight: normal;
+    background-color: #FFF;
+  }
+
+  .page-tools-menu .btn:hover {
+    color: #0282e5;
+    background-color: #f2f2f2;
+    border-color: #0282e5;
+  }
+</style>
+
+<section id="task-content" data-task="splitDownTheMiddle" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Split PDF pages down the middle') %></h1>
+      <h2><%= __('Split two page layout scans, A3 to double A4 or A4 to double A5') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload', { pages: 100 }); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <section class="scroll-here-step2">
+    <div class="row centered" style="display: none" id="page-area-selector-wrap">
+      <div id="page-area-selector">
+
+        <section id="tools-menu" class="tools-menu">
+          <div id="globalBtns">
+            <div aria-label="Tools" role="group" class="btn-group wrap">
+              <button type="button" class="btn btn-default btn-xs split-mode-btn" title="Split vertically" data-mode="vertical">
+                <i class="fal fa-columns"></i> Split vertically</button>
+              <button type="button" class="btn btn-default btn-xs split-mode-btn" title="Split horizontally" data-mode="horizontal">
+                <i class="fal fa-columns fa-rotate-90"></i> Split horizontally</button>
+            </div>
+          </div>
+        </section>
+
+        <p class="help-block head-space" style="opacity: 0.5"><%= __('Drag middle split line to customize where the split should occur') %></p>
+
+        <div class="loader-wrap" id="page-area-loader"><img class="loader medium" src="public/images/loaders/oval-green.svg"></div>
+
+        <section id="page-area-selector-content" style="display: none">
+          <canvas></canvas>
+          <div id="jsplit-holder">
+            <img src="" class="jsplit">
+            <div id="split-part2"></div>
+            <div id="split-part1"><div class="inner"></div></div>
+          </div>
+        </section>
+      </div>
+      <canvas id="blended-canvas" style="display: none"></canvas>
+    </div>
+  </section>
+
+
+  <div class="centered step2 bottom-fixed" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="splitDownTheMiddle"/>
+      <input type="hidden" name="ratio" value="1"/>
+      <input type="hidden" name="mode" value="auto"/>
+
+      <div class="container">
+        <div class="more-options" style="display: none">
+          <div class="row head-space-xl">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="autoDetectExcludedPages" checked="checked" value="true"> <%= __('Automatically detect pages to exclude') %>
+                <span class="input-help">
+                      <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="We'll try to automatically determine if your document has a cover page, or other pages that should not be split"></i>
+                    </span>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="display: none">
+            <label for="excludedPages" style="padding-right:20px; font-weight: normal;">Exclude pages:</label>
+            <input value="" min="1" placeholder="Example: 1-4,8-10,13,15-"
+                   class="form-control input-lg" type="text" name="excludedPages"
+                   id="excludedPages" data-validator="page-ranges-or-empty" style="width: 200px;">
+
+            <span class="input-help">
+                  <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Enter page ranges like 1,2,8-10,15-.<br/>This will exclude pages 1, 2, 8 to 10 and 15 until the end from being split down the middle."></i>
+                </span>
+          </div>
+          <div class="row head-space-xl">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="repagination" value="last-first"> <%= __('Re-paginate from booklet scan') %>
+                <span class="input-help">
+                      <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Select this option if your PDF document comes from a booklet scan (Eg: first scan pages 1 and 8, second scan pages 2 and 7, third scan pages 3 and 6, etc.) and you would like the result re-ordered by page numbers (1,2,3,4 etc)"></i>
+                    </span>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="rightToLeft" value="true"> <%= __('Right to left document (arabic, hebrew, etc.)') %>
+                <span class="input-help">
+                      <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Select this option if the right page comes before left page. (Eg: your document is written in a right to left language such as arabic or hebrew.)"></i>
+                    </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 30px">
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Split') %></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><%= __('More options') %></a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'split' }); %>
+<%- include('partials/task-screen-after'); %>

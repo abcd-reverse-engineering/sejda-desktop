@@ -1,0 +1,177 @@
+<section>
+    <section>
+        <div id="genericErrorModal" class="modal app-modal app-error-modal" style="display: none">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="modal-title"></div>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="outputPolicyChooserModal" class="modal app-modal" style="display: none">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title"><%= __('Folder output options') %></div>
+                </div>
+                <div class="modal-body">
+                    <p><%= __('Customize filenames') %></p>
+
+                    <div class="input-group" style="margin-bottom: 30px">
+                        <input value="" placeholder=""
+                               class="form-control input-lg remembered" type="text" name="outputFilenamePattern">
+
+                        <div class="input-group-addon input-help">
+                            <a href="<%= manifest.helpUrls.customizeFilenames %>"><i class="fal fa-question-circle"></i></a>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        <%= __('What should happen if a file with the same name already exists?') %><br/>
+                        <div class="outputFolderPath"></div>
+                    </p>
+
+                    <div data-toggle="buttons" class="btn-group btn-group-vertical">
+                        <label class="btn btn-default btn-xs active">
+                            <i class="fal fa-circle"></i>
+                            <i class="fas fa-dot-circle"></i>
+                            <div class="text-labels">
+                                <input value="rename" name="outputPolicy" type="radio">
+                                <lift:locS>Rename</lift:locS> <span class="recommended-label">(<lift:locS>Recommended</lift:locS>)</span>
+                                <span class="input-help-inline">
+                                    <%= __('If file exists, a new name will be used') %> - Eg: file(1).pdf
+                                </span>
+                            </div>
+                        </label>
+                        <label class="btn btn-default btn-xs">
+                            <i class="fal fa-circle"></i>
+                            <i class="fas fa-dot-circle"></i>
+                            <div class="text-labels">
+                                <input value="overwrite" name="outputPolicy" type="radio">
+                                <lift:locS>Overwrite</lift:locS>
+                                <span class="input-help-inline">
+                                    <%= __('If file exists, then it will be overwritten') %>
+                                </span>
+                            </div>
+                        </label>
+                        <label class="btn btn-default btn-xs">
+                            <i class="fal fa-circle"></i>
+                            <i class="fas fa-dot-circle"></i>
+                            <div class="text-labels">
+                                <input value="skip" name="outputPolicy" type="radio">
+                                <lift:locS>Skip</lift:locS>
+                                <span class="input-help-inline">
+                                    <%= __('If file exists, will not be generated again') %>
+                                </span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-continue btn-xs" data-dismiss="modal"><lift:locS>Continue</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="scanPrompt" class="modal app-modal app-warning-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><lift:locS>Scanned documents are not supported</lift:locS></h4>
+                </div>
+                <div class="modal-body">
+                    <div data-scope="edit">
+                        <strong><lift:locS>Editing scanned documents is not supported.</lift:locS></strong>
+                        <lift:locS>Changing existing text within scanned documents is not supported. However, you can still use other features such as adding new text, images, and annotations.</lift:locS>
+                    </div>
+                    <div data-scope="convert" style="display: none">
+                        <strong><lift:locS>Converting scanned documents is not supported</lift:locS>.</strong>
+                        <lift:locS>Scanned PDFs are images of text and lack the actual text data needed for conversion.</lift:locS>
+
+                        <br/><br/>
+                        <lift:locS>File</lift:locS>: <span class="file-name"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="dont-show-anymore-opts">
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="dontShowAnymore" style="margin-top: 5px"> <lift:locS>Don't show anymore</lift:locS></label>
+                        </div>
+                    </div>
+                    <a class="btn btn-secondary btn-xs" href="https://www.sejda.com/help#scans"><lift:locS>Learn more</lift:locS></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="movePagePrompt" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <lift:locS>Move page to a new location</lift:locS>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-inline">
+                        <label for="moveNewPageNumber" class="light"><lift:locS>New page location:</lift:locS></label>
+                        <input type="text" id="moveNewPageNumber" name="moveNewPageNumber" class="form-control input-xs" style="width: 55px;margin: 0 10px;vertical-align: baseline; text-align: center"/>
+                        <span class="num_of_pages"></span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-hint">
+                        <lift:locS>Tip: Can also drag and drop the page to the new location</lift:locS>
+                    </div>
+                    <button type="button" class="btn btn-yes btn-xs"><lift:locS>Move page</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="recentFilesCollapseModal" class="modal app-modal" style="display: none">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title"><%= __('Recent files') %></div>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <%= __('Would you like to clear the list of recent files or hide it?') %><br/>
+                        <%= __('You can show the list again anytime from Settings.') %>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-hide btn-xs btn-secondary" data-dismiss="modal">
+                        <i class="fal fa-eye-slash"></i><lift:locS>Hide</lift:locS></button>
+                    <button type="button" class="btn btn-clear btn-xs" data-dismiss="modal">
+                        <i class="fal fa-trash-alt"></i><lift:locS>Clear</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="i18n-strings" style="display: none">
+        <div data-key="Click to edit"><lift:locS>Click to edit</lift:locS></div>
+        <div data-key="Sorry, unsupported image format:"><lift:locS>Sorry, unsupported image format:</lift:locS></div>
+        <div data-key="We support the following image types:"><lift:locS>We support the following image types:</lift:locS></div>
+        <div data-key="Insufficient disk space"><lift:locS>Insufficient disk space</lift:locS></div>
+        <div data-key="Your main disk is too full for the application to run properly"><lift:locS>Your main disk is too full for the application to run properly</lift:locS></div>
+        <div data-key="Please free up some space and try again"><lift:locS>Please free up some space and try again</lift:locS></div>
+        <div data-key="Minimum required"><lift:locS>Minimum required</lift:locS></div>
+    </section>
+</section>

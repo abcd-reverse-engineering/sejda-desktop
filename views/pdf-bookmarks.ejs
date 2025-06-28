@@ -1,0 +1,211 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #pdfBookmarks {
+    border: 1px #CCC solid;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    /*overflow-y: scroll;*/
+    /*overflow-x: hidden;*/
+    /*height: 600px;*/
+    margin-bottom: 130px;
+    /*background-color: #f2f2f2;*/
+    min-height: 370px;
+  }
+
+  #pdfBookmarks ol {
+    margin: 0;
+    padding: 0;
+    margin-left: 35px;
+    border-left: 1px #EEE solid;
+  }
+
+  #pdfBookmarks > ol {
+    margin-left: 0;
+    padding-inline-start: 0;
+  }
+
+  #pdfBookmarks li {
+    list-style: none;
+  }
+
+  #pdfBookmarks li .outline-node {
+    display: inline-block;
+    width: calc(100% - 8px);
+    cursor: pointer;
+    border: 1px #EEE solid;
+    background-color: #f9f9f9;
+    margin: 3px;
+    padding: 3px 10px;
+  }
+
+  #pdfBookmarks li .outline-node:hover,
+  #pdfBookmarks li .outline-node.active
+  {
+    /*background-color: #DDD;*/
+    border-color: #0282e5;
+  }
+
+  #pdfBookmarks li .outline-node.edited {
+    background-color: rgba(2,130,229, 0.1);
+  }
+
+  #pdfBookmarks li .outline-node.edited.active,
+  #pdfBookmarks li .outline-node.active {
+    background-color: rgba(2,130,229, 0.2);
+  }
+
+  #pdfBookmarks li .outline-node.invalid {
+    background-color: rgba(255, 50, 104, 0.1) !important;
+    border-color: #ff3268;
+  }
+
+  .expander {
+    display: inline-block;
+    width: 17px;
+  }
+
+  .title {
+    display: inline;
+    outline: none;
+  }
+
+  #pdfBookmarks li .fal.tree-expander {
+    font-size: 11px;
+    vertical-align: middle;
+  }
+
+  #bookmarksLevelSelector .radio-inline input {
+    cursor: pointer;
+  }
+
+  #bookmarksLevelSelector .radio-inline {
+    margin-right: 10px;
+  }
+
+  #pdfPagePreview {
+    background-color: #fff;
+    box-shadow: 0 3px 6px -2px rgb(50 50 50 / 30%);
+    border: 1px #CCC solid;
+    width: 100%;
+    position: relative;
+  }
+
+  #pdfPagePreview canvas {
+    width: 100%;
+  }
+
+  #pdfPagePreview.zoomed {
+    transform: scale(2);
+  }
+
+  #pageNumberLabel {
+    font-size: 15px;
+    border-bottom: 1px #EEE solid;
+  }
+
+  #targetPageInput {
+    width: 30px;
+    height: 20px;
+    margin-left: 10px;
+    text-align: center;
+  }
+
+  .btn-complement {
+    cursor: default;
+  }
+
+  .btn-complement input {
+    border: none;
+    color: #0282e5;
+    outline: 1px #0282e5 solid;
+  }
+
+  .btn-complement input.invalid {
+    outline-color: red;
+  }
+
+  .add-item-opts li .fal {
+    margin-right: 5px;
+  }
+
+  .outline-node .page {
+    display: inline-block;
+    float: right;
+    color: #CCC;
+  }
+</style>
+
+<section id="task-content" data-task="editBookmarks" data-multiple-files="false">
+  <div class="container centered">
+    <div class="row">
+      <h1><lift:locS>Create PDF Bookmarks</lift:locS><span class="beta">BETA</span></h1>
+      <h2><lift:locS>Add, modify and remove bookmarks from PDF document outline</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <div id="bookmark-menu" class="bookmark-menu edit-menu" style="display: none">
+      <div class="btn-group" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <div class="btn-complement btn">
+            Page <input type="text" id="targetPageInput" style="width: 50px;" value="5" />
+          </div>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle tooltip-single-line" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Font family">
+            <i class="fal fa-plus-square" style="margin-right: 5px;"></i> Add
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu add-item-opts">
+            <li><a href="javascript://" id="addItemBeforeBtn"><i class="fal fa-arrow-from-bottom"></i> Add sibling before</a></li>
+            <li><a href="javascript://" id="addItemAfterBtn"><i class="fal fa-arrow-from-top"></i> Add sibling after</a></li>
+            <li class="divider" role="separator"></li>
+            <li><a href="javascript://" id="addItemChildBtn"><i class="fal fa-arrow-from-left"></i> Add child item</a></li>
+          </ul>
+        </div>
+        <button class="btn btn-default" id="deleteItemBtn" title="Delete">
+          <i class="far fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="centered step2 bottom-fixed" style="display:none; margin-top: 40px">
+      <form class="form-inline task-form" autocomplete="off">
+        <input type="hidden" name="type" value="editBookmarks"/>
+        <input type="hidden" name="jsonData">
+
+        <div class="container centered">
+          <div class="row head-space">
+            <button id="task-submit-btn" type="submit" class="btn btn-default btn-medium"><lift:locS>Apply changes</lift:locS></button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div id="pdfBookmarks"><lift:locS>Loading bookmarks...</lift:locS></div>
+        </div>
+        <div class="col-md-3">
+          <div id="pdfPagePreview">
+            <div id="pageNumberLabel">Page</div>
+            <canvas></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script class="pageScripts" data-src="public/js/pages/pdf-bookmarks-desktop.min.obfuscated.js"></script>
+
+</section>
+
+<%- include('partials/task-common-output-options', { onlyFile: true, outputFilenameAffix: 'bookmarked' }); %>
+<%- include('partials/task-screen-after'); %>

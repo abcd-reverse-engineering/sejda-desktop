@@ -1,0 +1,487 @@
+<section>
+    <!-- Remove unused 'Type your text' -->
+    <div id="removeUnusedTextPrompt" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <lift:locS>Unused text edits</lift:locS>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <lift:locS>Found "Type your text" edits. Remove before continuing?</lift:locS>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-no btn-light btn-xs"><lift:locS>Keep</lift:locS></button>
+                    <button type="button" class="btn btn-yes btn-xs"><lift:locS>Remove</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coming soon modal -->
+    <div id="comingSoonModal" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title"><lift:locS>Sorry, this feature is not yet available</lift:locS></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-xs" data-dismiss="modal"><lift:locS>Got it</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font replacement -->
+    <div id="fontReplacementPrompt" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title"><lift:locS>Font Replacement</lift:locS></div>
+                </div>
+                <div class="modal-body">
+                    <lift:locS>The original font is missing some of the characters you typed.</lift:locS> <lift:locS>Options are</lift:locS>:<br/><br/>
+
+                    - <lift:locS>Replace the original font with a visually similar font</lift:locS> (<lift:locS>Recommended</lift:locS>).<br/>
+                    - <lift:locS>Keep the original font, using a fallback for the missing characters.</lift:locS>
+
+                    <br/><br/>
+                    <small><lift:locS>We'll remember your choice for all future edits in this document.</lift:locS></small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-replace btn-default"><lift:locS>Replace original</lift:locS></button>
+                    <button type="button" class="btn btn-xs btn-dismiss btn-secondary"><lift:locS>Keep using original</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search & Replace -->
+    <div id="searchReplaceTextPrompt" class="modal app-modal" style="display: none; z-index: 999 !important; right: initial!important; bottom: initial!important; left: 0; top: 20px; overflow: hidden">
+        <div class="modal-dialog" style="margin: 30px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title"><lift:locS>Find & Replace</lift:locS></div>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" style="margin-bottom: -30px;">
+                        <div class="row form-group" style="margin-bottom: 5px;">
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control input-xs lift:locPlaceholder" placeholder="Find" name="findText" id="findText" value=""/>
+                            </div>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control input-xs lift:locPlaceholder" placeholder="Replace" name="replaceText" id="replaceText" value=""/>
+                            </div>
+                        </div>
+                        <div class="row form-group search-replace-options">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="replaceMatchCase" name="replaceMatchCase" style="margin-top: 5px;"> <lift:locS>Match case</lift:locS>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="replaceMatchLinks" name="replaceMatchLinks" checked="checked" style="margin-top: 5px;"> <lift:locS>Include links</lift:locS>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div id="searchStatus" style="position: absolute;bottom: 25px;left: 20px;color: #0b8"></div>
+                    <button type="button" class="btn btn-find-next btn-light btn-xs"><lift:locS>Find</lift:locS></button>
+                    <button type="button" class="btn btn-replace-find-next btn-light btn-xs"><lift:locS>Replace</lift:locS></button>
+                    <button type="button" class="btn btn-replace-all btn-xs"><lift:locS>Replace all</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System fonts -->
+    <div id="systemFontsPrompt" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title"><lift:locS>More Fonts</lift:locS></div>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control input-xs" name="systemFontSearch" value="" placeholder="Type to search"/>
+                    <ul id="systemFonts">
+                        <li class="loading">Loading...</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs btn-ok btn-default">Ok</button>
+                    <button type="button" class="btn btn-xs btn-dismiss btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Undo modal window -->
+    <div id="undoPrompt" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <lift:locS>Undo changes</lift:locS>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="empty"><lift:locS>No changes found</lift:locS></div>
+                    <div id="undoTableWrap">
+                        <table id="undoTable" class="table table-hover table-condensed table-striped"></table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-yes btn-xs"><lift:locS>Revert selected</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="colorPickerPrompt" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <lift:locS>Choose a color</lift:locS>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="hex-color-section">
+                        <input name="hexcolor" value="#FF0000" size="7" class="form-control input-xs">
+                    </div>
+                    <div class="inline-picker-section">
+                        <input name="color" class="minicolors-input" value="#FF0000" size="7">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-xs" data-dismiss="modal"><lift:locS>Done</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="navigationSidePanel" style="display: none">
+        <div class="fixed-header">
+            <button type="button" class="close">&times;</button>
+            <div class="nav-page-num-direct-input">
+                <input type="text" class="input-xxs" id="navPageNumInput"> / <span id="nav_total_page_num"></span>
+            </div>
+        </div>
+        <ol id="pdf-canvas-list-nav-side-panel" class="pdf-page-wrap-parent" data-can-select-pages="false">
+        </ol>
+    </div>
+
+    <div id="tabOrderPrompt" class="modal app-modal" style="display: none; z-index: 999 !important; right: initial!important; bottom: initial!important; left: 0; top: 20px; overflow: hidden">
+        <div class="modal-dialog" style="margin: 30px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <lift:locS>Tab order</lift:locS> - <lift:locS>Form fields</lift:locS>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="empty"><lift:locS>No form fields found</lift:locS></div>
+
+                    <div class="sort-btns">
+                        <div data-sort="rows" class="sort-btn">
+                            <div class="sort-tabs-sheet">
+                                <div class="sort-tabs-row">
+                                    <div class="sort-tabs-page">1</div>
+                                    <div class="sort-tabs-page">2</div>
+                                    <div class="sort-tabs-page">3</div>
+                                </div>
+                                <div class="sort-tabs-row">
+                                    <div class="sort-tabs-page">4</div>
+                                    <div class="sort-tabs-page">5</div>
+                                    <div class="sort-tabs-page">6</div>
+                                </div>
+                            </div>
+                            <label><lift:locS>Sort by rows</lift:locS></label>
+                        </div>
+
+                        <div data-sort="cols" class="sort-btn">
+                            <div class="sort-tabs-sheet">
+                                <div class="sort-tabs-row">
+                                    <div class="sort-tabs-page">1</div>
+                                    <div class="sort-tabs-page">3</div>
+                                    <div class="sort-tabs-page">5</div>
+                                </div>
+                                <div class="sort-tabs-row">
+                                    <div class="sort-tabs-page">2</div>
+                                    <div class="sort-tabs-page">4</div>
+                                    <div class="sort-tabs-page">6</div>
+                                </div>
+                            </div>
+                            <label><lift:locS>Sort by columns</lift:locS></label>
+                        </div>
+
+                        <div data-sort="custom" class="sort-btn" style="pointer-events: none">
+                            <div class="sort-tabs-sheet">
+                                <div class="sort-tabs-row">
+                                    <div class="sort-tabs-page">1</div>
+                                    <div class="sort-tabs-page">4</div>
+                                    <div class="sort-tabs-page">2</div>
+                                </div>
+                                <div class="sort-tabs-row">
+                                    <div class="sort-tabs-page">6</div>
+                                    <div class="sort-tabs-page">3</div>
+                                    <div class="sort-tabs-page">5</div>
+                                </div>
+                            </div>
+                            <label><lift:locS>Custom order</lift:locS>
+                                <div style="color: #999; font-size: 85%; line-height: 12px;"><lift:locS>Drag and drop below to reorder</lift:locS></div></label>
+                        </div>
+
+                        <div data-sort="restore" class="sort-btn">
+                            <div class="sort-tabs-sheet">
+                                <div class="sort-tabs-row">
+                                    <div class="sort-tabs-page">A</div>
+                                    <div class="sort-tabs-page">X</div>
+                                    <div class="sort-tabs-page">O</div>
+                                </div>
+                                <div class="sort-tabs-row">
+                                    <div class="sort-tabs-page">Z</div>
+                                    <div class="sort-tabs-page">W</div>
+                                    <div class="sort-tabs-page">Q</div>
+                                </div>
+                            </div>
+                            <label><lift:locS>Restore original</lift:locS></label>
+                        </div>
+                    </div>
+
+                    <div id="tabOrderWrap">
+                    </div>
+
+                    <div id="tabOrderTemplate" class="page-tab-ordering">
+                        <div class="header">
+                            <lift:locS>Page</lift:locS> <span class="page_num"></span>
+                        </div>
+                        <ul class="page-field-list">
+                            <li>
+                                <span class="drag-handle"><i class="fal fa-grip-vertical"></i></span>
+                                <span class="field-name"></span>
+                                <span class="field-kind"></span>
+                                <span class="field-counter"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .stampColorPicker i {
+            cursor: pointer;
+            border: 3px transparent solid;
+            border-radius: 20px;
+            padding: 3px;
+            font-size: 20px;
+        }
+
+        .stampColorPicker i:hover {
+            border-color: #F3F3F3;
+        }
+
+        .stampPreview {
+            width: 400px;
+            margin: auto;
+            margin-top: 30px;
+        }
+    </style>
+
+    <div id="createStampModal" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title"><lift:locS>Create stamp</lift:locS></div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label class="light"><lift:locS>Subject</lift:locS></label>
+                            <input type="text" id="stampSubject" class="form-control" value="Approved">
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="light"><lift:locS>Author</lift:locS></label>
+                            <input type="text" id="stampAuthor" class="form-control" value="Alex Appleseed">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-xs-6">
+                            <label class="light"><lift:locS>Date and time</lift:locS></label>
+                            <select name="stampDateStyle" id="stampDateStyle" class="input-lg form-control">
+                                <option value="none">No date and time</option>
+                                <option value="date">Feb 03, 2025</option>
+                                <option value="date-time" selected="selected">1:15PM, Feb 03, 2025</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
+                            <label class="light"><lift:locS>Color</lift:locS></label>
+                            <div id="stampColorPicker" class="stampColorPicker form-group">
+                                <i class="fas fa-circle active" style="color: #2B5329"></i>
+                                <i class="fas fa-circle" style="color: #2B4B8D"></i>
+                                <i class="fas fa-circle" style="color: #C41E3A"></i>
+                                <i class="fas fa-circle" style="color: #8B4513"></i>
+                                <i class="fas fa-circle" style="color: #4B0082"></i>
+                                <i class="fas fa-circle" style="color: #D35400"></i>
+                                <i class="fas fa-circle" style="color: #000000"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="stampPreviewWrap">
+                        <div class="stampPreview first">
+                            <svg viewBox="0 0 500 100" style="width: 100%; height: 100%;">
+                                <rect x="10" y="10" width="480" height="85" rx="20" fill="none" stroke="#2B5329" stroke-width="4"></rect>
+                                <text x="30" y="50" font-size="40" font-family="sans-serif" fill="#2B5329" font-weight="bold">Approved</text>
+                                <text x="30" y="80" font-size="20" font-family="sans-serif" fill="#2B5329">By Alex Appleseed at 1:15 PM, Feb 03, 2025</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer centered">
+                    <button type="button" class="btn btn-medium btn-ok wide" style="margin-right: 15px;"><lift:locS>Save</lift:locS></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="attachmentsModal" class="modal app-modal" style="display: none">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <lift:locS>Attachments</lift:locS>
+                    </div>
+                </div>
+                <div class="modal-body">
+          <span type="button" class="fileinput-link btn btn-secondary btn-xxs" id="upload-attachment-link">
+            <i class="fal fa-plus"></i> <lift:locS>New Attachment</lift:locS>
+            <input id="attachment-filepicker" class="attachment-filepicker lift:locTooltip" type="file" name="file" title="Upload an attachment" accept="*">
+          </span>
+                    <ul id="attachmentsList">
+                        <li id="attachmentEntryTemplate" style="display: none">
+                            <i class="fal fa-paperclip"></i>
+                            <a href="javascript://" class="caption"><span class="filename"></span></a>
+                            <span class="updated-label" style="display: none"><lift:locS>Updated</lift:locS></span>
+
+                            <div class="action-btns">
+                                <a href="javascript://" title="Add annotation to page" class="btn-annotate lift:locTooltip"><i class="far fa-file-plus"></i></a>
+                                <a href="javascript://" title="Download" class="btn-download lift:locTooltip"><i class="far fa-arrow-to-bottom"></i></a>
+                                <a href="javascript://" title="Remove" class="btn-delete lift:locTooltip"><i class="far fa-trash"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="i18n-strings" style="display: none">
+        <div data-key="Tap again to place element on page"><lift:locS>Tap again to place element on page</lift:locS></div>
+        <div data-key="Press ESC to cancel"><lift:locS>Press ESC to cancel</lift:locS></div>
+        <div data-key="Form fields now in fill out mode"><lift:locS>Form fields now in fill out mode</lift:locS></div>
+        <div data-key="Form fields now in edit mode"><lift:locS>Form fields now in edit mode</lift:locS></div>
+        <div data-key="Add a shape by making an area selection on the page"><lift:locS>Add a shape by making an area selection on the page</lift:locS></div>
+        <div data-key="Click and drag to draw the shape"><lift:locS>Click and drag to draw the shape</lift:locS></div>
+        <div data-key="This font (embedded in the document) does not support this style change. Try changing the font family"><lift:locS>This font (embedded in the document) does not support this style change. Try changing the font family</lift:locS></div>
+        <div data-key="Rotating image, please wait..."><lift:locS>Rotating image, please wait...</lift:locS></div>
+        <div data-key="Right to left scripts are not fully supported (eg: Arabic, Hebrew)"><lift:locS>Right to left scripts are not fully supported (eg: Arabic, Hebrew)</lift:locS></div>
+        <div data-key="The original font used for this text is missing some of the characters you typed"><lift:locS>The original font used for this text is missing some of the characters you typed</lift:locS></div>
+        <div data-key="Editing a scan? Changing existing text inside scans not supported"><lift:locS>Editing a scan? Changing existing text inside scans not supported</lift:locS></div>
+        <div data-key="Other functionalities work: adding text, images, etc."><lift:locS>Other functionalities work: adding text, images, etc.</lift:locS></div>
+        <div data-key="Read only field is now editable"><lift:locS>Read only field is now editable</lift:locS></div>
+        <div data-key="Click existing text to edit or click the page to add new text"><lift:locS>Click existing text to edit or click the page to add new text</lift:locS></div>
+        <div data-key="Select a page area to create link"><lift:locS>Select a page area to create link</lift:locS></div>
+        <div data-key="Click a location on the page to add image"><lift:locS>Click a location on the page to add image</lift:locS></div>
+        <div data-key="Select text to annotate"><lift:locS>Select text to annotate</lift:locS></div>
+        <div data-key="Select page area to whiteout"><lift:locS>Select page area to whiteout</lift:locS></div>
+        <div data-key="Click a location on the page to add signature"><lift:locS>Click a location on the page to add signature</lift:locS></div>
+        <div data-key="Select area to draw the shape"><lift:locS>Select area to draw the shape</lift:locS></div>
+        <div data-key="Press ESC to exit freehand highlight mode"><lift:locS>Press ESC to exit freehand highlight mode</lift:locS></div>
+        <div data-key="Press ESC to exit draw mode"><lift:locS>Press ESC to exit draw mode</lift:locS></div>
+        <div data-key="Add links by making an area selection on the page"><lift:locS>Add links by making an area selection on the page</lift:locS></div>
+        <div data-key="Text highlight not working? Try the Annotate > Freehand > Highlight tool"><lift:locS>Text highlight not working? Try the Annotate > Freehand > Highlight tool</lift:locS></div>
+        <div data-key="Cannot zoom on pages that have changes"><lift:locS>Cannot zoom on pages that have changes</lift:locS></div>
+        <div data-key="Complex script alphabets are not supported (eg: Arabic, Devanagari)"><lift:locS>Complex script alphabets are not supported (eg: Arabic, Devanagari)</lift:locS></div>
+        <div data-key="Text is too small to edit. Please zoom in and try again"><lift:locS>Text is too small to edit. Please zoom in and try again</lift:locS></div>
+        <div data-key="One more free save left for the next"><lift:locS>One more free save left for the next</lift:locS></div>
+        <div data-key="minutes"><lift:locS>minutes</lift:locS></div>
+        <div data-key="Stop editing fields"><lift:locS>Stop editing fields</lift:locS></div>
+        <div data-key="Make fields editable"><lift:locS>Make fields editable</lift:locS></div>
+        <div data-key="Click once to select"><lift:locS>Click once to select</lift:locS></div>
+        <div data-key="Click on the page to place symbol"><lift:locS>Click on the page to place symbol</lift:locS></div>
+        <div data-key="Looks like you clicked outside the page? Please try clicking a location inside the page"><lift:locS>Looks like you clicked outside the page? Please try clicking a location inside the page</lift:locS></div>
+        <div data-key="Your text field seems very tall"><lift:locS>Your text field seems very tall</lift:locS></div>
+        <div data-key="Did you mean to use a multiline text field instead of a single line text field?"><lift:locS>Did you mean to use a multiline text field instead of a single line text field?</lift:locS></div>
+        <div data-key="Sample text"><lift:locS>Sample text</lift:locS></div>
+        <div data-key="This page is rotated"><lift:locS>This page is rotated</lift:locS></div>
+        <div data-key="Sorry, adding form fields on rotated pages is not yet supported"><lift:locS>Sorry, adding form fields on rotated pages is not yet supported</lift:locS></div>
+        <div data-key="Whiteout hides but will not completely remove underlying text or images. Not suitable for redacting sensitive data"><lift:locS>Whiteout hides but will not completely remove underlying text or images. Not suitable for redacting sensitive data</lift:locS></div>
+        <div data-key="Sorry, adding annotations on rotated pages is not yet supported"><lift:locS>Sorry, adding annotations on rotated pages is not yet supported</lift:locS></div>
+        <div data-key="Delete page"><lift:locS>Delete page</lift:locS></div>
+        <div data-key="Zoom in"><lift:locS>Zoom in</lift:locS></div>
+        <div data-key="Zoom out"><lift:locS>Zoom out</lift:locS></div>
+        <div data-key="Rotate page"><lift:locS>Rotate page</lift:locS></div>
+        <div data-key="Embedded font, characters might be missing"><lift:locS>Embedded font, characters might be missing</lift:locS></div>
+        <div data-key="Read-only form field. Double click to edit"><lift:locS>Read-only form field. Double click to edit</lift:locS></div>
+        <div data-key="Field has features that are not supported"><lift:locS>Field has features that are not supported</lift:locS></div>
+        <div data-key="Insert page here"><lift:locS>Insert page here</lift:locS></div>
+        <div data-key="Document contains XFA elements, which are not supported"><lift:locS>Document contains XFA elements, which are not supported</lift:locS></div>
+        <div data-key="Document contains unsupported features"><lift:locS>Document contains unsupported features</lift:locS></div>
+        <div data-key="Reached end of the document"><lift:locS>Reached end of the document</lift:locS></div>
+        <div data-key="Please enter text to find"><lift:locS>Please enter text to find</lift:locS></div>
+        <div data-key="Added form field"><lift:locS>Added form field</lift:locS></div>
+        <div data-key="Deleted form field"><lift:locS>Deleted form field</lift:locS></div>
+        <div data-key="Link to page"><lift:locS>Link to page</lift:locS></div>
+        <div data-key="Whiteout"><lift:locS>Whiteout</lift:locS></div>
+        <div data-key="Rectangle"><lift:locS>Rectangle</lift:locS></div>
+        <div data-key="Ellipse"><lift:locS>Ellipse</lift:locS></div>
+        <div data-key="Line"><lift:locS>Line</lift:locS></div>
+        <div data-key="Arrow"><lift:locS>Arrow</lift:locS></div>
+        <div data-key="Signature"><lift:locS>Signature</lift:locS></div>
+        <div data-key="Image"><lift:locS>Image</lift:locS></div>
+        <div data-key="There is something wrong with this form field. We cannot update its value"><lift:locS>There is something wrong with this form field. We cannot update its value</lift:locS></div>
+        <div data-key="Could not access your camera to capture signature"><lift:locS>Could not access your camera to capture signature</lift:locS></div>
+        <div data-key="Click 'Allow' in the pop-up above to activate your camera"><lift:locS>Click 'Allow' in the pop-up above to activate your camera</lift:locS></div>
+        <div data-key="Some images could not be processed and were removed from your edits"><lift:locS>Some images could not be processed and were removed from your edits</lift:locS></div>
+        <div data-key="Text color"><lift:locS>Text color</lift:locS></div>
+        <div data-key="Repeated on all pages"><lift:locS>Repeated on all pages</lift:locS></div>
+        <div data-key="No longer repeated on all pages"><lift:locS>No longer repeated on all pages</lift:locS></div>
+        <div data-key="Can no longer be modified after being repeated on all pages"><lift:locS>Can no longer be modified after being repeated on all pages</lift:locS></div>
+        <div data-key="Drag text with your mouse to move it"><lift:locS>Drag text with your mouse to move it</lift:locS></div>
+        <div data-key="2 free saves left for the next"><lift:locS>2 free saves left for the next</lift:locS></div>
+        <div data-key="No free saves left for the next"><lift:locS>No free saves left for the next</lift:locS></div>
+        <div data-key="hours"><lift:locS>hours</lift:locS></div>
+        <div data-key="Unsupported field"><lift:locS>Unsupported field</lift:locS></div>
+        <div data-key="Image might be partially hidden by an overlapping element"><lift:locS>Image might be partially hidden by an overlapping element</lift:locS></div>
+        <div data-key="Document contains unsupported form fields"><lift:locS>Document contains unsupported form fields</lift:locS></div>
+        <div data-key="Click a location on the page to add attachment"><lift:locS>Click a location on the page to add attachment</lift:locS></div>
+        <div data-key="Attachment"><lift:locS>Attachment</lift:locS></div>
+        <div data-key="Attachment already exists"><lift:locS>Attachment already exists</lift:locS></div>
+        <div data-key="An attachment with this filename already exists"><lift:locS>An attachment with this filename already exists</lift:locS></div>
+        <div data-key="ESC to cancel"><lift:locS>ESC to cancel</lift:locS></div>
+        <div data-key="Attachment download"><lift:locS>Attachment download</lift:locS></div>
+        <div data-key="This attachment was added or updated in the current editing session"><lift:locS>This attachment was added or updated in the current editing session</lift:locS></div>
+        <div data-key="Click to place signature"><lift:locS>Click to place signature</lift:locS></div>
+        <div data-key="Click again to change signature"><lift:locS>Click again to change signature</lift:locS></div>
+        <div data-key=""><lift:locS></lift:locS></div>
+    </section>
+</section>

@@ -1,0 +1,206 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  /* jquery.Jcrop.min.css v0.9.12 (build:20130126) */
+  .jcrop-holder{direction:ltr;text-align:left;}
+  .jcrop-vline,.jcrop-hline{background:#FFF url(public/images/Jcrop.gif);font-size:0;position:absolute;}
+  .jcrop-vline{height:100%;width:1px!important;}
+  .jcrop-vline.right{right:0;}
+  .jcrop-hline{height:1px!important;width:100%;}
+  .jcrop-hline.bottom{bottom:0;}
+  .jcrop-tracker{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;height:100%;width:100%;}
+  .jcrop-handle{background-color:#333;border:1px #EEE solid;font-size:1px;height:7px;width:7px;}
+  .jcrop-handle.ord-n{left:50%;margin-left:-4px;margin-top:-4px;top:0;}
+  .jcrop-handle.ord-s{bottom:0;left:50%;margin-bottom:-4px;margin-left:-4px;}
+  .jcrop-handle.ord-e{margin-right:-4px;margin-top:-4px;right:0;top:50%;}
+  .jcrop-handle.ord-w{left:0;margin-left:-4px;margin-top:-4px;top:50%;}
+  .jcrop-handle.ord-nw{left:0;margin-left:-4px;margin-top:-4px;top:0;}
+  .jcrop-handle.ord-ne{margin-right:-4px;margin-top:-4px;right:0;top:0;}
+  .jcrop-handle.ord-se{bottom:0;margin-bottom:-4px;margin-right:-4px;right:0;}
+  .jcrop-handle.ord-sw{bottom:0;left:0;margin-bottom:-4px;margin-left:-4px;}
+  .jcrop-dragbar.ord-n,.jcrop-dragbar.ord-s{height:7px;width:100%;}
+  .jcrop-dragbar.ord-e,.jcrop-dragbar.ord-w{height:100%;width:7px;}
+  .jcrop-dragbar.ord-n{margin-top:-4px;}
+  .jcrop-dragbar.ord-s{bottom:0;margin-bottom:-4px;}
+  .jcrop-dragbar.ord-e{margin-right:-4px;right:0;}
+  .jcrop-dragbar.ord-w{margin-left:-4px;}
+  .jcrop-light .jcrop-vline,.jcrop-light .jcrop-hline{background:#FFF;filter:alpha(opacity=70)!important;opacity:.70!important;}
+  .jcrop-light .jcrop-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#000;border-color:#FFF;border-radius:3px;}
+  .jcrop-dark .jcrop-vline,.jcrop-dark .jcrop-hline{background:#000;filter:alpha(opacity=70)!important;opacity:.7!important;}
+  .jcrop-dark .jcrop-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#FFF;border-color:#000;border-radius:3px;}
+  .solid-line .jcrop-vline,.solid-line .jcrop-hline{background:#FFF;}
+  .jcrop-holder img,img.jcrop-preview{max-width:none;}
+
+  .jcrop-holder {
+    margin: auto;
+  }
+
+  .show-me-how {
+    vertical-align: baseline;
+    padding: 5px 7px;
+  }
+
+  .areasLayer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+
+  .text-area {
+    border: 1px #0282e5 dashed;
+    background-color: rgba(2,130,229,0.1);
+    position: absolute;
+  }
+
+  .text-area:before {
+    content: attr(data-name);
+    text-transform: uppercase;
+    font-size: 12px;
+    background-color: #0282e5;
+    color: #FFF;
+    position: absolute;
+    left: -1px;
+    top: -20px;
+    height: 20px;
+    line-height: 20px;
+    font-weight: bold;
+    padding: 0 5px;
+    cursor: pointer;
+  }
+
+  .page-wrap {
+    position: relative;
+    margin: auto;
+    margin-bottom: 150px;
+  }
+
+  #page-text-selector-wrap {
+    background-color: #e8e8e8;
+    margin-top: 30px;
+  }
+
+  .selection-hint {
+    display: inline-block;
+    color: #666;
+  }
+
+  .selection-hint .fal {
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  .prev-next-pages-nav {
+    padding: 0 !important;
+    position: absolute;
+    right: 0;
+    margin: 0;
+    left: unset;
+    top: 0;
+  }
+
+  #page-text-selector-header,
+  #page-text-selector-footer {
+    height: 30px;
+    margin: auto;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .tools-menu {
+    padding: 0 !important;
+  }
+
+  #page-text-selector-footer .prev-next-pages-nav {
+    position: relative;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .clear-selection-areas-btn,
+  .clear-selection-areas-btn:visited,
+  .clear-selection-areas-btn:link,
+  .clear-selection-areas-btn:active {
+    color: #0282e5;
+  }
+</style>
+
+<section id="task-content" data-task="splitByText" data-multiple-files="pro">
+  <div class="container centered">
+    <div class="row">
+      <h1><lift:locS>Split PDF By Text Content</lift:locS></h1>
+      <h2><lift:locS>Extract separate documents when specific text changes from page to page</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload', { pages: 10 }); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <section class="scroll-here-step2">
+    <div class="row centered" style="display: none" id="page-text-selector-wrap">
+      <div>
+        <div id="page-text-selector">
+          <div id="page-text-selector-header">
+            <div class="selection-hint">
+              <i class="fal fa-mouse-pointer"></i><lift:locS>Select with your mouse an area of the page</lift:locS>.
+              <a href="javascript://" class="clear-selection-areas-btn"><i class="fal fa-trash-alt"></i><lift:locS>Reset selection</lift:locS></a>
+            </div>
+
+            <div class="prev-next-pages-nav tools-menu">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default page-tools-btn prev-page-btn" title="Previous page">
+                  <i class="fal fa-arrow-left"></i>
+                </button>
+                <button type="button" class="btn btn-default page-tools-btn next-page-btn" title="Next page">
+                  <i class="fal fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="page-wrap">
+            <canvas></canvas>
+            <img src="" class="jcrop">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="centered step2 bottom-fixed" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="splitByText"/>
+
+      <input name="area[x]" value="" type="hidden">
+      <input name="area[y]" value="" type="hidden">
+      <input name="area[width]" value="" type="hidden">
+      <input name="area[height]" value="" type="hidden">
+
+      <div class="container centered" style="max-width: 600px; margin: auto">
+        <div class="row" style="text-align: center; margin-top: 10px;">
+          <label for="startsWith"><lift:locS>Text should start with: (optional)</lift:locS></label><br/>
+          <div class="input-group">
+            <input value="" min="1" placeholder="Examples: Address: or Reference number:"
+                   class="form-control input-lg" type="text" name="startsWith"
+                   id="startsWith">
+
+            <div class="input-group-addon input-help">
+              <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                 title="If there are pages that match but should not trigger a split, use this to filter them out"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="row head-space">
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>Split PDF by text</lift:locS></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('partials/task-common-output-options', { onlyDirectory: true, outputFilenamePattern: 'split_[FILENUMBER]_[TEXT]' }); %>
+<%- include('partials/task-screen-after'); %>

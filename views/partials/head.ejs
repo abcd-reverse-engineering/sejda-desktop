@@ -1,0 +1,50 @@
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="public/images/icon_128-sejda.png">
+
+  <link rel="stylesheet" href="public/css/fontawesome/all.min.css"/>
+  <link rel="stylesheet" href="public/css/index.css"/>
+
+  <title><%=manifest.productName%></title>
+
+  <script>
+    window.addEventListener('unhandledrejection', function(e){
+      e.preventDefault();
+      console.error(e.reason);
+    });
+    window.addEventListener('error', function(e){
+      e.preventDefault();
+      console.error(e.error);
+    });
+    window.sejdaContext.node.process.on('uncaughtException', function(err) {
+      console.log('Uncaught exception', err.stack);
+    });
+
+    window.sejdaContext.node.process.on('unhandledRejection', function(err) {
+      console.log('Unhandled rejection', err.stack);
+    });
+    
+    window.__locale = '<%=locale%>';
+    // mapping for pdf.js expected locale
+    const pdfjsLocaleMappings ={ 
+      'pt': 'pt-PT',
+      'en': 'en-US',
+      'es': 'es-ES',
+    }
+    window.__pdfjs_locale = pdfjsLocaleMappings[window.__locale] || window.__locale;
+  </script>
+
+  <script>
+    var Analytics = {
+      trackEvent: function(one, two, three) {
+        //console.log('track event', one, two, three)
+      },
+      trackNoPushEvent: function(one, two, three) {
+        //console.log('track event', one, two, three)
+      }
+    }
+
+    Sejda = {};
+  </script>
+</head>

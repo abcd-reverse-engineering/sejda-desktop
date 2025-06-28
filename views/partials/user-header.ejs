@@ -1,0 +1,507 @@
+<section>
+  <div class="container-fluid" style="height: 25px;padding-left: 10px;padding-right: 10px;">
+    <div class="pull-left">
+      <div class="menu-item" style="width: 40px">
+        <div class="menu-content-container">
+          <div id="menu" class="row nav-sidebar" style="display: none">
+            <ul>
+              <li>
+                <a id="home-menu-item" href="index.ejs" data-app-menu-id="file-home"><i class="fal fa-home"></i> <%= __('Home') %></a>
+              </li>
+              <li>
+                <a id="home-menu-item" href="settings.ejs" data-app-menu-id="file-settings"><i class="fal fa-cogs"></i> <%= __('Settings') %></a>
+              </li>
+              <li>
+                <a id="support-menu-item" href="javascript://" data-app-menu-id="file-contact-support"><i class="fal fa-envelope"></i> <%= __('Contact Support') %></a>
+              </li>
+              <li id="purchase-menu">
+                <a id="purchase-menu-item" href="<%=manifest.buyUrl%>" data-app-menu-id="file-purchase"><i class="fal fa-shopping-cart"></i> <%= __('Purchase') %></a>
+              </li>
+              <li>
+                <a id="enter-key-menu-item" href="javascript://" data-app-menu-id="file-enter-license-key"><i class="fal fa-key"></i> <%= __('Enter license key') %></a>
+              </li>
+              <li>
+                <a id="about-menu-item" href="javascript://" data-app-menu-id="file-about"><i class="fal fa-info-circle"></i> <%= __('About') %></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <a class="header-link header-tool more-tasks" href="javascript://">
+        <%= __('All Tools') %> <i class="fal fa-angle-down"></i>
+      </a>
+
+      <a class="header-link header-tool hide-xs" href="compress-pdf.ejs"><%= __('Compress') %></a>
+      <a class="header-link header-tool hide-xs" href="pdf-editor.ejs"><%= __('Edit') %></a>
+      <a class="header-link header-tool hide-xs hide-lang-de hide-lang-hu" href="sign-pdf.ejs"><%= __('Fill & Sign') %></a>
+      <a class="header-link header-tool hide-sm" href="delete-pdf-pages.ejs"><%= __('Delete Pages') %></a>
+      <a class="header-link header-tool hide-sm" href="merge-pdf.ejs"><%= __('Merge') %></a>
+      <a class="header-link header-tool hide-sm" href="split-pdf.ejs"><%= __('Split') %></a>
+      <a id="viewerHeaderLink" style="display: none" class="header-link header-tool" href="#"><%= __('Viewer') %></a>
+      <a id="viewerBackHeaderLink" style="display: none" class="header-link header-tool" href="#"><i class="fal fa-exchange" style="margin-right: 5px"></i><%= __('Viewer') %></a>
+
+    </div>
+    <div class="pull-right">
+      <div class="licensing-status-app-btn header-link" href="javascript://" style="font-weight: normal;"></div>
+    </div>
+  </div>
+
+  <div class="container-fluid mega-menu" style="display: none" id="megaMenu">
+    <div class="mega-menu-inner">
+      <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="container tasks-container">
+        <div class="row">
+          <div class="col col-lg-2 col-md-3 col-sm-4 col-xs-6 col-recent-tools">
+            <ul class="popular">
+              <li class="header">
+                <lift:locS>Recent</lift:locS><i class="fal fa-history"></i>
+              </li>
+            </ul>
+          </div>
+          <div class="col col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <ul>
+              <li class="header"><lift:locS>Merge</lift:locS></li>
+              <li class="cat-merge">
+                <a href="alternate-mix-pdf.ejs">
+                  <div class="caption">
+                              <span class="fa-stack fa-lg icon-merge fa-fw">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fal fa-random fa-stack-1x"></i>
+                              </span><lift:locS>Alternate & Mix</lift:locS>
+                  </div>
+                  <div class="description"><lift:locS>Mixes pages from 2 or more documents, alternating between them</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-merge">
+                <a href="merge-pdf.ejs">
+                  <div class="caption">
+                              <span class="fa-stack fa-lg icon-merge fa-fw">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fal fa-sitemap fa-stack-1x"></i>
+                              </span><lift:locS>Merge</lift:locS>
+                  </div>
+                  <div class="description"><lift:locS>Combine multiple PDFs and images into one</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-merge">
+                <a href="organize-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-merge fa-fw">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fal fa-object-group fa-stack-1x"></i>
+                            </span><lift:locS>Organize</lift:locS></div>
+                  <div class="description"><lift:locS>Arrange and reorder PDF pages</lift:locS></div>
+                </a>
+              </li>
+              <li class="header lower">
+                <lift:locS>Split</lift:locS>
+              </li>
+              <li class="cat-split">
+                <a href="extract-pdf-pages.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-split fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-external-link fa-stack-1x"></i>
+                                  </span><lift:locS>Extract Pages</lift:locS></div>
+                  <div class="description"><lift:locS>Get a new document containing only the desired pages</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-split">
+                <a href="split-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-split fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-clone fa-stack-1x"></i>
+                                  </span><lift:locS>Split by pages</lift:locS></div>
+                  <div class="description"><lift:locS>Split specific page ranges or extract every page into a separate document</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-split">
+                <a href="split-pdf-by-outline.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-split fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-bookmark fa-stack-1x"></i>
+                                  </span><lift:locS>Split by bookmarks</lift:locS></div>
+                  <div class="description"><lift:locS>Extract chapters to separate documents based on the bookmarks in the table of contents</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-split">
+                <a href="split-pdf-down-the-middle.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-split fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-columns fa-stack-1x"></i>
+                                  </span><lift:locS>Split in half</lift:locS></div>
+                  <div class="description"><lift:locS>Split two page layout scans, A3 to double A4 or A4 to double A5</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-split">
+                <a href="split-pdf-by-size.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-split fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-chart-pie fa-stack-1x"></i>
+                                  </span><lift:locS>Split by size</lift:locS></div>
+                  <div class="description"><lift:locS>Get multiple smaller documents with specific file sizes</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-split">
+                <a href="split-pdf-by-text.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-split fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-font fa-stack-1x"></i>
+                                  </span><lift:locS>Split by text</lift:locS></div>
+                  <div class="description"><lift:locS>Extract separate documents when specific text changes from page to page</lift:locS></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <ul>
+              <li class="header">
+                <lift:locS>Edit & Sign</lift:locS>
+              </li>
+              <li class="cat-edit">
+                <a href="pdf-editor.ejs">
+                  <div class="caption">
+                                <span class="task-icon fa-stack fa-lg fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-pencil fa-stack-1x"></i>
+                                </span><lift:locS>Edit</lift:locS>
+                  </div>
+                  <div class="description"><lift:locS>Edit PDF files for free. Fill & sign PDF. Add text, links, images and shapes. Edit existing PDF text. Annotate PDF</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-edit">
+                <a href="sign-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-signature fa-stack-1x"></i>
+                                  </span><lift:locS>Fill & Sign</lift:locS></div>
+                  <div class="description"><lift:locS>Add signature to PDF. Fill out PDF forms</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-edit">
+                <a href="pdf-forms.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-wpforms fa-stack-1x"></i>
+                                  </span><lift:locS>Create Forms</lift:locS></div>
+                  <div class="description"><lift:locS>Free PDF forms creator. Make existing PDF documents fillable</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-edit">
+                <a href="delete-pdf-pages.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-trash fa-stack-1x"></i>
+                                  </span><lift:locS>Delete Pages</lift:locS></div>
+                  <div class="description"><lift:locS>Remove pages from a PDF document</lift:locS></div>
+                </a>
+              </li>
+              <li class="header lower">
+                <lift:locS>Compress</lift:locS>
+              </li>
+              <li class="cat-compress">
+                <a href="compress-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-compress fa-stack-1x"></i>
+                                  </span><lift:locS>Compress</lift:locS></div>
+                  <div class="description"><lift:locS>Reduce the size of your PDF</lift:locS></div>
+                </a>
+              </li>
+              <li class="header lower">
+                <lift:locS>Security</lift:locS>
+              </li>
+              <li class="cat-security">
+                <a href="encrypt-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-lock fa-stack-1x"></i>
+                                  </span><lift:locS>Protect</lift:locS></div>
+                  <div class="description"><lift:locS>Protect file with password and permissions</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-security">
+                <a href="unlock-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-unlock fa-stack-1x"></i>
+                                  </span><lift:locS>Unlock</lift:locS></div>
+                  <div class="description"><lift:locS>Remove restrictions and password from PDF files</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-security">
+                <a href="watermark-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-file-alt fa-stack-1x"></i>
+                                  </span><lift:locS>Watermark</lift:locS></div>
+                  <div class="description"><lift:locS>Add image or text watermark to PDF documents</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-security">
+                <a href="flatten-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fal fa-font fa-stack-1x"></i>
+                                <i class="fal fa-slash fa-stack-1x"></i>
+                              </span><lift:locS>Flatten</lift:locS></div>
+                  <div class="description"><lift:locS>Makes fillable PDFs read-only. Print & scan in one step</lift:locS></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <ul>
+              <li class="header">
+                <lift:locS>Convert from PDF</lift:locS>
+              </li>
+              <li class="cat-from-pdf">
+                <a href="pdf-to-excel.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-office fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-file-excel fa-stack-1x"></i>
+                                  </span><lift:locS>PDF to Excel</lift:locS></div>
+                  <div class="description"><lift:locS>Convert PDF to Excel or CSV. Extract table data from PDF</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-from-pdf">
+                <a href="pdf-to-jpg.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-file-image fa-stack-1x"></i>
+                                  </span><lift:locS>PDF to JPG</lift:locS></div>
+                  <div class="description"><lift:locS>Get PDF pages converted to JPG, PNG or TIFF images</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-from-pdf">
+                <a href="extract-text-from-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-align-left fa-stack-1x"></i>
+                                  </span><lift:locS>PDF to Text</lift:locS></div>
+                  <div class="description"><lift:locS>Copies all text from the PDF document and extracts it to a separate text file</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-from-pdf">
+                <a href="pdf-to-word.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-office fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-file-word fa-stack-1x"></i>
+                                  </span><lift:locS>PDF to Word</lift:locS></div>
+                  <div class="description"><lift:locS>Convert from PDF to DOC</lift:locS></div>
+                </a>
+              </li>
+              <li class="header lower">
+                <lift:locS>Convert to PDF</lift:locS>
+              </li>
+              <li class="cat-to-pdf">
+                <a href="jpg-to-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-image fa-stack-1x"></i>
+                                  </span><lift:locS>JPG to PDF</lift:locS></div>
+                  <div class="description"><lift:locS>Convert Images to PDF</lift:locS></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <ul>
+              <li class="header">
+                <lift:locS>Other</lift:locS>
+              </li>
+              <li class="cat-other">
+                <a href="bates-numbering-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-gavel fa-stack-1x"></i>
+                                  </span><lift:locS>Bates Numbering</lift:locS></div>
+                  <div class="description"><lift:locS>Bates stamp multiple files at once</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="pdf-bookmarks.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-bookmark fa-stack-1x"></i>
+                                  </span><lift:locS>Create Bookmarks</lift:locS></div>
+                  <div class="description"><lift:locS>Create PDF Bookmarks</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="crop-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-crop fa-stack-1x"></i>
+                                  </span><lift:locS>Crop</lift:locS></div>
+                  <div class="description"><lift:locS>Trim PDF margins, change PDF page size</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="edit-pdf-metadata.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-info-square fa-stack-1x"></i>
+                                  </span><lift:locS>Edit Metadata</lift:locS></div>
+                  <div class="description"><lift:locS>Change PDF Author, Title, Keywords, Subject and other metadata fields</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="extract-images-from-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-popular fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-external-link fa-stack-1x"></i>
+                                  </span><lift:locS>Extract Images</lift:locS></div>
+                  <div class="description"><lift:locS>Extract images from PDF</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="grayscale-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-paint-brush fa-stack-1x"></i>
+                                  </span><lift:locS>Grayscale</lift:locS></div>
+                  <div class="description"><lift:locS>Make a PDF text and images grayscale</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="header-footer-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-heading fa-stack-1x"></i>
+                                  </span><lift:locS>Header &amp; Footer</lift:locS></div>
+                  <div class="description"><lift:locS>Apply page numbers or text labels to PDF files</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="n-up-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-th-large fa-stack-1x"></i>
+                                  </span><lift:locS>N-up</lift:locS></div>
+                  <div class="description"><lift:locS>Print multiple pages per sheet per paper. A5 plan as 4-up on A3 or A4 2-up on A3</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="page-numbers-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-sort-numeric-up fa-stack-1x"></i>
+                                  </span><lift:locS>Page Numbers</lift:locS></div>
+                  <div class="description"><lift:locS>Add PDF page numbers</lift:locS></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <ul>
+              <li class="header">
+                &nbsp;
+              </li>
+              <li class="cat-other">
+                <a href="rename-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-i-cursor fa-stack-1x"></i>
+                                  </span><lift:locS>Rename</lift:locS></div>
+                  <div class="description"><lift:locS>Change document filename based on text from the PDF pages</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="repair-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-wrench fa-stack-1x"></i>
+                                  </span><lift:locS>Repair</lift:locS></div>
+                  <div class="description"><lift:locS>Recover data from a corrupted or damaged PDF document</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="resize-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-arrows-alt fa-stack-1x"></i>
+                                  </span><lift:locS>Resize</lift:locS></div>
+                  <div class="description"><lift:locS>Add page margins and padding, Change PDF page size</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="rotate-pdf-pages.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-repeat fa-stack-1x"></i>
+                                  </span><lift:locS>Rotate</lift:locS></div>
+                  <div class="description"><lift:locS>Rotate and save PDF pages permanently</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-other">
+                <a href="delete-pdf-annotations.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-highlighter fa-stack-1x"></i>
+                                  </span><lift:locS>Remove annotations</lift:locS></div>
+                  <div class="description"><lift:locS>Batch remove highlights, strikeouts or any other annotations from a PDF document</lift:locS></div>
+                </a>
+              </li>
+              <li class="header lower">
+                <lift:locS>Scans</lift:locS>
+              </li>
+              <li class="cat-scans">
+                <a href="deskew-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-popular fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-file-alt fa-stack-1x rotated-5-deg"></i>
+                                  </span><lift:locS>Deskew</lift:locS></div>
+                  <div class="description"><lift:locS>Automatically straighten and deskew scanned PDF pages</lift:locS></div>
+                </a>
+              </li>
+              <li class="cat-scans">
+                <a href="ocr-pdf.ejs">
+                  <div class="caption">
+                                <span class="fa-stack fa-lg icon-edit fa-fw">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fal fa-qrcode fa-stack-1x"></i>
+                                  </span><lift:locS>OCR</lift:locS></div>
+                  <div class="description"><lift:locS>Convert PDF scans to searchable text and PDFs. Extract text from scans</lift:locS></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

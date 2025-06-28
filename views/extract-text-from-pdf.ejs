@@ -1,0 +1,30 @@
+<%- include('partials/task-screen-before'); %>
+
+<section id="task-content" data-task="extractText" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Extract text from PDF') %></h1>
+      <h2><%= __('Copies all text from the PDF document and extracts it to a separate text file') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="extractText"/>
+
+      <div class="container">
+        <%- include('partials/task-common-output-options', { extension: '.txt' }); %>
+        <div class="row head-space">
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Extract text') %></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-screen-after'); %>

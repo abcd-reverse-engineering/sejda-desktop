@@ -1,0 +1,24 @@
+<section>
+  <div class="row centered noselect" style="display: none" id="image-canvas-wrap">
+    <div class="selection-help">
+      <span class="can-select"><em>Click</em> <%= __('pages to select') %>. <kbd>shift</kbd> <%= __('to select multiple at once') %>.
+        <span class="can-clear-selection" style="display: none">
+          <a href="javascript://" class="clear-selection-btn btn btn-xs btn-link inline-help-link">Clear selection</a>
+        </span>
+        <br/>
+      </span>
+      <span class="can-reorder" style="display: none"><em>Drag &amp; drop</em> <%= __('to reorder') %>.</span>
+
+      <div class="thumbs-size-panel pull-right">
+        <i class="fal fa-search-minus decrease" style="font-size: 16px"></i>
+        <input type="range" min="100" max="400" value="150" name="thumbsSize" id="thumbsSizeInput" title="Adjust the size of the thumbnails" data-toggle="tooltip" data-placement="top">
+        <i class="fal fa-search-plus increase" style="font-size: 16px"></i>
+      </div>
+    </div>
+
+    <section id="image-canvas" class="noselect">
+      <section id="tools-menu" class="tools-menu"></section>
+      <ol id="image-canvas-list" class="image-page-wrap-parent"></ol>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,267 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #pdf-files-summary-wrap {
+    margin-bottom: 20px;
+  }
+
+  .n-up-preview {
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    padding: 10px;
+    min-width: 100px;
+  }
+
+  .n-up-preview:hover,
+  .n-up-preview.selected {
+    color: #333;
+    background-color: rgba(0, 187, 136, .07);
+    border-color: #0b8;
+  }
+
+  .n-up-preview.selected {
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+  }
+
+  .n-up-page {
+    border: 1px solid #eee;
+    display: inline-block;
+    text-align: center;
+    color: #BBB;
+  }
+
+  .xxl .n-up-page {
+    width: 50px;
+    height: 70px;
+    font-size: 31px;
+    line-height: 70px;
+  }
+
+  .xl .n-up-page {
+    width: 25px;
+    height: 35px;
+    font-size: 15px;
+    line-height: 35px;
+  }
+
+  .n-up-sheet {
+    border: 1px solid #CCC;
+    height: 85px;
+    display: inline-block;
+  }
+
+  .xxl .n-up-sheet {
+    padding: 5px;
+  }
+
+  .xl .n-up-sheet {
+    padding: 4px;
+  }
+
+  .n-up-row + .n-up-row {
+    padding-top: 5px;
+  }
+
+  .n-up-preview:hover .n-up-sheet,
+  .n-up-preview.selected .n-up-sheet{
+    background-color: #F8F8F8;
+    border-color: #999;
+  }
+
+  .n-up-preview:hover .n-up-page,
+  .n-up-preview.selected .n-up-page {
+    border-color: #CCC;
+  }
+
+  .n-up-preview label {
+    font-weight: 100;
+    color: #AAA;
+    font-size: 11px;
+    padding: 5px;
+    cursor: pointer;
+    display: block;
+  }
+
+  .n-up-preview:hover label,
+  .n-up-preview.selected label {
+    color: #666
+  }
+</style>
+
+<section id="task-content" data-task="nup" data-multiple-files="pro">
+  <div class="container centered">
+    <div class="row">
+      <h1><lift:locS>N-up &amp; PDF Imposition</lift:locS></h1>
+      <h2><lift:locS>Print multiple pages per sheet per paper.</lift:locS> <lift:locS>A5 plan as 4-up on A3 or A4 2-up on A3</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; min-height: 250px;">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="nup"/>
+
+      <div class="container">
+        <div class="row head-space-xl">
+          <label><lift:locS>Choose style</lift:locS></label>
+        </div>
+        <div class="row head-space-xl" style="margin-bottom: 40px;">
+          <div class="n-up-preview xxl" data-n="2" data-page-order="horizontal">
+            <div class="n-up-sheet">
+              <div class="n-up-row">
+                <div class="n-up-page">1</div>
+                <div class="n-up-page">2</div>
+              </div>
+            </div>
+            <label>2-up</label>
+          </div>
+          <div class="n-up-preview xl" data-n="4" data-page-order="horizontal">
+            <div class="n-up-sheet">
+              <div class="n-up-row">
+                <div class="n-up-page">1</div>
+                <div class="n-up-page">2</div>
+              </div>
+              <div class="n-up-row">
+                <div class="n-up-page">3</div>
+                <div class="n-up-page">4</div>
+              </div>
+            </div>
+            <label>4-up</label>
+          </div>
+          <div class="n-up-preview xl" data-n="4" data-page-order="vertical">
+            <div class="n-up-sheet">
+              <div class="n-up-row">
+                <div class="n-up-page">1</div>
+                <div class="n-up-page">3</div>
+              </div>
+              <div class="n-up-row">
+                <div class="n-up-page">2</div>
+                <div class="n-up-page">4</div>
+              </div>
+            </div>
+            <label>4-up<br/>vertical</label>
+          </div>
+          <div class="n-up-preview xl" data-n="8" data-page-order="horizontal">
+            <div class="n-up-sheet">
+              <div class="n-up-row">
+                <div class="n-up-page">1</div>
+                <div class="n-up-page">2</div>
+                <div class="n-up-page">3</div>
+                <div class="n-up-page">4</div>
+              </div>
+              <div class="n-up-row">
+                <div class="n-up-page">5</div>
+                <div class="n-up-page">6</div>
+                <div class="n-up-page">7</div>
+                <div class="n-up-page">8</div>
+              </div>
+            </div>
+            <label>8-up</label>
+          </div>
+          <div class="n-up-preview xl" data-n="8" data-page-order="vertical">
+            <div class="n-up-sheet">
+              <div class="n-up-row">
+                <div class="n-up-page">1</div>
+                <div class="n-up-page">3</div>
+                <div class="n-up-page">5</div>
+                <div class="n-up-page">7</div>
+              </div>
+              <div class="n-up-row">
+                <div class="n-up-page">2</div>
+                <div class="n-up-page">4</div>
+                <div class="n-up-page">6</div>
+                <div class="n-up-page">8</div>
+              </div>
+            </div>
+            <label>8-up<br/>vertical</label>
+          </div>
+        </div>
+        <section class="more-options" style="display: none">
+          <div class="row head-space-xl">
+            <label><lift:locS>Pages per sheet</lift:locS></label>
+          </div>
+          <div class="row head-space">
+            <div>
+              <div data-toggle="buttons" id="n-group" class="btn-group" style="margin-left: 0;">
+                <label class="btn btn-default btn-xxs active">
+                  <input value="2" name="n" type="radio"> 2
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="4" name="n" type="radio"> 4
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="8" name="n" type="radio"> 8
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="16" name="n" type="radio"> 16
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="32" name="n" type="radio"> 32
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row head-space-xl">
+            <label><lift:locS>Page ordering</lift:locS></label>
+          </div>
+          <div class="row head-space">
+            <div>
+              <div data-toggle="buttons" id="page-order-group" class="btn-group" style="margin-left: 0;">
+                <label class="btn btn-default btn-xxs active">
+                  <input value="horizontal" name="pageOrdering" type="radio">
+                  <lift:locS>Horizontal</lift:locS>
+                  <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Orders pages from left to right."></i>
+                    </span>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="vertical" name="pageOrdering" type="radio"> <lift:locS>Vertical</lift:locS>
+                  <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Orders pages from top to bottom."></i>
+                    </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 15px;">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="preservePageSize" value="true"> <lift:locS>Preserve original page size</lift:locS>
+                <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Select this option if you'd like the result PDF to have the same page size as the original, downscaling the collated pages."></i>
+                    </span>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom: 30px;">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="rightToLeft" value="true"> <lift:locS>Right to left document (arabic, hebrew)</lift:locS>
+                <span class="input-help">
+                      <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                         title="Select this option if the right page comes before left page, like arabic or hebrew"></i>
+                    </span>
+              </label>
+            </div>
+          </div>
+        </section>
+        <div class="row head-space-xl" style="margin-bottom: 40px">
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>N-up PDF</lift:locS></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><lift:locS>More options</lift:locS></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'nup' }); %>
+<%- include('partials/task-screen-after'); %>

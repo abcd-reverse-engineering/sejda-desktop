@@ -1,0 +1,30 @@
+<%- include('partials/task-screen-before'); %>
+
+<section id="task-content" data-task="pdfToDoc" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Convert PDF to Word') %></h1>
+      <h2><%= __('Creates a Microsoft Word .docx with text and images from PDF, optimizing for legibility') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="pdfToDoc"/>
+
+      <div class="container">
+        <div class="row head-space">
+          <button id="convertPdfToWordBtn" type="submit" class="btn btn-default btn-medium"><%= __('Convert to Word') %></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { extension: '.docx' }); %>
+<%- include('partials/task-screen-after'); %>

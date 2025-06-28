@@ -1,0 +1,280 @@
+<section>
+  <section>
+    <div class="modal fade" id="taskResultModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <a id="closeResultsModal" href="javascript://" class="close" data-dismiss="modal" aria-label="Close">&times;</a>
+            <div class="row centered" style="margin: 0; width: 100%">
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="processing states" style="margin-top: 30vh">
+                    <h1><i class="fal fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 30px; margin-right: 10px"></i> <%= __('Your task is processing') %></h1>
+                    <h2><%= __('Please wait...') %></h2>
+                  </div>
+                  <div class="upgrade states" style="display: none">
+                    <h1 style="margin-bottom: 40px;"><i class="fal fa-lock-alt" style="color: #0b8; margin-right: 10px; font-size: 30px;"></i> <%= __('Upgrade required') %></h1>
+                    <%- include('upgrade-section'); %>
+                  </div>
+                  <div class="failed states" style="display: none; margin-top: -10%">
+                    <h1 style="margin-top: 150px"><i class="fal fa-exclamation-circle" style="color: #ff3268; margin-right: 10px; font-size: 30px;"></i> <%= __('Sorry, task failed') %></h1>
+                    <h2 id="failureReason"></h2>
+                    <div style="margin-top: 60px">
+                      <a class="btn btn-default btn-medium bug-report-btn" href="javascript://" style="display: none"><i class="fal fa-exclamation-circle" style="margin-right: 5px"></i> <%= __('Report a problem') %></a>
+                      <a class="btn btn-secondary btn-medium close-frame-btn" href="javascript://"><i class="fal fa-arrow-left"></i> <%= __('Back') %></a>
+                      <a href="javascript://" class="btn btn-secondary btn-medium start-new-btn"><i class="fal fa-redo" style="margin-right: 5px"></i> <%= __('Start over') %></a>
+                    </div>
+                  </div>
+                  <div class="completed states" style="display: none;">
+                    <h1><i class="fal fa-check-circle" style="color: #0b8; margin-right: 10px; font-size: 30px;"></i> <%= __('Task completed') %></h1>
+                    <h2 class="remark" style="display: none;"></h2>
+                    
+                    <section id="additionalResultBtns">
+                      <a class="btn btn-lg btn-link btn-flat-secondary close-frame-btn" href="javascript://" id="backToEditingBtn">
+                        <i class="fal fa-arrow-left"></i> <%= __('Back to') %>&nbsp;<span id="backToEditingTaskName"></span></a>
+                      <a class="btn btn-lg btn-link btn-flat-secondary new-task-btn" href="javascript://" style="" id="startNewBtn">
+                        <%= __('Start new') %> <i class="fal fa-redo"></i></a>
+                    </section>
+
+                    <div style="display: none;" id="result-warnings-wrap" class="alert alert-warning">
+                      <i class="fal fa-exclamation-circle" style="margin-right: 7px;"></i> Warnings:
+                      <div id="result-warnings"></div>
+                    </div>
+                    <div style="margin-top: 30px;" class="download-btn-group-wrap">
+                      <div class="download-btn-group">
+                        <div class="buttons-section">
+                          <div class="task-btns">
+                            <a href="javascript://" id="open-btn" class="result-btn lift:locTooltip" title="Show location on disk">
+                              <i class="fal fa-folder-open"></i>
+                              <span class="caption"><%= __('Show') %></span>
+                            </a>
+                            <a href="javascript://" id="view-pdf-btn" style="display: none" class="result-btn lift:locTooltip" title="View document">
+                              <i class="fal fa-file-pdf"></i>
+                              <span class="caption"><%= __('View') %></span>
+                            </a>
+                            <a href="javascript://" id="print-pdf-btn" style="display: none" class="result-btn lift:locTooltip" title="Print document">
+                              <i class="fal fa-print"></i>
+                              <span class="caption"><%= __('Print') %></span>
+                            </a>
+                          </div>
+                          <div class="next-btns">
+                            <a href="./merge-pdf.ejs" class="result-btn continue-with-btn lift:locTooltip" title="Continue with Merge">
+                          <span class="fa-stack fa-lg icon-popular fa-fw">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fal fa-sitemap fa-stack-1x"></i>
+                          </span>
+                              <span class="caption"><%= __('Merge') %></span>
+                            </a>
+                            <a href="./pdf-editor.ejs" class="result-btn continue-with-btn lift:locTooltip" title="Continue with Edit">
+                          <span class="fa-stack fa-lg icon-popular fa-fw">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fal fa-pencil fa-stack-1x"></i>
+                          </span>
+                              <span class="caption"><%= __('Edit') %></span>
+                            </a>
+                            <a href="./compress-pdf.ejs" class="result-btn continue-with-btn lift:locTooltip" title="Continue with Compress">
+                          <span class="fa-stack fa-lg icon-popular fa-fw">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fal fa-compress fa-stack-1x"></i>
+                          </span>
+                              <span class="caption"><%= __('Compress') %></span>
+                            </a>
+                            <a href="./delete-pdf-pages.ejs" class="result-btn continue-with-btn lift:locTooltip" title="Continue with Delete pages">
+                          <span class="fa-stack fa-lg icon-popular fa-fw">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fal fa-trash fa-stack-1x"></i>
+                          </span>
+                              <span class="caption"><%= __('Delete Pages') %></span>
+                            </a>
+                            <a href="./split-pdf.ejs" class="result-btn continue-with-btn lift:locTooltip" title="Continue with Split">
+                          <span class="fa-stack fa-lg icon-popular fa-fw">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fal fa-clone fa-stack-1x"></i>
+                          </span>
+                              <span class="caption"><%= __('Split') %></span>
+                            </a>
+                            <a href="./crop-pdf.ejs" class="result-btn continue-with-btn lift:locTooltip" title="Continue with Crop">
+                          <span class="fa-stack fa-lg icon-popular fa-fw">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fal fa-crop fa-stack-1x"></i>
+                          </span>
+                              <span class="caption"><%= __('Crop') %></span>
+                            </a>
+                            <a href="javascript://" title="More tools to continue with" class="result-btn lift:locTooltip" id="continue-with-btn">
+                              <i class="fal fa-angle-down"></i>
+                              <span class="caption"><%= __('More tools') %></span>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="lower-section">
+                          <div class="preview-top-bar">
+                            <a href="javascript://" style="display: none" id="close-preview-btn" class="btn filename-btn" title="Close preview"><i class="fal fa-chevron-up"></i></a>
+                            <a href="javascript://" id="open-preview-btn" class="btn filename-btn" title="Show preview"><i class="fal fa-chevron-down"></i></a>
+                          </div>
+                          <section class="embed-responsive" id="preview-pdf" style="display: none">
+                          </section>
+                          <section class="embed-responsive preview-panel-generic" id="preview-folder" style="display: none">
+                            <a href="javascript://" class="open-folder-btn">
+                              <div class="large-preview-icon-wrap"><i class="fal fa-folder-open large-preview-icon"></i></div> 
+                              <div><span class="resultItemCaption"></span></div>
+                            </a>
+                          </section>
+                          <section class="embed-responsive preview-panel-generic" id="preview-file-other" style="display: none">
+                            <a href="javascript://" class="open-folder-btn">
+                              <div class="large-preview-icon-wrap"><i class="fal fa-file-alt large-preview-icon"></i></div>
+                              <div><span class="resultItemCaption"></span></div>
+                            </a>
+                          </section>
+                        </div>
+                        <div id="buttonPanels">
+                          <div id="buttonPanelsNav" style="display: none">
+                            <a style="" href="javascript://" id="backToAllActionsBtn">×</a>
+                          </div>
+                          <div id="continue-with-btn-panel" class="result-btn-panel" style="display: none">
+                            <div class="row continue-with-nav">
+                              <ul class="col col-xs-4">
+                                <li class="header"><%= __('Merge') %></li>
+                                <li>
+                                  <a href="./alternate-mix-pdf.ejs"><%= __('Alternate & Mix') %></a>
+                                </li>
+                                <li>
+                                  <a href="./merge-pdf.ejs"><%= __('Merge') %></a>
+                                </li>
+                                <li>
+                                  <a href="./organize-pdf.ejs"><%= __('Organize') %></a>
+                                </li>
+                                <li class="header">
+                                  <%= __('Split') %>
+                                </li>
+                                <li>
+                                  <a href="./extract-pdf-pages.ejs"><%= __('Extract Pages') %></a>
+                                </li>
+                                <li>
+                                  <a href="./split-pdf.ejs"><%= __('Split by pages') %></a>
+                                </li>
+                                <li>
+                                  <a href="./split-pdf-by-outline.ejs"><%= __('Split by bookmarks') %></a>
+                                </li>
+                                <li>
+                                  <a href="./split-pdf-down-the-middle.ejs"><%= __('Split in half') %></a>
+                                </li>
+                                <li>
+                                  <a href="./split-pdf-by-size.ejs"><%= __('Split by size') %></a>
+                                </li>
+                                <li>
+                                  <a href="./split-pdf-by-text.ejs"><%= __('Split by text') %></a>
+                                </li>
+                              </ul>
+                              <ul class="col col-xs-4">
+                                <li class="header">
+                                  <%= __('Edit & Sign') %>
+                                </li>
+                                <li>
+                                  <a href="./pdf-editor.ejs"><%= __('PDF Editor') %></a>
+                                </li>
+                                <li>
+                                  <a href="./sign-pdf.ejs"><%= __('Fill & Sign') %></a>
+                                </li>
+                                <li>
+                                  <a href="./pdf-forms.ejs"><%= __('Create Forms') %></a>
+                                </li>
+                                <li class="header"><%= __('Compress') %></li>
+                                <li>
+                                  <a href="./compress-pdf.ejs"><%= __('Compress') %></a>
+                                </li>
+                                <li class="header"><%= __('Security') %></li>
+                                <li>
+                                  <a href="./encrypt-pdf.ejs"><%= __('Protect') %></a>
+                                </li>
+                                <li>
+                                  <a href="./unlock-pdf.ejs"><%= __('Unlock') %></a>
+                                </li>
+                                <li>
+                                  <a href="./watermark-pdf.ejs"><%= __('Watermark') %></a>
+                                </li>
+                                <li>
+                                  <a href="./flatten-pdf.ejs"><%= __('Flatten') %></a>
+                                </li>
+                              </ul>
+                              <ul class="col col-xs-4">
+                                <li class="header"><%= __('Covert from PDF') %></li>
+                                <li>
+                                  <a href="./pdf-to-excel.ejs"><%= __('PDF to Excel') %></a>
+                                </li>
+                                <li>
+                                  <a href="./pdf-to-jpg.ejs"><%= __('PDF to JPG') %></a>
+                                </li>
+                                <li>
+                                  <a href="./extract-text-from-pdf.ejs"><%= __('PDF to Text') %></a>
+                                </li>
+                                <li>
+                                  <a href="./pdf-to-word.ejs"><%= __('PDF to Word') %></a>
+                                </li>
+                                <li class="header"><%= __('Other') %></li>
+                                <li>
+                                  <a href="./bates-numbering-pdf.ejs"><%= __('Bates Numbering') %></a>
+                                </li>
+                                <li>
+                                  <a href="./pdf-bookmarks.ejs"><%= __('Create Bookmarks') %></a>
+                                </li>
+                                <li>
+                                  <a href="./crop-pdf.ejs"><%= __('Crop') %></a>
+                                </li>
+                                <li>
+                                  <a href="./delete-pdf-pages.ejs"><%= __('Delete Pages') %></a>
+                                </li>
+                                <li>
+                                  <a href="./deskew-pdf.ejs"><%= __('Deskew') %></a>
+                                </li>
+                                <li>
+                                  <a href="./edit-pdf-metadata.ejs"><%= __('Edit Metadata') %></a>
+                                </li>
+                                <li>
+                                  <a href="./extract-images-from-pdf.ejs"><%= __('Extract Images') %></a>
+                                </li>
+                                <li>
+                                  <a href="./grayscale-pdf.ejs"><%= __('Grayscale') %></a>
+                                </li>
+                                <li>
+                                  <a href="./header-footer-pdf.ejs"><%= __('Header & Footer') %></a>
+                                </li>
+                                <li>
+                                  <a href="./n-up-pdf.ejs"><%= __('N-up') %></a>
+                                </li>
+                                <li>
+                                  <a href="./ocr-pdf.ejs"><%= __('OCR') %></a>
+                                </li>
+                                <li>
+                                  <a href="./rename-pdf.ejs"><%= __('Rename') %></a>
+                                </li>
+                                <li>
+                                  <a href="./repair-pdf.ejs"><%= __('Repair') %></a>
+                                </li>
+                                <li>
+                                  <a href="./resize-pdf.ejs"><%= __('Resize') %></a>
+                                </li>
+                                <li>
+                                  <a href="./rotate-pdf-pages.ejs"><%= __('Rotate') %></a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="locked-results" style="display: none">
+                          <span class="fa-stack fa-lg fa-fw">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-lock fa-stack-1x"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

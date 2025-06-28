@@ -1,0 +1,111 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  .delete-page-wrap {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    opacity: 0.95;
+    background-color: #FFF;
+    height: 70px;
+    margin: 20px;
+    padding-top: 5px;
+  }
+
+  .pdf-delete-page-xl {
+    margin-top: 10px;
+    opacity: 0.2;
+  }
+
+  .pdf-delete-page-xl .fal {
+    margin-right: 5px;
+  }
+
+  .pdf-delete-page-xl.btn-light:hover,
+  a.pdf-delete-page-xl.btn-light:hover {
+    color: #fff;
+    background-color: #0282e5;
+  }
+
+  .pdf-page-wrap:hover .pdf-delete-page-xl {
+    opacity: 1;
+  }
+
+  #specificPagesWrap {
+    margin-top: 5px;
+  }
+
+  .selection-help .can-select {
+    display: none !important;
+  }
+</style>
+
+<section id="task-content" data-task="deletePages" data-can-delete="true" data-can-bulk-delete="true" data-can-select="false" data-multiple-files="pro">
+  <div class="container centered">
+    <div class="row">
+      <h1><lift:locS>Delete PDF Pages</lift:locS></h1>
+      <h2><lift:locS>Remove pages from a PDF document</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+  <%- include('partials/pdf-page-thumbnails'); %>
+
+  <div class="centered bottom-fixed step2" style="display:none">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="deletePages"/>
+
+      <div class="container">
+        <div class="row head-space task-form-row-medium">
+          <div>
+            <label><lift:locS>Deleting many pages? Type an interval here</lift:locS>:</label>
+            <div id="specificPagesWrap">
+              <div class="input-group">
+                <input value="" min="1" placeholder="Examples: 1-10,13,14,100-"
+                       class="form-control input-lg thumbs-multiple-select tooltip-on-focus" type="text" name="pages"
+                       id="specificDeletePages" data-validator="page-ranges">
+
+                <div class="input-group-addon input-help">
+                  <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Easily remove many pages at once. To remove the first 10 pages, enter '1-10'. To delete page 15 and all subsequent pages, enter '15-'."></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="more-options" style="display: none">
+          <div class="checkbox" style="margin-top: 10px">
+            <label>
+              <input type="checkbox" value="true" name="discardOutline" id="discardOutline">
+              <lift:locS>Discard bookmarks</lift:locS>
+            </label>
+            <span class="input-help">
+                    <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                       title="Remove bookmarks and outline from the result."></i>
+                  </span>
+          </div>
+        </div>
+        
+        <div class="row head-space">
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>Apply changes</lift:locS></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><lift:locS>More options</lift:locS></a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="globalBtns" style="display: none">
+    <div id="global-help-hint" style="display: none"></div>
+  </div>
+
+</section>
+
+<div id="globalBtns" style="display: none">
+  <div id="global-help-hint" style="display: none"></div>
+</div>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'deleted' }); %>
+<%- include('partials/task-screen-after'); %>

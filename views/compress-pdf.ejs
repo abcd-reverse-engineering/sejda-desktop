@@ -1,0 +1,136 @@
+<%- include('partials/task-screen-before'); %>
+
+<section id="task-content" data-task="compress" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><lift:locS>Compress PDF</lift:locS></h1>
+      <h2><lift:locS>Reduce the size of your PDF</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload', { fileSize: 100 }); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="compress"/>
+
+      <div class="container">
+        <div class="row">
+          <label><lift:locS>Image quality</lift:locS>:</label><br/>
+          <div data-toggle="buttons" class="btn-group remembered">
+            <label class="btn btn-default btn-xs active">
+              <input value="0.65" name="imageQuality" type="radio">
+              <lift:locS>Medium</lift:locS>
+              <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="Choose this for smallest size. JPEG quality: 65%."></i>
+                      </span>
+            </label>
+            <label class="btn btn-default btn-xs">
+              <input value="0.8" name="imageQuality" type="radio">
+              <lift:locS>Good</lift:locS>
+              <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="A balance between image quality and file size. JPEG quality: 80%."></i>
+                      </span>
+            </label>
+            <label class="btn btn-default btn-xs">
+              <input value="1" name="imageQuality" type="radio"> <lift:locS>Best</lift:locS>
+              <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="The best image quality but larger file size. JPEG quality: 100%."></i>
+                      </span>
+            </label>
+          </div>
+        </div>
+        <div class="more-options" style="display: none; padding-bottom: 40px;">
+          <div class="row head-space-xl">
+            <label><lift:locS>Image resolution (ppi)</lift:locS>:</label><br/>
+            <div data-toggle="buttons" class="btn-group remembered">
+              <label class="btn btn-default btn-xs">
+                <input value="72" name="imageDpi" type="radio">72
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input value="100" name="imageDpi" type="radio">100
+              </label>
+              <label class="btn btn-default btn-xs active">
+                <input value="144" name="imageDpi" type="radio">144
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input value="200" name="imageDpi" type="radio">200
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input value="300" name="imageDpi" type="radio">300
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input value="720" name="imageDpi" type="radio">720
+              </label>
+            </div>
+          </div>
+          <div class="row head-space-xl">
+            <label><lift:locS>Image conversion</lift:locS>:</label><br/>
+            <div data-toggle="buttons" class="btn-group remembered">
+              <label class="btn btn-default btn-xs active">
+                <input value="none" name="imageConversion" type="radio">
+                <lift:locS>None</lift:locS>
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input value="grayscale" name="imageConversion" type="radio">
+                <lift:locS>Grayscale</lift:locS>
+                <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="Choose this for smaller file size. Color images are converted to grayscale (black and white only)"></i>
+                      </span>
+              </label>
+            </div>
+          </div>
+          <div class="row head-space-xl">
+            <label><lift:locS>Multimedia files</lift:locS>:</label><br/>
+            <div data-toggle="buttons" class="btn-group remembered">
+              <label class="btn btn-default btn-xs active">
+                <input value="all" name="discardMultimedia" type="radio">
+                <lift:locS>Discard</lift:locS>
+                <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="Removes audio or video files from the document."></i>
+                      </span>
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input value="none" name="discardMultimedia" type="radio">
+                <lift:locS>Keep</lift:locS>
+              </label>
+            </div>
+          </div>
+          <div class="row head-space-xl">
+            <label><lift:locS>Fonts</lift:locS>:</label><span style="margin-left: 5px;" class="label label-success">Experimental</span><br/>
+            <div data-toggle="buttons" class="btn-group">
+              <label class="btn btn-default btn-xs active">
+                <input value="false" name="subsetFonts" type="radio">
+                <lift:locS>Leave unchanged</lift:locS>
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input value="true" name="subsetFonts" type="radio">
+                <lift:locS>Optimize</lift:locS>
+                <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top"
+                           title="Attempts to subset fonts, so only the glyphs actually used are preserved."></i>
+                      </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 30px">
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>Compress PDF</lift:locS></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><lift:locS>More options</lift:locS></a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'compressed' }); %>
+<%- include('partials/task-screen-after'); %>

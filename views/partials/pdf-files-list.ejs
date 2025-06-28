@@ -1,0 +1,41 @@
+<section>
+  <div class="container">
+    <div class="row centered" style="display: none" id="pdf-files-list-wrap">
+      <div class="col-sm-8 col-xs-12 no-padding">
+        <div id="pdf-files-list-outer">
+          <ul id="pdf-files-list" class="noselect"></ul>
+        </div>
+      </div>
+      <div class="col-sm-4 col-sm-12 no-padding">
+        <%- include('add-more-files', { fileTypes: 'pdf,png,gif,jpg,jpeg,tif,tiff,bmp,webp' }); %>
+
+        <div style="margin-top: 20px; margin-bottom: 20px;">
+          <a href="javascript://" class="sort-btn" data-sort-order="asc">Sort files A-Z</a>
+          <a href="javascript://" class="sort-btn" data-sort-order="desc">Sort files Z-A</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="pdf-file-item-wrap-alternate-mix-template" style="display: none">
+      <li class="pdf-file-item-wrap grabbable" title="Drag to reorder">
+        <div class="pdf-file-item bordered" data-filename="{{encodedName}}"  data-filename-raw="{{originalName}}" data-file-counter="{{counter}}">
+          <span class="close" title="Remove file">&times;</span>
+          <div class="filename"><span class="order">{{order}}</span> <span class="name">{{name}}</span></div>
+          <div class="page-options form-inline">
+            <div class="page-options-row">
+              <label class="light"><lift:locS>Pick pages in</lift:locS>: </label>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default btn-xxs active"><input autocomplete="off" type="radio" name="reverse" value="false"> <lift:locS>Regular Order</lift:locS></label>
+                <label class="btn btn-default btn-xxs"><input type="radio" name="reverse" value="true"> <lift:locS>Reverse Order</lift:locS></label>
+              </div>
+            </div>
+            <div class="page-options-row">
+              <label class="light">
+                <lift:locS>Switch document after reading</lift:locS><input value="1" class="form-control input-xxs input-short" type="text" name="step[]"><lift:locS>pages</lift:locS></label>
+            </div>
+          </div>
+        </div>
+      </li>
+    </div>
+  </div>
+</section>

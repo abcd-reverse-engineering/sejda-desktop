@@ -1,0 +1,19 @@
+<section class="step2 centered" style="display: none">
+  <div class="btn-group upload-btn-group secondary-upload-btn-group can-add-more" style="margin-top: 30px">
+    <span class="btn btn-light btn-xs fileinput-button">
+      <i class="fal fal fa-copy"></i>
+      <i class="fal fa-spinner fa-pulse" style="display: none"></i> <%= __('Add more files') %>
+      <form id="addMoreFilesUploadForm" action="" method="post" enctype="multipart/form-data" data-filetypes="<%= locals.fileTypes || 'pdf' %>">
+        <input type="hidden" name="key">
+        <input type="hidden" name="AWSAccessKeyId">
+        <input type="hidden" name="acl">
+        <input type="hidden" name="success_action_redirect">
+        <input type="hidden" name="policy">
+        <input type="hidden" name="signature">
+        <input type="hidden" name="Content-type">
+        <input type="hidden" name="x-amz-storage-class">
+        <input class="fileupload" type="file" name="file" data-url="" data-scope="task-file" multiple="multiple">
+      </form>
+    </span>
+  </div>
+</section>

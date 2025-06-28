@@ -1,0 +1,119 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #permissions label {
+    font-weight: normal;
+    margin-right: 8px;
+  }
+
+  .tool-warning {
+    color: #664d03;
+    background-color: rgba(252,232,186,0.4);
+    margin: auto;
+    max-width: 550px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+</style>
+
+<section id="task-content" data-task="encrypt" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Encrypt PDF') %></h1>
+      <h2><%= __('Protect file with password and permissions') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="encrypt"/>
+
+      <div class="container">
+        <div class="row head-space-xl" style="width: 70%; margin: auto;">
+          <label><%= __('Password') %></label>
+          <div class="input-group">
+            <input value="" min="1" placeholder="Example: open123"
+                   class="form-control input-lg" type="text" name="userPassword"
+                   id="userPassword">
+            <div class="input-group-addon input-help">
+              <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                 title="This is the password required to <strong>open</strong> the file"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row head-space-xl more-options" style="display: none">
+          <div class="form-group head-space-xl" style="width: 70%; margin: auto;">
+            <label><%= __('Require a password to change permissions') %></label>
+            <div class="input-group">
+              <input value="" min="1" placeholder="Example: edit123"
+                     class="form-control input-lg" type="text" name="ownerPassword"
+                     id="ownerPassword">
+              <div class="input-group-addon input-help">
+                <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                   title="Optional. Password required to <strong>edit</strong> permissions, technically called the 'owner password'."></i>
+              </div>
+            </div>
+          </div>
+          <div class="form-group head-space-xl" style="margin-top: 20px;">
+            <label><%= __('Encryption') %></label>
+            <div>
+              <div data-toggle="buttons" class="btn-group">
+                <label class="btn btn-default btn-xxs">
+                  <input value="rc4_128" name="encryptionAlgorithm" type="radio"> <%= __('Medium') %> <span class="less-important">(RC4 128 bits)</span>
+                </label>
+                <label class="btn btn-default btn-xxs">
+                  <input value="aes_128" name="encryptionAlgorithm" type="radio"> <%= __('Medium') %> <span class="less-important">(AES 128 bits)</span>
+                </label>
+                <label class="btn btn-default btn-xxs active">
+                  <input checked="checked" value="aes_256" name="encryptionAlgorithm" type="radio"> <%= __('High') %> <span class="less-important">(AES 256 bits)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group head-space-xl" style="margin-top: 40px;">
+            <label><%= __('Allowed PDF reader permissions') %></label>
+            <p class="tool-warning">
+              Warning: Some PDF readers will ignore these permissions.<br/>
+              Permissions may not be honoured or enforced at all times.
+            </p>
+            <div id="permissions">
+              <label>
+                <input value="modify" name="permissions[]" type="checkbox"> <%= __('Modifying') %>
+              </label>
+              <label>
+                <input value="copy" name="permissions[]" type="checkbox"> <%= __('Copying text and graphics') %>
+              </label>
+              <label>
+                <input value="degradedprinting" name="permissions[]" type="checkbox"> <%= __('Printing') %>
+              </label>
+              <label>
+                <input value="print" name="permissions[]" type="checkbox"> <%= __('High resolution printing') %>
+              </label>
+              <label>
+                <input value="fill" name="permissions[]" type="checkbox"> <%= __('Filling forms') %>
+              </label>
+              <label>
+                <input value="modifyannotations" name="permissions[]" type="checkbox"> <%= __('Commenting') %>
+              </label>
+              <label>
+                <input value="assemble" name="permissions[]" type="checkbox"> <%= __('Insert, rotate, or delete pages') %>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row head-space-xl"  style="margin-top: 20px">
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Encrypt PDF') %> <i class="fal fa-chevron-right"></i></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><%= __('More options') %></a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'encrypted' }); %>
+<%- include('partials/task-screen-after'); %>

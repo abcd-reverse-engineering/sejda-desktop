@@ -1,0 +1,65 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #pdf-canvas-wrap {
+    display: none !important;
+  }
+
+  .pdf-file-item-wrap {
+    margin: 10px 0;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08), 0 -1px 3px rgba(0,0,0,.02);
+    border-radius: 10px;
+    border: 1px #DDD solid;
+    background-color: #FFF;
+  }
+
+  .pdf-file-item {
+    border-radius: 0;
+    background-color: #FFF;
+  }
+
+  .pdf-file-item:hover, .pdf-file-item-wrap:hover .pdf-file-item {
+    background-color: #FFF;
+  }
+
+  .order {
+    background-color: rgba(0,187,136,.07);
+    font-weight: normal;
+    color: #666;
+    border-radius: 4px;
+    width: 18px;
+    display: inline-block;
+    text-align: center;
+  }
+</style>
+
+<section id="task-content" data-task="alternateMix" data-can-reorder="true" data-multiple-files="true"
+         data-can-add-more="true" data-drop-files-once="false">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Alternate & Mix Odd and Even PDF Pages') %></h1>
+      <h2><lift:locS>Mixes pages from 2 or more documents, alternating between them</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-list'); %>
+  <%- include('partials/pdf-page-thumbnails'); %>
+
+  <div class="centered step2 bottom-fixed" style="display:none">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="alternateMix"/>
+
+      <div class="container">
+        <div class="row head-space-xl">
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>Mix PDF files</lift:locS></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('partials/task-common-output-options', { onlyFile: true, outputFilenameAffix: 'mixed' }); %>
+<%- include('partials/task-screen-after'); %>

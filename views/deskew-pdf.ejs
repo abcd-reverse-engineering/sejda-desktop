@@ -1,0 +1,232 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #specificPagesWrap {
+    max-width: 500px;
+    margin: auto;
+  }
+
+  .page-wrap {
+    position: relative;
+    margin: auto;
+    background-color: #FFF;
+    overflow: hidden;
+  }
+
+  #page-deskew-selector {
+    background-color: #F8f8F8;
+    margin-top: 30px;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 40px 5px;
+  }
+
+  @media (min-width: 768px) {
+    #page-deskew-selector {
+      padding: 40px 40px;
+    }
+  }
+
+  .prev-next-pages-nav .prev-page-btn {
+    float: left;
+  }
+
+  .prev-next-pages-nav .next-page-btn {
+    float: right;
+  }
+
+  #page-deskew-selector-header,
+  #page-deskew-selector-footer {
+    margin: auto;
+    margin-bottom: 10px;
+  }
+
+  .tools-menu {
+    padding: 0 !important;
+  }
+
+  #page-deskew-selector-footer .prev-next-pages-nav {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .page-counter-pages-nav {
+    color: #999;
+  }
+
+  .slider-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .angle-display {
+    text-align: right;
+  }
+
+  #rotationSlider {
+    flex: 1;
+  }
+
+  #gridCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  input.current_page {
+    display: inline-block;
+    width: 30px;
+    padding: 0;
+    text-align: center;
+  }
+</style>
+
+<section id="task-content" data-task="deskew" data-multiple-files="pro" data-free-max-file-size="100" data-free-limit-file-size="100">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Deskew PDF') %></h1>
+      <h2><%= __('Automatically straighten and deskew scanned PDF pages') %></h2>
+    </div>
+    </div>
+
+  <%- include('partials/file-upload', { fileSize: 100 }); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  </section>
+
+  <div class="centered step2" style="display:none" id="step2Choices">
+  <div class="row">
+    <label><lift:locS>Choose an option</lift:locS></label>
+  </div>
+  <div class="row">
+    <a class="btn btn-medium btn-secondary default btn-choice" data-choice="automatic" title="We'll process all pages and automatically determine the best crop size so that white margins are trimmed and all pages in the document have the same consistent page size">
+      <div class="icons">
+        <i class="fal fa-wand-magic margin-right-5"></i>
+      </div>
+      <div class="text"><lift:locS>We'll detect and deskew automatically the pages that are skewed</lift:locS>&nbsp</div>
+      <strong><lift:locS>Automatic</lift:locS><i class="fal fa-arrow-right"></i></strong>
+    </a>
+    <a class="btn btn-medium btn-secondary btn-choice" data-choice="manual" title="We'll crop page by page so that all white margins are completely removed from each page. Pages might have different sizes, based on how much white margins were trimmed.">
+      <div class="icons">
+        <i class="fal fa-sync-alt margin-right-5" style="font-size: 90%"></i>
+      </div>
+      <div class="text"><lift:locS>You'll manually deskew each page</lift:locS>&nbsp</div>
+      <strong><lift:locS>Manually</lift:locS> <lift:locS>page by page</lift:locS> <i class="fal fa-arrow-right"></i></strong>
+    </a>
+  </div>
+  <div class="row head-space-xl" style="margin-top: 30px;">
+    <button id="step2ChoicesContinueBtn" class="btn btn-default btn-medium"><lift:locS>Continue</lift:locS> <i class="fal fa-angle-right"></i></button>
+  </div>
+</div>
+
+  <section class="scroll-here-step3">
+  <div class="container centered">
+    <div id="page-deskew-selector-wrap" style="display: none">
+      <div id="global-help-hint" style="display: none"></div>
+
+      <div id="page-deskew-selector">
+        <div id="page-deskew-selector-header">
+          <div class="prev-next-pages-nav tools-menu">
+          </div>
+        </div>
+
+        <div class="page-wrap">
+          <canvas id="pageCanvas"></canvas>
+          <img src="" class="page-rendering">
+          <canvas id="gridCanvas"></canvas>
+        </div>
+
+        <div id="page-deskew-selector-footer">
+          <div class="prev-next-pages-nav tools-menu">
+            <button type="button" class="btn btn-default page-tools-btn prev-page-btn" title="Previous page">
+              <i class="fal fa-arrow-left"></i> <lift:locS>Previous</lift:locS>
+            </button>
+
+            <span class="page-counter-pages-nav"><lift:locS>Page</lift:locS> <input type="text" class="current_page form-control input-xxs"></input> of <span class="total_pages"></span></span>
+
+            <button type="button" class="btn btn-default page-tools-btn next-page-btn" title="Next page">
+              <lift:locS>Next</lift:locS> <i class="fal fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <div class="slider-container">
+            <label class="light">Rotation:</label>
+            <input type="range" id="rotationSlider" min="-30" max="30" value="0" step="0.1" />
+            <span class="angle-display"><span id="rotationValue">0.0</span>°</span>
+          </div>
+
+          <div class="fine-control-buttons tools-menu">
+            <div class="btn-group">
+              <button class="btn btn-xs" id="decreasePoint1">-0.1°</button>
+              <button class="btn btn-xs" id="decreasePoint5">-0.5°</button>
+              <button class="btn btn-xs" id="decrease1">-1°</button>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-xs" id="increase1">+1°</button>
+              <button class="btn btn-xs" id="increasePoint5">+0.5°</button>
+              <button class="btn btn-xs" id="increasePoint1">+0.1°</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="centered step3" style="display:none; margin-top: 40px; padding-bottom: 40px;">
+  <form class="form-inline task-form" autocomplete="off">
+    <input type="hidden" name="type" value="deskew"/>
+    <input type="hidden" name="angles" value=""/>
+    <input type="hidden" name="mode" value="automatic"/>
+
+    <div class="container">
+      <div id="optionsAutomaticMode" class="container" style="display: none">
+        <div class="row head-space">
+          <div>
+            <label><lift:locS>Only specific pages</lift:locS>:</label>
+            <div id="specificPagesWrap">
+              <div class="input-group">
+                <input value="" min="1" placeholder="Optional. Examples: 1-10,13,14,100-"
+                       class="form-control input-lg thumbs-multiple-select tooltip-on-focus" type="text" name="pages"
+                       id="specificDeletePages" data-validator="page-ranges-or-empty">
+
+                <div class="input-group-addon input-help">
+                  <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Type 1-10 to deskew first 10 pages. Type 15- to deskew all pages after page 15. Type 1,2,3 to deskew pages 1, 2 and 3"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row head-space centered aligned-checkbox-wrap">
+          <div class="row aligned-checkbox">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="true" name="onlyStronglySkewed">
+                <lift:locS>Only straighten strongly skewed pages</lift:locS>
+              </label>
+              <span class="input-help">
+                    <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top"
+                       title="Minimizes the number of pages that are deskewed. Only straightens a page if the skew angle is strong (over 0.70 degrees)."></i>
+                  </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row head-space">
+        <button type="submit" class="btn btn-default btn-medium"><lift:locS>Deskew PDF</lift:locS></button>
+      </div>
+    </div>
+  </form>
+</div>
+
+  <script class="pageScripts" data-src="public/js/pages/deskew-pdf-desktop.min.obfuscated.js"></script>
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'deskewed' }); %>
+<%- include('partials/task-screen-after'); %>

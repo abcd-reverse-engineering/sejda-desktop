@@ -1,0 +1,134 @@
+<section>
+  <div id="upload-progress"><div class="bar" style="width: 0%"></div></div>
+
+  <div id="top-upgrade-section-wrap" style="display: none">
+    <%- include('upgrade-section'); %>
+  </div>
+
+  <section id="fileUploadContainer">
+  <div class="container-fluid centered step1" style="height: 80px">
+    <svg class="curve-up-separator" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none" style="margin-bottom: -5px; margin-top: -20px;">
+      <path d="M0 100 C 20 0 50 0 100 100 Z" />
+    </svg>
+  </div>
+  <div class="container-fluid centered step1">
+    <div class="row no-margins" style="background-color: #EEE;">
+      <div class="drop-files-zone">
+        <div class="drop-files-zone-hint"><%= __('Drag & drop files here') %></div>
+        <div class="btn-group upload-btn-group main" style="opacity: 0.3">
+          <span class="btn btn-lg fileinput-button">
+            <i class="fal fa-file-pdf"></i>
+            <span class="singular" style="display: none"><%= __('Choose PDF file') %></span>
+            <span class="plural"><%= __('Choose PDF files') %></span>
+            <form id="fileUploadForm" action="" method="post" enctype="multipart/form-data" data-filetypes="<%= locals.fileTypes || 'pdf' %>">
+              <input type="hidden" name="key">
+              <input type="hidden" name="AWSAccessKeyId">
+              <input type="hidden" name="acl">
+              <input type="hidden" name="success_action_redirect">
+              <input type="hidden" name="policy">
+              <input type="hidden" name="signature">
+              <input type="hidden" name="Content-type">
+              <input type="hidden" name="x-amz-storage-class">
+              <input class="fileupload" data-allows-drop="true" data-once="true" type="file" name="file" data-url="" data-scope="task-file" multiple="multiple" accept=".pdf">
+            </form>
+          </span>
+        </div>
+        <div id="startWithBlankDocument" style="display: none">
+          <a class="open-blank-doc-btn" href="javascript://"><lift:locS>or start with a blank document</lift:locS></a>
+        </div>
+        <p class="hint">
+            <%= __('Files are processed locally.') %><br/>
+          <span id="freeLimitsSection">
+            <%= __('Free service for documents up to') %> <span id="freePagesLimit"><%= locals.pages || 200 %></span> <%= __('pages or') %> <span id="freeFileSizeLimit"><%= locals.fileSize || 50 %></span> <%= __('MB and 3 tasks per day')%>.
+          </span>  
+        </p>
+        </p>
+      </div>
+      <svg viewBox="0 0 1200 46" class="col-12 text-white absolute bottom-0" style="height: auto; margin-bottom: -10px;">
+        <path fill="#FDFDFD" fill-rule="evenodd"
+              d="M0-7h1200v53H0V-7zm0 30.113V-7h1200v43.495c-37.762 7.58-155.36 7.58-352.791 0C721.412 31.665 480.68.297 248.535.355 197.087.368 114.242 7.955 0 23.113z"></path>
+      </svg>
+    </div>
+  </div>
+  <div class="container-fluid centered step1" id="recentFilesListContainer" style="display: none">
+    <div id="recentFilesListOuter">
+      <h4><i class="fal fa-history"></i> <%= __('Recent files') %></h4>
+      <span class="collapse-toggle"><i class="fal fa-chevron-down"></i></span>
+      <ol id="recentFilesList"></ol>
+    </div>
+  </div>  
+  </section>
+
+  <!-- File password prompt -->
+  <div id="filePwdPrompt" class="modal file-pwd-prompt" style="display: none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><lift:locS>Password for</lift:locS> <span class="file-name">file.pdf</span></h4>
+        </div>
+        <div class="modal-body">
+          <label class="danger" style="display: none; color: #a94442;"><lift:locS>Incorrect password</lift:locS></label>
+          <input type="text" name="filePwd" class="file-pwd form-control input-lg"/>
+          <span class="fal fa-fw fa-eye input-field-icon toggle-password"></span>
+
+          <div class="checkbox">
+            <label><input type="checkbox" name="usePwdForAllFiles" style="margin-top: 5px"> <lift:locS>Use this password for all files</lift:locS></label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-xs"><lift:locS>Continue</lift:locS></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="limited-permissions-notice" style="display: none">
+    <div class="limited-permissions-notice-inner">
+      <i class="fal fa-info-circle"></i> <lift:locS>This document has limited permissions. Provide the owner password to enable modifying its contents.</lift:locS>
+      <a href="https://www.sejda.com/help#owner-password"><lift:locS>Learn more</lift:locS>.</a>
+      <button class="btn blue-btn btn-xs enter-owner-pwd-btn"><lift:locS>Enter password</lift:locS></button>
+    </div>
+  </div>
+
+  <div id="fileOwnerPwdPrompt" class="modal file-pwd-prompt" style="display: none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><lift:locS>Owner password for</lift:locS> <span class="file-name">file.pdf</span></h4>
+        </div>
+        <div class="modal-body">
+          <section class="file-permissions-list" style="margin-bottom: 30px;">
+            <label class="light"><lift:locS>This document has limited permissions</lift:locS>:</label>
+            <div class="row ">
+              <div class="col-xs-6">
+                <div data-perm="copy" class="denied" style="display: none"><i class="fal fa-ban"></i> <lift:locS>Content copying</lift:locS></div>
+                <div data-perm="modify" class="denied" style="display: none"><i class="fal fa-ban"></i> <lift:locS>Editing contents</lift:locS></div>
+                <div data-perm="assemble" class="denied" style="display: none"><i class="fal fa-ban"></i> <lift:locS>Organizing pages</lift:locS></div>
+              </div>
+              <div class="col-xs-6">
+                <div data-perm="fill" class="denied" style="display: none"><i class="fal fa-ban"></i> <lift:locS>Fill forms</lift:locS></div>
+                <div data-perm="print" class="denied" style="display: none"><i class="fal fa-ban"></i> <lift:locS>Printing</lift:locS></div>
+                <div data-perm="sign" class="denied" style="display: none"><i class="fal fa-ban"></i> <lift:locS>Signing</lift:locS></div>
+              </div>
+            </div>
+          </section>
+          <div>
+            <div class="alert alert-danger" style="display: none;"><i class="fal fa-exclamation-triangle"></i> <lift:locS>Incorrect password</lift:locS></div>
+
+            <label class="light"><lift:locS>Provide the document owner password to enable all permissions:</lift:locS></label>
+            <input type="text" name="filePwd" class="file-pwd form-control input-lg" placeholder="Enter document owner password"/>
+            <span class="fal fa-fw fa-eye input-field-icon toggle-password"></span>
+          </div>
+          <div style="margin-top: 10px">
+            <a href="https://www.sejda.com/help#owner-password"><lift:locS>Learn more</lift:locS><i class="fal fa-question-circle" style="margin-left: 5px; vertical-align: middle"></i></a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-xs"><lift:locS>Continue</lift:locS></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

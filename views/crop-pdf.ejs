@@ -1,0 +1,360 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+    /* jquery.Jcrop.min.css v0.9.12 (build:20130126) */
+    .jcrop-holder{direction:ltr;text-align:left;}
+    .jcrop-vline,.jcrop-hline{background:#FFF url(public/images/Jcrop.gif);font-size:0;position:absolute;}
+    .jcrop-vline{height:100%;width:1px!important;}
+    .jcrop-vline.right{right:0;}
+    .jcrop-hline{height:1px!important;width:100%;}
+    .jcrop-hline.bottom{bottom:0;}
+    .jcrop-tracker{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;height:100%;width:100%;}
+    .jcrop-handle{background-color:#333;border:1px #EEE solid;font-size:1px;height:7px;width:7px;}
+    .jcrop-handle.ord-n{left:50%;margin-left:-4px;margin-top:-4px;top:0;}
+    .jcrop-handle.ord-s{bottom:0;left:50%;margin-bottom:-4px;margin-left:-4px;}
+    .jcrop-handle.ord-e{margin-right:-4px;margin-top:-4px;right:0;top:50%;}
+    .jcrop-handle.ord-w{left:0;margin-left:-4px;margin-top:-4px;top:50%;}
+    .jcrop-handle.ord-nw{left:0;margin-left:-4px;margin-top:-4px;top:0;}
+    .jcrop-handle.ord-ne{margin-right:-4px;margin-top:-4px;right:0;top:0;}
+    .jcrop-handle.ord-se{bottom:0;margin-bottom:-4px;margin-right:-4px;right:0;}
+    .jcrop-handle.ord-sw{bottom:0;left:0;margin-bottom:-4px;margin-left:-4px;}
+    .jcrop-dragbar.ord-n,.jcrop-dragbar.ord-s{height:7px;width:100%;}
+    .jcrop-dragbar.ord-e,.jcrop-dragbar.ord-w{height:100%;width:7px;}
+    .jcrop-dragbar.ord-n{margin-top:-4px;}
+    .jcrop-dragbar.ord-s{bottom:0;margin-bottom:-4px;}
+    .jcrop-dragbar.ord-e{margin-right:-4px;right:0;}
+    .jcrop-dragbar.ord-w{margin-left:-4px;}
+    .jcrop-light .jcrop-vline,.jcrop-light .jcrop-hline{background:#FFF;filter:alpha(opacity=70)!important;opacity:.70!important;}
+    .jcrop-light .jcrop-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#000;border-color:#FFF;border-radius:3px;}
+    .jcrop-dark .jcrop-vline,.jcrop-dark .jcrop-hline{background:#000;filter:alpha(opacity=70)!important;opacity:.7!important;}
+    .jcrop-dark .jcrop-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#FFF;border-color:#000;border-radius:3px;}
+    .solid-line .jcrop-vline,.solid-line .jcrop-hline{background:#FFF;}
+    .jcrop-holder img,img.jcrop-preview{max-width:none;}
+
+    .jcrop-holder {
+        margin: auto;
+    }
+
+    .blended-canvas {
+        background-color: white;
+        -webkit-box-shadow: 0 3px 6px -2px rgba(50,50,50,.3);
+        -moz-box-shadow: 0 3px 6px -2px rgba(50,50,50,.3);
+        box-shadow: 0 3px 6px -2px rgba(50,50,50,.3);
+    }
+
+    img.jcrop {
+        -webkit-box-shadow: 0 3px 6px -2px rgba(50,50,50,.6);
+        -moz-box-shadow: 0 3px 6px -2px rgba(50,50,50,.6);
+        box-shadow: 0 3px 6px -2px rgba(50,50,50,.6);
+    }
+
+    #partialRenderNotice {
+        margin-bottom: 20px;
+    }
+
+    #page-area-selector {
+        text-align: center;
+        padding-bottom: 160px;
+        margin-bottom: 0;
+    }
+
+    #page-area-selector p.help-block {
+        max-width: 50%;
+        line-height: 12px;
+        margin: auto;
+        padding: 15px;
+        font-size: 12px;
+    }
+
+    .page-wrap {
+        width: fit-content;
+        width: -moz-fit-content;
+        display: table;
+        min-width: 30%;
+        margin: auto;
+        background-color: #eee;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .page-wrap.half-size {
+        display: inline-block;
+        vertical-align: top;
+        min-width: calc(40vw + 40px);
+        min-height: 300px;
+        margin: 10px;
+    }
+
+    .page-wrap .margins-layer input {
+        text-align: center;
+        display: inline-block;
+        padding: 6px !important;
+        width: 65px;
+    }
+
+    .page-wrap .margins-layer {
+        margin: 10px 0 20px;
+        text-align: left;
+    }
+
+    .page-wrap .margins-layer label,
+    .page-wrap .margins-layer input {
+        color: #666;
+        vertical-align: middle;
+    }
+
+    .page-wrap .page-num {
+        line-height: 36px;
+        margin-top: 10px;
+        margin-bottom: -10px;
+        color: #999;
+    }
+
+    .loading {
+        color: #0b8;
+        margin-bottom: 15px;
+    }
+
+    .loading img {
+        height: 17px;
+        margin-right: 5px;
+    }
+
+    .auto-crop-btn, .apply-to-all-crop-btn {
+        float: right;
+        margin-left: 15px;
+        clear: right;
+        font-size: 80%;
+    }
+
+    .apply-to-all-crop-btn {
+        visibility: hidden;
+    }
+
+    [data-mode=individual] .apply-to-all-crop-btn {
+        visibility: visible;
+    }
+
+    #cropModeSelector {
+        margin-top: 30px;
+        padding: 20px;
+        margin-bottom: -20px;
+    }
+
+    #cropModeSelector .details {
+        color: #AAA;
+    }
+
+    #step2Choices .btn-choice {
+        min-height: 200px;
+    }
+
+    .page-wrap .margins-layer .col-label,
+    .page-wrap .margins-layer .col-input {
+        float: left;
+        width: 70px;
+    }
+
+    .page-wrap .margins-layer .inch-cm-toggle {
+        float: right
+    }
+
+    .page-wrap .margins-layer .col-label {
+        padding-top: 5px;
+        text-align: right;
+        padding-right: 0;
+    }
+
+    .page-wrap .margins-layer .col-input {
+        padding-left: 10px;
+        padding-right: 0;
+    }
+
+    .page-wrap .margins-layer .col-input + .page-wrap .margins-layer .col-label {
+        margin-left: 20px;
+    }
+
+</style>
+
+<section id="task-content" data-task="crop" data-multiple-files="pro">
+    <div class="container centered">
+        <div class="row">
+            <h1><%= __('Crop PDF') %></h1>
+            <h2><lift:locS>Trim PDF margins, change PDF page size</lift:locS></h2>
+        </div>
+    </div>
+
+    <%- include('partials/file-upload'); %>
+    <%- include('partials/loading'); %>
+    <%- include('partials/pdf-files-summary'); %>
+
+    <div class="centered step2" style="display:none" id="step2Choices">
+        <div class="row">
+            <label><lift:locS>Choose an option</lift:locS></label>
+        </div>
+        <div class="row">
+            <a class="btn btn-medium btn-secondary default btn-choice" data-choice="automatic_consistent" title="We'll process all pages and automatically determine the best crop size so that white margins are trimmed and all pages in the document have the same consistent page size">
+                <div class="icons">
+                    <i class="fal fa-file margin-right-5"></i><i class="fal fa-file"></i>
+                </div>
+                <div class="text"><lift:locS>Same crop size across all pages</lift:locS>&nbsp</div>
+                <strong><lift:locS>Automatic</lift:locS><i class="fal fa-arrow-right"></i></strong>
+            </a>
+            <a class="btn btn-medium btn-secondary btn-choice" data-choice="automatic_maximum" title="We'll crop page by page so that all white margins are completely removed from each page. Pages might have different sizes, based on how much white margins were trimmed.">
+                <div class="icons">
+                    <i class="fal fa-file margin-right-5" style="font-size: 90%"></i><i class="fal fa-file margin-right-5"></i><i class="fal fa-file" style="font-size: 75%"></i>
+                </div>
+                <div class="text"><lift:locS>Crop each page as much as possible</lift:locS>&nbsp</div>
+                <strong><lift:locS>Automatic</lift:locS> <lift:locS>maximum crop</lift:locS> <i class="fal fa-arrow-right"></i></strong>
+            </a>
+            <a class="btn btn-medium btn-secondary btn-choice" data-choice="manual" title="We'll show you page previews and you'll be able to manually adjust the crop areas">
+                <div class="icons">
+                    <i class="fal fa-crop-alt margin-right-5"></i>
+                </div>
+                <div class="text"><lift:locS>Preview pages and choose crop areas</lift:locS></div>
+                <strong><lift:locS>Preview pages &amp; select</lift:locS> <i class="fal fa-arrow-right"></i></strong>
+            </a>
+        </div>
+        <div class="row head-space-xl" style="margin-top: 30px;">
+            <button id="step2ChoicesContinueBtn" class="btn btn-default btn-medium"><lift:locS>Continue</lift:locS> <i class="fal fa-angle-right"></i></button>
+        </div>
+    </div>
+
+    <section class="step3" style="display: none">
+        <div id="cropModeSelector" class="centered">
+            <div id="global-help-hint" style="display: none"></div>
+            <div class="row">
+                <label><lift:locS>Preview mode</lift:locS></label>
+            </div>
+            <div class="row">
+                <div data-toggle="buttons" class="btn-group" style="margin-left: 20px;">
+                    <label class="btn btn-default btn-xs active">
+                        <input value="all" name="mode" type="radio">
+                        <div class="caption"><lift:locS>Blended</lift:locS></div>
+                        <!--                <div class="details"><lift:locS>Crop whole document in one go</lift:locS></div>-->
+                    </label>
+                    <label class="btn btn-default btn-xs">
+                        <input value="individual" name="mode" type="radio">
+                        <div class="caption"><lift:locS>Page by page</lift:locS></div>
+                        <!--                <div class="details"><lift:locS>Crop each page individually</lift:locS></div>-->
+                    </label>
+                    <label class="btn btn-default btn-xs">
+                        <input value="odd-even" name="mode" type="radio">
+                        <div class="caption"><lift:locS>Odd &amp; even</lift:locS></div>
+                        <!--                <div class="details"><lift:locS>Crop odd &amp; even pages differently</lift:locS></div>-->
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="centered" id="page-area-selector-wrap">
+            <div>
+                <div id="page-area-selector">
+                    <section id="page-area-selector-header">
+                        <div id="partialRenderNotice" style="display: none">
+                            <p class="hint"><lift:locS>First</lift:locS> <span class="rendered_pages_count"></span> <lift:locS>pages blended.</lift:locS>
+                                <a href="javascript://" style="margin-left: 10px" id="renderMorePagesBtn"><lift:locS>Blend 30 more</lift:locS></a>
+                                <a href="javascript://" style="margin-left: 10px" id="renderAllPagesBtn"><lift:locS>Blend all</lift:locS></a></p>
+                        </div>
+                    </section>
+                    <section id="page-area-selector-content">
+
+                    </section>
+                    <section id="page-area-selector-footer" style="display: none">
+                        <p class="hint head-space">
+                            <lift:locS>Content outside the crop area is hidden but not completely removed from the document</lift:locS>
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div id="pageWrapTemplate" class="page-wrap" style="display: none">
+            <div class="margins-layer container-fluid" style="display: none">
+                <div class="row">
+                    <div class="col-label">
+                        <label class="light"><lift:locS>Top</lift:locS></label>
+                    </div>
+                    <div class="col-input">
+                        <input value="0.0" class="input-xxs form-control" name="marginTop" type="text" placeholder="1.0"/>
+                    </div>
+                    <div class="col-label">
+                        <label class="light"><lift:locS>Width</lift:locS></label>
+                    </div>
+                    <div class="col-input">
+                        <input value="0.0" class="input-xxs form-control" name="areaWidth" type="text" placeholder="1.0"/>
+                    </div>
+                    <div class="col-label">
+                        <label class="light"><lift:locS>Height</lift:locS></label>
+                    </div>
+                    <div class="col-input">
+                        <input value="0.0" class="input-xxs form-control" name="areaHeight" type="text" placeholder="1.0"/>
+                    </div>
+                    <div class="col-buttons">
+                        <div class="inch-cm-toggle">
+                            <div data-toggle="buttons" class="btn-group">
+                                <label class="btn btn-default btn-xxs active">
+                                    <input value="inch" name="unit" type="radio">inch
+                                </label>
+                                <label class="btn btn-default btn-xxs">
+                                    <input value="cm" name="unit" type="radio">cm
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-label">
+                        <label class="light"><lift:locS>Bottom</lift:locS></label>
+                    </div>
+                    <div class="col-input">
+                        <input value="0.0" class="input-xxs form-control" name="marginBottom" type="text" placeholder="1.0"/>
+                    </div>
+                    <div class="col-label">
+                        <label class="light"><lift:locS>Left</lift:locS></label>
+                    </div>
+                    <div class="col-input">
+                        <input value="0.0" class="input-xxs form-control" name="marginLeft" type="text" placeholder="1.0"/>
+                    </div>
+                    <div class="col-label">
+                        <label class="light"><lift:locS>Right</lift:locS></label>
+                    </div>
+                    <div class="col-input">
+                        <input value="0.0" class="input-xxs form-control" name="marginRight" type="text" placeholder="1.0"/>
+                    </div>
+                    <div class="col-buttons">
+                        <a href="javascript://" class="apply-to-all-crop-btn lift:locTooltip" title="Applies current crop area to all pages following.">Apply to all</a>
+                        <a href="javascript://" class="auto-crop-btn lift:locTooltip" title="Automatically detects the optimal crop area to remove whitespace margin.">Auto-crop</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" style="display: none">
+                <img class="loader" src="/images/loaders/oval-green.svg"> <span class="status"></span>
+            </div>
+
+            <canvas class="render-canvas" style="display: none"></canvas>
+            <canvas class="blended-canvas"></canvas>
+            <img src="" class="jcrop">
+            <div class="page-num"></div>
+        </div>
+    </section>
+
+    <div class="centered step3 bottom-fixed" style="display:none; margin-top: 40px">
+        <form class="form-inline task-form" autocomplete="off">
+            <input type="hidden" name="type" value="crop"/>
+            <input type="hidden" name="autoCropMode" value="none"/>
+
+            <div class="container centered">
+                <div class="row head-space">
+                    <button type="submit" class="btn btn-default btn-medium"><lift:locS>Crop PDF</lift:locS></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script class="pageScripts" data-src="public/js/pages/crop-pdf-desktop.min.obfuscated.js"></script>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'cropped' }); %>
+<%- include('partials/task-screen-after'); %>

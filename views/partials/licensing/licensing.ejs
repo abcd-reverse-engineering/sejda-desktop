@@ -1,0 +1,201 @@
+<section id="licensing-section">
+  <section id="license-expired" class="license-screen" style="display: none">
+    <div class="container-fluid container-upgrade-section-license-screen">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h3>Your license expired</h3>
+      <h4>Continue using the free limited version or upgrade to keep access to <strong>premium features</strong>.</h4>
+      <h4>Thank you for choosing <%= manifest.productName %>.</h4>
+
+      <div class="head-space-xl">
+        <a class="btn btn-xs btn-secondary buy-btn upgrade-btn" href="<%= manifest.buyUrl %>">Purchase</a>
+        <a class="btn btn-xs btn-secondary existing-license-btn upgrade-btn" href="javascript://">Enter license key</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="license-expires-soon" class="license-screen" style="display: none">
+    <div class="container-fluid container-upgrade-section-license-screen">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+      <h3>Your license will expire in <span class="days-count"></span></h3>
+      <h4>Thank you for choosing <%= manifest.productName %>.</h4>
+      <h4>After the license expires you will continue to have access to a limited set of features.</h4>
+      <h4>Purchase now to keep access to <strong>premium features</strong>.</h4>
+
+      <div class="head-space-xl">
+        <a class="btn btn-xs btn-default buy-btn upgrade-btn" href="<%= manifest.buyUrl %>">Purchase now</a>
+        <a class="btn btn-xs btn-secondary existing-license-btn upgrade-btn" href="javascript://">Enter license key</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="license-verify-fail" class="license-screen" style="display: none">
+    <div class="container-fluid container-upgrade-section-license-screen">
+      <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <section data-reason="concurrent_use" style="display: none">
+        <h3>More users than allowed</h3>
+        <h4>You have reached the limit of users for this license key.</h4>
+
+        <div class="head-space-xl">
+          <a class="btn btn-xs btn-default buy-btn" href="<%= manifest.buyUrl %>?reason=more_users">Purchase</a>
+          <a class="btn btn-xs btn-secondary existing-license-btn" href="javascript://">Enter license key</a>
+          <a class="btn btn-xs btn-secondary contact-btn" href="javascript://">Contact support</a>
+        </div>
+      </section>
+
+      <section data-reason="wrong_major_version" style="display: none">
+        <h3>Your license is not valid for this version</h3>
+        <h4>Updated recently? Perpetual licenses do not include free access to newer versions.</h4>
+
+        <div class="head-space-xl">
+          <a class="btn btn-xs btn-default find-older-version-btn external-link" href="<%= manifest.desktopOlderVersionsUrl %>&reason=wrong_major_version">Download purchased version</a>
+        </div>
+      </section>
+
+      <section data-reason="access_revoked" style="display: none">
+        <h3>Your access has been revoked</h3>
+        <h4>You are no longer are allowed to use this license. Please contact your system administrator for assistance.</h4>
+      </section>
+
+      <section data-reason="unknown" style="display: none">
+        <h3>We could not validate your license key</h3>
+        <h4>Please copy/paste the license key from your <a href="https://www.sejda.com/account?justUpgraded=desktop">account page</a></h4>
+
+        <div class="head-space-xl">
+          <a class="btn btn-xs btn-secondary existing-license-btn" href="javascript://">Enter license key</a>
+        </div>
+      </section>
+
+      <section data-reason="account_inactive" style="display: none">
+        <h3>Your account is inactive</h3>
+        <h4>Please confirm your account before use. We've sent you an email with a confirmation link. <a href="https://sejda.com/account">More details</a></h4>
+
+        <div class="head-space-xl">
+          <a class="btn btn-xs btn-secondary existing-license-btn" href="javascript://">Enter license key</a>
+          <a class="btn btn-xs btn-default contact-btn" href="javascript://">Contact support</a>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section id="license-blocked" class="license-screen" style="display: none">
+    <div class="container-fluid container-upgrade-section-license-screen">
+      <h3>Discontinued</h3>
+      <h4>
+        This application version has been discontinued.<br/>
+        Please <a href="<%= manifest.downloadUrl %>">update to the latest version</a> or contact support for more details.<br/>
+        We apologise for any inconvenience caused.
+      </h4>
+
+      <div class="head-space-xl">
+        <a class="btn btn-xs btn-secondary contact-btn" href="javascript://">Contact support</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="license-enter-existing" class="license-screen" style="display: none">
+    <div class="container-fluid container-upgrade-section-license-screen">
+      <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h3>Enter your license key</h3>
+
+      <input type="text" id="licenseKeyInput" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" class="input-lg" value="">
+      
+      <div class="hint" style="color: #000">You can find your license key on your <a href="https://www.sejda.com/account?justUpgraded=desktop">sejda.com/account</a> page</div>
+
+      <div class="head-space-xl">
+        <a class="btn btn-xs btn-primary submit-license-key-btn" href="javascript://">Continue</a>
+        <a class="btn btn-xs btn-secondary cancel-existing-license-btn" href="javascript://">Cancel</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="license-just-upgraded" class="license-screen" style="display: none">
+    <div class="container-fluid container-upgrade-section-license-screen">
+      <h3>Thanks for upgrading!</h3>
+      <h4>We appreciate your business and hope you'll enjoy <%= manifest.productName %>.</h4>
+
+      <div class="head-space-xl">
+        <a class="btn btn-xs btn-default ok-continue-btn" href="javascript://">Continue</a>
+      </div>
+    </div>
+  </section>
+  <section id="license-accept-eula" class="license-screen" style="display: none">
+    <div class="container-fluid">
+      <%- include('eula'); %>
+
+      <div style="padding-top: 20px;border-top: 1px #DDD solid;">
+        <a class="btn btn-xs btn-default back-eula-btn" href="javascript://" style="display: none;">&lt; Back</a>
+        <a class="btn btn-xs btn-default accept-eula-btn" href="javascript://">I Accept</a>
+      </div>
+    </div>
+  </section>
+  <section id="review-privacy" class="license-screen" style="display: none">
+    <div class="container-fluid container-upgrade-section-license-screen">
+      <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h3>Allow automated error reporting?</h3>
+
+      <form style="max-width: 500px; margin: auto;">
+        <div>
+          When an error occurs, submit crash information automatically:<br/>settings used, edits performed, log outputs, file names, memory allocation, hostname, username, app version, license key.
+        </div>
+      </form>
+
+      <div class="head-space-xl">
+        <a class="btn btn-medium btn-default continue-review-privacy-btn" data-allowed="true" href="javascript://">Yes, allow</a>
+        <a class="btn btn-medium btn-secondary continue-review-privacy-btn" href="javascript://">No</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="free-version-limits" class="license-screen" style="display: none">
+    <div class="container-fluid container-upgrade-section-license-screen">
+      <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h3>Sejda PDF Desktop is free to use with daily limits.</h3>
+      <h4>Upgrade for PRO features and unlimited use.</h4>
+
+      <table class="table" id="compareLimits">
+        <thead>
+        <tr>
+          <td>Free</td>
+          <td class="pro">Pro</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>3 tasks per day</td>
+          <td class="pro">Unlimited</td>
+        </tr>
+        <tr>
+          <td>Docs up to 50Mb and 200 pages</td>
+          <td class="pro">Unlimited</td>
+        </tr>
+        <tr>
+          <td>Compress files up to 100Mb</td>
+          <td class="pro">Unlimited</td>
+        </tr>
+        <tr>
+          <td>OCR files up to 10 pages</td>
+          <td class="pro">Unlimited</td>
+        </tr>
+        <tr>
+          <td>Images up to 5Mb</td>
+          <td class="pro">Unlimited</td>
+        </tr>
+        <tr>
+          <td>Combine up to 30 files and 50 pages</td>
+          <td class="pro">Unlimited</td>
+        </tr>
+        <tr>
+          <td>Convert files one by one</td>
+          <td class="pro">Multiple files in one go</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="head-space-xl">
+        <p>Users upgrading to PRO receive a license key, which can be used to remove the free limits.</p>
+        <a class="btn btn-xs btn-secondary existing-license-btn" href="javascript://">I have a license key</a>
+      </div>
+    </div>
+  </section>
+</section>

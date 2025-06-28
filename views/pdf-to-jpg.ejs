@@ -1,0 +1,97 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  .save-as-image-wrap {
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    right: 0;
+    opacity: 0.95;
+    background-color: #FFF;
+    height: 70px;
+    margin: 20px;
+  }
+
+  .save-as-image-btn {
+    margin-top: 10px;
+    opacity: 0.2;
+  }
+
+  .pdf-page-wrap:hover .save-as-image-btn {
+    opacity: 1;
+  }
+
+  .pdf-page-wrap.saved {
+    opacity: 0.6;
+  }
+</style>
+
+<section id="task-content" data-task="pdfToJpg" data-multiple-files="pro">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Convert PDF to Images JPG PNG TIFF') %></h1>
+      <h2><lift:locS>Get PDF pages converted to JPG, PNG or TIFF images</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload', { pages: 20 }); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+  <%- include('partials/pdf-page-thumbnails'); %>
+
+  <div class="centered bottom-fixed step2" style="display:none">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="pdfToImage"/>
+      <input type="hidden" name="pages" value="" id="specificPages" />
+      <input type="hidden" name="allPages" value="" />
+
+      <div class="container">
+        <div class="row" style="margin-top:10px">
+          <div>
+            <label><lift:locS>Image resolution</lift:locS></label>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-default btn-xs">
+                <input type="radio" name="resolution" value="75"> <lift:locS>Small</lift:locS> (75 dpi)
+              </label>
+              <label class="btn btn-default btn-xs active">
+                <input type="radio" name="resolution" value="150"> <lift:locS>Medium</lift:locS> (150 dpi)
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input type="radio" name="resolution" value="220"> <lift:locS>Large</lift:locS> (220 dpi)
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div>
+            <label><lift:locS>Image format</lift:locS></label>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-default btn-xs active">
+                <input type="radio" name="imageFormat" value="jpg"> JPG
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input type="radio" name="imageFormat" value="png"> PNG
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input type="radio" name="imageFormat" value="tiff"> TIFF
+              </label>
+              <label class="btn btn-default btn-xs">
+                <input type="radio" name="imageFormat" value="tiff_single"> TIFF (multi-page)
+                <span class="input-help">
+                        <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top"
+                           title="One single TIFF image file that contains all the pages"></i>
+                      </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row head-space">
+          <button type="submit" class="btn btn-default btn-medium" id="convertSelectedBtn"><lift:locS>Convert</lift:locS></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('partials/task-common-output-options', { onlyDirectory: true, outputFilenamePattern: '[CURRENTPAGE]_[BASENAME]' }); %>
+<%- include('partials/task-screen-after'); %>

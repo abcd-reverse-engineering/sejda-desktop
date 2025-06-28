@@ -1,0 +1,162 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #metadataFieldsGroupWrap .form-group {
+    max-width: 550px;
+    margin: auto;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 30px;
+    text-align: left;
+    position: relative;
+    background-color: #F8F8F8;
+    margin-bottom: 10px;
+  }
+
+  .delete-meta-field-btn {
+    position: absolute;
+    top: 50px;
+    right: 7px;
+    color: gray;
+    cursor: pointer;
+    display: none;
+  }
+
+  .delete-meta-field-btn:hover {
+    color: red;
+  }
+
+  #metadataFieldsGroupWrap .form-group:hover .delete-meta-field-btn {
+    display: block;
+  }
+
+  .form-group.collapsed {
+    border-radius: 10px;
+    padding-bottom: 0 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .form-group-header {
+    cursor: pointer;
+    padding-top: 10px;
+  }
+
+  .form-group-header label {
+    cursor: pointer;
+  }
+
+  .form-group-header .icon-collapse {
+    float: right;
+    color: #DDD;
+    display: none;
+  }
+
+  .form-group.collapsed .form-group-content {
+    display: none;
+  }
+
+  .form-group.collapsed .icon-collapse {
+    display: block;
+  }
+
+  .form-group-content .hint {
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+  }
+</style>
+
+<section id="task-content" data-task="editMetadata" data-multiple-files="pro">
+  <div class="container centered">
+    <div class="row">
+      <h1><lift:locS>Edit PDF Metadata</lift:locS></h1>
+      <h2><lift:locS>Change PDF Author, Title, Keywords, Subject and other metadata fields</lift:locS></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none" id="step2Choices">
+    <div class="row">
+      <label><lift:locS>Choose an option</lift:locS></label>
+    </div>
+    <div class="row">
+      <a class="btn btn-medium btn-secondary btn-choice" data-choice="remove-all">
+        <div class="icons"><i class="fal fa-file-times"></i></div>
+        <div class="text">Completely delete metadata from doc</div>
+        <strong><lift:locS>Remove all metadata</lift:locS> <i class="fal fa-arrow-right"></i></strong>
+      </a>
+      <a class="btn btn-medium btn-secondary default btn-choice" data-choice="update">
+        <div class="icons">
+          <i class="fal fa-file-invoice"></i>
+        </div>
+        <div class="text">Update only specific fields</div>
+        <strong><lift:locS>Change metadata</lift:locS> <i class="fal fa-arrow-right"></i></strong>
+      </a>
+    </div>
+    <div class="row head-space-xl" style="margin-top: 30px;">
+      <button id="step2ChoicesContinueBtn" class="btn btn-default btn-medium"><lift:locS>Continue</lift:locS> <i class="fal fa-angle-right"></i></button>
+    </div>
+  </div>
+
+  <div class="centered step3" style="display:none">
+    <form class="inline-form task-form" autocomplete="off">
+      <input type="hidden" name="type" value="editMetadata"/>
+      <input type="hidden" name="removeAllMetadata" value="false">
+
+      <div class="container">
+        <div id="metadataFieldsGroupWrap" class="form-group-wrap" style="margin-top: 20px;">
+          <div class="form-group">
+            <div class="form-group-header">
+              <label class="control-label">Title</label>
+              <i class="fal fa-plus-square icon-collapse" title="Change field"></i>
+              <!--                  <i class="fal fa-minus-square"></i>-->
+            </div>
+            <div class="form-group-content">
+              <input type="text" class="form-control" name="metadata.Title">
+              <p class="hint"></p>
+              <a class="delete-meta-field-btn" title="Remove field"><i class="fal fa-times-circle"></i></a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a id="openNewMetaFieldModalBtn" href="javascript://" title="Add new metadata field">
+            <i class="fal fa-plus" style="margin-right: 5px;"></i>Add new field</a>
+        </div>
+        <div class="row" style="margin-top: 40px; margin-bottom: 40px">
+          <button type="submit" class="btn btn-default btn-medium"><lift:locS>Update PDF Metadata</lift:locS></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="newMetaFieldModal" class="modal app-modal" style="display: none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-title">New metadata field</div>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="newMetaFieldName">Name</label>
+            <input type="text" class="form-control" id="newMetaFieldName" placeholder="Author">
+          </div>
+          <div class="form-group">
+            <label for="newMetaFieldValue">Value</label>
+            <input type="text" class="form-control" id="newMetaFieldValue" placeholder="Alex Appleseed">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="addNewMetaFieldBtn" type="button" class="btn btn-xs">Add field</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'updated' }); %>
+<%- include('partials/task-screen-after'); %>

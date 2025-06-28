@@ -1,0 +1,326 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+    .textLayer {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        line-height: 1.0;
+        pointer-events: none;
+    }
+
+    .textLayer > div {
+        color: transparent;
+        position: absolute;
+        white-space: pre;
+        cursor: text;
+        -webkit-transform-origin: 0% 0%;
+        -moz-transform-origin: 0% 0%;
+        -o-transform-origin: 0% 0%;
+        -ms-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+        opacity: 0.4;
+        pointer-events: auto;
+    }
+
+    .textLayer .endOfContent {
+        display: block;
+        position: absolute;
+        left: 0px;
+        top: 100%;
+        right: 0px;
+        bottom: 0px;
+        z-index: -1;
+        cursor: default;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+    }
+
+    .textLayer .endOfContent.active {
+        top: 0px;
+    }
+
+    #edit-pages-wrap {
+        margin-top: 30px;
+    }
+
+    #edit-pages {
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 80px;
+        background-color: #e8e8e8;
+        padding: 10px 10px 220px;
+        text-align: center;
+        min-height: 350px;
+    }
+
+    .page-container {
+        margin-top: 30px;
+    }
+
+    .page-wrap .middle {
+        width: 100px;
+        vertical-align: top;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .middle .page-number-label {
+        font-size: 25px;
+        color: #CCC;
+    }
+
+    .middle .fa {
+        font-size: 30px;
+        color: #CCC;
+        padding-top: 40px;
+    }
+
+    .page-wrap .page-pdf {
+        width: calc(50% - 100px);
+        position: relative;
+        display: inline-block;
+        min-height: 200px;
+        background-color: #F2F2F2;
+    }
+
+    .page-wrap canvas.overlay, .page-wrap canvas.page {
+        width: 100%;
+    }
+
+    .page-wrap canvas.overlay {
+        position: absolute;
+    }
+
+    .page-wrap .page-ocr {
+        width: calc(50% - 100px);
+        background-color: #FFF;
+        display: inline-flex;
+        min-height: 200px;
+        vertical-align: top;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .page-ocr-loading {
+        text-align: center;
+        font-size: 18px;
+        color: #AAA;
+    }
+
+    .page-ocr-loading .caption {
+        text-transform: capitalize;
+    }
+
+    .page-ocr-loading .fa {
+        font-size: 45px;
+        margin: 15px;
+    }
+
+    .page-ocr .message {
+        color: #AAA;
+    }
+
+    .page-ocr .btn-start-ocr {
+        margin-left: 5px;
+    }
+
+    .page-ocr .ocr-result-text {
+        text-align: left;
+        overflow: auto;
+        -ms-word-wrap: normal;
+        word-wrap: normal;
+        overflow-wrap: normal;
+        white-space: pre;
+        padding: 20px;
+        border: none;
+        border-radius: 0;
+        background-color: transparent;
+        font-size: 12px;
+        min-height: 160px;
+    }
+
+    .page-ocr .ocr-result-text:focus {
+        outline: none;
+        background-color: lightyellow;
+    }
+
+    .page-ocr .ocr-result-footer {
+        font-size: 12px;
+        text-align: left;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #F9F9F9;
+    }
+
+    .page-ocr .ocr-result-footer a {
+        margin-left: 20px;
+    }
+
+    .quick-title {
+        color: #AAA;
+        padding: 10px;
+    }
+
+    .form-horizontal.task-form .checkbox{
+        display:inline-block;
+        padding-left:0;
+        margin-top:0;
+        margin-bottom:0
+    }
+
+    .form-horizontal.task-form .checkbox input[type=checkbox] {
+        margin-left: 0 !important;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+
+    .checkbox + .checkbox {
+        margin-left: 20px !important;
+    }
+
+    .form-horizontal .right-side {
+        text-align: left;
+        padding-left:0
+    }
+
+    .tool-warning {
+        color: #664d03;
+        background-color: #FFE4BD;
+        margin: auto;
+        max-width: 550px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    button#ocrAllPagesSubmitBtn {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+</style>
+
+<section id="task-content" data-task="ocr" data-multiple-files="true">
+    <div class="container centered">
+        <div class="row">
+            <h1><%= __('OCR Recognize Text in PDF') %></h1>
+            <h2><%= __('Convert PDF scans to searchable text and PDFs') %>. <%= __('Extract text from scans') %></h2>
+        </div>
+    </div>
+
+    <%- include('partials/file-upload', { pages: 10 }); %>
+    <%- include('partials/loading'); %>
+    <%- include('partials/pdf-files-summary'); %>
+
+    <div class="centered step2" style="display:none; margin-top: 40px">
+        <form class="form-horizontal task-form" autocomplete="off">
+            <input type="hidden" name="type" value="ocr"/>
+            <input type="hidden" name="outputFilenamePattern" value="" />
+
+            <div class="form-group container">
+                <label class="col-xs-6 control-label"><%= __('Language') %>: </label>
+                <div class="col-xs-6 right-side">
+                    <select id="mainLangDropdown" name="lang" class="dropdown remembered"
+                            data-style="btn-xs btn-select" data-width="110px">
+                        <option value="afr">Afrikaans</option>
+                        <option value="sqi">Albanian</option>
+                        <option value="aze">Azerbaijani</option>
+                        <option value="eus">Basque</option>
+                        <option value="bel">Belarusian</option>
+                        <option value="ben">Bengali</option>
+                        <option value="bul">Bulgarian</option>
+                        <option value="cat">Catalan</option>
+                        <option value="chi_sim">Chinese</option>
+                        <option value="hrv">Croatian</option>
+                        <option value="ces">Czech</option>
+                        <option value="dan">Danish</option>
+                        <option value="nld">Dutch</option>
+                        <option value="eng" selected="selected">English</option>
+                        <option value="est">Estonian</option>
+                        <option value="fin">Finnish</option>
+                        <option value="fra">French</option>
+                        <option value="glg">Galician</option>
+                        <option value="deu">German</option>
+                        <option value="ell">Greek</option>
+                        <option value="heb">Hebrew</option>
+                        <option value="hin">Hindi</option>
+                        <option value="hun">Hungarian</option>
+                        <option value="isl">Icelandic</option>
+                        <option value="ind">Indonesian</option>
+                        <option value="ita">Italian</option>
+                        <option value="jpn">Japanese</option>
+                        <option value="kan">Kannada</option>
+                        <option value="kor">Korean</option>
+                        <option value="lav">Latvian</option>
+                        <option value="lit">Lithuanian</option>
+                        <option value="mkd">Macedonian</option>
+                        <option value="msa">Malay</option>
+                        <option value="mal">Malayalam</option>
+                        <option value="mlt">Maltese</option>
+                        <option value="nor">Norwegian</option>
+                        <option value="fas">Persian (Farsi)</option>
+                        <option value="pol">Polish</option>
+                        <option value="por">Portuguese</option>
+                        <option value="ron">Romanian</option>
+                        <option value="rus">Russian</option>
+                        <option value="srp">Serbian</option>
+                        <option value="slk">Slovakian</option>
+                        <option value="slv">Slovenian</option>
+                        <option value="spa">Spanish</option>
+                        <option value="swa">Swahili</option>
+                        <option value="swe">Swedish</option>
+                        <option value="tam">Tamil</option>
+                        <option value="tel">Telugu</option>
+                        <option value="tha">Thai</option>
+                        <option value="chi_tra">Traditional Chinese</option>
+                        <option value="tur">Turkish</option>
+                        <option value="ukr">Ukrainian</option>
+                        <option value="vie">Vietnamese</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group container">
+                <label class="col-xs-6 control-label"><%= __('Output formats') %>:</label>
+                <div class="col-xs-6 right-side">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="outputFormats[]" value="pdf" checked="checked">
+                            PDF
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input value="txt" name="outputFormats[]" type="checkbox">
+                            Text
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container centered">
+                <div style="padding-bottom: 40px;">
+                    <div class="row head-space">
+                        <p class="hint" id="langDownloadFirstRunNotice" style="display: none">Language pack for <span class="lang_name">selected language</span> will be automatically downloaded on the first run.</p>
+                    </div>
+                </div>
+
+                <p class="tool-warning">
+                    Warning: OCR does not guarantee 100% accuracy.<br/>
+                    Characters may be incorrect. Review the results before using.
+                </p>
+                
+                <div class="row head-space-xl">
+                    <button id="ocrAllPagesSubmitBtn" type="submit" class="btn btn-default btn-medium"><%= __('Recognize text on all pages') %></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { onlyDirectory:true, outputFilenameAffix: 'ocr' }); %>
+<%- include('partials/task-screen-after'); %>

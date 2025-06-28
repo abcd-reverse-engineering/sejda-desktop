@@ -1,0 +1,292 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  label .badge {
+    margin-right: 4px;
+    vertical-align: top;
+  }
+</style>
+
+<link rel="stylesheet" href="public/css/jquery.minicolors.css">
+
+<section id="task-content" data-task="batesNumbering" data-multiple-files="true">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Bates numbering for PDF files') %></h1>
+      <h2><%= __('Bates stamp multiple files at once') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <div class="centered step2" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="batesNumbering"/>
+      <input name="pattern" value="Exhibit [FILE_NUMBER] - Case XYZ - [BATES_NUMBER]" type="hidden">
+      <input name="batesDigits" value="6" type="hidden">
+
+      <div class="container">
+        <div class="row head-space-xl">
+          <label><span class="badge">1</span> <%= __('Select Style') %></label>
+        </div>
+        <div class="row">
+          <select name="style" id="batesStyle" class="input-lg form-control remembered" style="width: 400px;">
+            <option value="bates-with-exhibit" selected="selected">Exhibit 1 Case XYZ 000001</option>
+            <option value="full-bates">Case XYZ 000001</option>
+            <option data-divider="true" disabled="disabled"></option>
+            <option value="bates-with-exhibit-5-digits">Exhibit 1 Case XYZ 00001</option>
+            <option value="full-bates-5-digits">Case XYZ 00001</option>
+            <option data-divider="true" disabled="disabled"></option>
+            <option value="bates-with-exhibit-4-digits">Exhibit 1 Case XYZ 0001</option>
+            <option value="full-bates-4-digits">Case XYZ 0001</option>
+            <option data-divider="true" disabled="disabled"></option>
+            <option value="bates-with-exhibit-3-digits">Exhibit 1 Case XYZ 001</option>
+            <option value="full-bates-3-digits">Case XYZ 001</option>
+            <option data-divider="true" disabled="disabled"></option>
+            <option value="bates-with-exhibit-1-digits">Exhibit 1 Case XYZ 1</option>
+            <option value="full-bates-1-digits">Case XYZ 1</option>
+            <option data-divider="true" disabled="disabled"></option>
+            <option value="just-number">000001, 000002, 000003</option>
+            <option value="just-number-5-digits">00001, 00002, 00003</option>
+            <option value="just-number-4-digits">0001, 0002, 0003</option>
+            <option value="just-number-3-digits">001, 002, 003</option>
+            <option value="just-number-1-digits">1, 2, 3</option>
+            <option data-divider="true" disabled="disabled"></option>
+            <option value="bates-custom">Custom style (other)</option>
+          </select>
+        </div>
+        <div class="row head-space-xl">
+          <label><span class="badge">2</span> <%= __('Customize Style') %></label>
+          <div class="dropdown">
+            <div class="bates-format-customize" data-id="bates-with-exhibit" style="display: none">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit_exhibit" value="Exhibit">
+                <div class="input-group-addon input-lg">1</div>
+                <input type="hidden" value="[FILE_NUMBER]">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">000001</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="full-bates" style="display: none">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="full-bates_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">000001</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="bates-with-exhibit-5-digits" data-digits="5">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit-5-digits_exhibit" value="Exhibit">
+                <div class="input-group-addon input-lg">1</div>
+                <input type="hidden" value="[FILE_NUMBER]">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit-5-digits_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">00001</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="bates-with-exhibit-4-digits" data-digits="4">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit-4-digits_exhibit" value="Exhibit">
+                <div class="input-group-addon input-lg">1</div>
+                <input type="hidden" value="[FILE_NUMBER]">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit-4-digits_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">0001</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="bates-with-exhibit-3-digits" data-digits="3">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit-3-digits_exhibit" value="Exhibit">
+                <div class="input-group-addon input-lg">1</div>
+                <input type="hidden" value="[FILE_NUMBER]">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit-3-digits_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">001</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="bates-with-exhibit-1-digits" data-digits="1">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit-1-digits_exhibit" value="Exhibit">
+                <div class="input-group-addon input-lg">1</div>
+                <input type="hidden" value="[FILE_NUMBER]">
+                <input type="text" class="form-control input-lg remembered" name="bates-with-exhibit-1-digits_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">1</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="full-bates-5-digits" style="display: none" data-digits="5">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="full-bates-5-digits_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">00001</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="full-bates-4-digits" style="display: none" data-digits="4">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="full-bates-4-digits_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">0001</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="full-bates-3-digits" style="display: none" data-digits="3">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="full-bates-3-digits_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">001</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="full-bates-1-digits" style="display: none" data-digits="1">
+              <div class="input-group">
+                <input type="text" class="form-control input-lg remembered" name="full-bates-1-digits_case" value="Case XYZ">
+                <div class="input-group-addon input-lg">1</div>
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="just-number" style="display: none">
+              <div class="input-group">
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="just-number-5-digits" style="display: none" data-digits="5">
+              <div class="input-group">
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="just-number-4-digits" style="display: none" data-digits="4">
+              <div class="input-group">
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="just-number-3-digits" style="display: none" data-digits="3">
+              <div class="input-group">
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="just-number-1-digits" style="display: none" data-digits="1">
+              <div class="input-group">
+                <input type="hidden" value="[BATES_NUMBER]">
+              </div>
+            </div>
+            <div class="bates-format-customize" data-id="bates-custom" id="bates-custom" style="display: none">
+              <input type="text" class="form-control input-lg remembered" name="bates-custom_text" value="Exhibit [FILE_NUMBER] Case XYZ [BATES_NUMBER]">
+            </div>
+          </div>
+        </div>
+        <div class="row head-space-xl">
+          <div id="bates-preview"></div>
+        </div>
+
+        <div class="row">
+          <label><%= __('Location on Page') %></label>
+        </div>
+        <div class="row">
+          <select class="form-control input-lg remembered" name="pageLocation" style="width: 400px;">
+            <option value="top-left"><%= __('Header left') %></option>
+            <option value="top-center" selected><%= __('Header center') %></option>
+            <option value="top-right"><%= __('Header right') %></option>
+            <option value="bottom-left"><%= __('Footer left') %></option>
+            <option value="bottom-center"><%= __('Footer center') %></option>
+            <option value="bottom-right"><%= __('Footer right') %></option>
+          </select>
+        </div>
+
+        <div class="row head-space-xl">
+          <label><%= __('Numbering') %> (<%= __('Continue from') %>)</label>
+        </div>
+        <div class="row" style="text-align: left; margin-top: 10px;">
+          <div class="col-sm-6" style="text-align: right">
+            <label class="light"><%= __('Bates sequence starts from') %>:</label>
+            <input style="width: 100px; padding: 6px; text-align: center" value="1" class="form-control input-lg remembered" name="batesStartFrom" type="text">
+            <input value="1" name="batesIncrement" type="hidden">
+            <span class="input-help">
+                  <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Use this to continue a previous Bates stamping. Eg: previous numbering stopped at sequence 1001, continue now with 1002."></i>
+                </span>
+          </div>
+          <div class="col-sm-6" style="text-align: left">
+            <label class="light"><%= __('Files counter starts from') %>:</label>
+            <input style="width: 100px; padding: 6px; text-align: center" value="1" class="form-control input-lg remembered" name="fileCountStartFrom" type="text">
+            <span class="input-help">
+                  <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                     title="Relevant only when the file/exhibit counter is also used, besides the Bates sequence. Use this to continue a previous Bates stamping. Eg: Type the number of files already stamped."></i>
+                </span>
+          </div>
+        </div>
+
+        <div class="row head-space-xl">
+          <label><%= __('Document Margins') %></label><br>
+          <div data-toggle="buttons" class="btn-group remembered">
+            <label class="btn btn-default btn-xs active">
+              <input checked="" value="false" name="addMargins" type="radio"> <%= __('Leave unchanged') %>
+            </label>
+            <label class="btn btn-default btn-xs">
+              <input value="true" name="addMargins" type="radio"> <%= __('Increase margins') %>
+              <span class="input-help">
+                        <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                           title="Increase document margins to avoid overlapping existing text."></i>
+                      </span>
+            </label>
+          </div>
+        </div>
+
+        <div id="bates-more-options" style="display: none" class="row head-space more-options">
+          <div class="row head-space-xl">
+            <label><%= __('Font') %></label><br>
+            <div data-toggle="buttons" class="btn-group">
+              <label class="btn btn-default btn-xs active times-new-roman">
+                <input checked="" value="times_roman" name="font" type="radio"> Times New Roman
+              </label>
+              <label class="btn btn-default btn-xs helvetica">
+                <input value="helvetica" name="font" type="radio"> Helvetica
+              </label>
+              <label class="btn btn-default btn-xs courier">
+                <input value="courier" name="font" type="radio"> Courier
+              </label>
+            </div>
+            <select style="vertical-align: middle" class="input-lg" name="fontSize">
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option selected="selected" value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="18">18</option>
+              <option value="20">20</option>
+              <option value="22">22</option>
+              <option value="24">24</option>
+              <option value="26">26</option>
+              <option value="28">28</option>
+              <option value="30">30</option>
+              <option value="45">45</option>
+              <option value="60">60</option>
+            </select>
+            <input type="hidden" name="color" class="minicolors-input" value="#000000" size="7">
+          </div>
+        </div>
+
+        <p class="help-block head-space">
+            <%= __('Always keep a backup of your original files') %>.
+          <span class="input-help">
+                <i class="fal fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true"
+                   title="<%= __("If you'll later need to start over and renumber your files, this can only be done using the originals.") %>"></i>
+              </span>
+        </p>
+
+        <div class="row head-space" style="margin-bottom: 20px; margin-top: 20px;">
+          <button type="submit" class="btn btn-default btn-medium"><%= __('Bates stamp') %> <i class="fal fa-chevron-right"></i></button>
+          <a class="btn btn-link btn-medium btn-more-options" href="javascript://"><%= __('More options') %></a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'bates_stamped' }); %>
+<%- include('partials/task-screen-after'); %>

@@ -1,0 +1,774 @@
+<%- include('partials/task-screen-before'); %>
+
+<style>
+  #edit-pages {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 80px;
+    background-color: #e8e8e8;
+    padding: 10px;
+    padding-bottom: 220px;
+    text-align: center;
+    min-height: 350px;
+  }
+
+  .page-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .page-wrap canvas {
+    background-color: #FFF;
+  }
+
+  .image-editable img {
+    max-width: 800px;
+  }
+
+  .text-editable,
+  .image-editable {
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  .image-editable {
+    padding: 5px;
+  }
+
+  .image-editable,
+  .text-editable {
+    border: dashed 1px transparent;
+    outline: 1px solid transparent;
+  }
+
+  .text-editable [contenteditable] {
+    margin: 5px;
+    outline: 1px solid transparent;
+  }
+
+  .image-editable.active,
+  .text-editable.active{
+    border-color: #0282e5;
+  }
+
+  .text-editable:hover:focus,
+  .text-editable.active:focus{
+    border-color: #0282e5;
+  }
+
+  .image-editable {
+    padding: 5px;
+  }
+
+  .text-editable::selection,
+  .text-editable::-moz-selection {
+    background: #9ecaed;
+  }
+
+  .text-editable.ui-draggable-handle,
+  .image-editable,
+  .shape-editable {
+    cursor: move;
+  }
+
+  .text-editable.ui-draggable-disabled,
+  .shape-editable.ui-draggable-disabled {
+    cursor: inherit;
+  }
+
+  .text-editable-menu .dropdown-menu>li>a {
+
+  }
+
+  .text-editable-menu .color-swatch,
+  .shape-editable-menu .color-swatch {
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 1px solid transparent;
+    margin-left: -4px;
+  }
+
+  .color-swatch:hover {
+    border-color: #FFF;
+  }
+
+  .color-swatch .diagonal-red-line {
+    width: 25px;
+    height: 20px;
+    border-bottom: 1px solid red;
+    -webkit-transform: translateY(10px) translateX(10px) rotate(-45deg);
+    -ms-transform: translateY(10px) translateX(10px) rotate(-45deg);
+    -moz-transform: translateY(10px) translateX(10px) rotate(-45deg);
+    position: absolute;
+    top: -18px;
+    left: -21px;
+  }
+
+  .color-swatch-col {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dropdown-menu.color-opts,
+  .dropdown-menu.background-color-opts,
+  .dropdown-menu.border-color-opts {
+    padding: 5px;
+    width: 160px;
+    text-align: center;
+  }
+
+
+  .text-editable.ui-draggable-handle,
+  .image-editable,
+  .shape-editable {
+    cursor: move;
+  }
+
+  .ui-resizable-nw,
+  .ui-resizable-ne,
+  .ui-resizable-sw,
+  .ui-resizable-se,
+  .ui-resizable-n,
+  .ui-resizable-e,
+  .ui-resizable-s,
+  .ui-resizable-w {
+    width: 10px;
+    height: 10px;
+    background-color: #FFF;
+    border: 2px solid #0282e5;
+  }
+
+  .ui-resizable-nw:hover,
+  .ui-resizable-ne:hover,
+  .ui-resizable-sw:hover,
+  .ui-resizable-se:hover,
+  .ui-resizable-n:hover,
+  .ui-resizable-e:hover,
+  .ui-resizable-s:hover,
+  .ui-resizable-w:hover {
+    background-color: #0282e5;
+  }
+
+  .ui-wrapper .ui-resizable-sw,
+  .text-editable .ui-resizable-sw {
+    display: none !important;
+  }
+
+  .ui-resizable-nw {
+    left: -5px;
+    top: -5px;
+  }
+  .ui-resizable-ne {
+    top: -5px;
+    right: -5px;
+  }
+  .ui-resizable-sw {
+    bottom: -5px;
+    left: -5px;
+  }
+  .ui-resizable-se {
+    bottom: -5px;
+    right:-5px;
+  }
+  .ui-resizable-n {
+    display: none !important;
+  }
+  .ui-resizable-s {
+    display: none !important;
+  }
+  .ui-resizable-w {
+    display: none !important;
+  }
+  .ui-resizable-e {
+    display: none !important;
+  }
+
+  .ui-rotatable-handle:before {
+    font-family: "Font Awesome 5 Pro";
+    content: "\f01e";
+    color: #0282e5;
+    font-size: 18px;
+    font-weight:300;
+    font-style: normal;
+    margin-left: -5px;
+    margin-top: 0;
+    position: absolute;
+    background-color: rgba(255,255,255,0.7);
+    height: 20px;
+    width: 20px;
+    padding-top: 10px;
+  }
+
+  .image-editable ~ .ui-rotatable-handle:before {
+    padding-top: 0 !important;
+    margin-top: -10px !important;
+  }
+
+  .ui-rotatable-handle {
+    height: 10px;
+    width: 10px;
+    cursor: pointer;
+    position: absolute;
+    display: none;
+    left: -5px;
+    bottom: -5px;
+  }
+
+  .text-editable .ui-rotatable-handle {
+    left: -5px;
+    bottom: 0;
+    line-height: 0;
+  }
+
+  .opacity-opts,
+  .font-size-opts {
+    min-width: 170px;
+  }
+
+  .opacity-opts li,
+  .font-size-opts li {
+    text-align: center;
+  }
+
+  .image-editable-menu .tooltip.top .tooltip-inner,
+  .text-editable-menu .tooltip.top .tooltip-inner {
+    width: auto;
+    min-width: 0;
+  }
+
+  li.watermark-entry:hover {
+    background-color: #f5f5f5;
+  }
+
+  .watermark-entry-delete {
+    top: 7px;
+    right: 10px;
+    position: absolute;
+    font-size: 30px;
+    color: #CCC;
+    cursor: pointer;
+    font-weight: 100;
+  }
+
+  .watermark-entry:hover {
+    color: #0282e5;
+  }
+
+  .watermark-entry {
+    position: relative;
+    padding-right: 30px;
+  }
+
+  .watermark-entry img {
+    height: 45px;
+    max-width: 300px;
+  }
+
+  #sidePanel {
+    width: 400px;
+    float: right;
+    text-align: left;
+    margin-right: 50px;
+  }
+
+  #sidePanel .form-group {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  #sidePanel #opacityRange {
+    width: 170px;
+    margin-right: 20px;
+  }
+
+  #sidePanel #opacityText {
+    width: 70px;
+    padding: 6px 6px;
+    text-align: center;
+  }
+
+  #sidePanel #fontSize {
+    width: 50px;
+    margin: 0 0 0 10px;
+    padding: 6px 6px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  #sidePanel #fontFamilySelect {
+    width: 210px;
+    display: inline-block;
+  }
+
+  #sidePanel #rotationRange {
+    width: 170px;
+    margin-right: 20px;
+  }
+
+  #sidePanel #rotationText {
+    width: 70px;
+    padding: 6px 6px;
+    text-align: center;
+  }
+
+  #sidePanel #imageWidth {
+    width: 70px;
+    margin: 0 10px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  #sidePanel #imageHeight {
+    margin: 0 0 0 10px;
+    width: 70px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  #sidePanel #watermarkText {
+    margin: 0;
+    height: 100px;
+    width: 100%;
+    background-image: -webkit-linear-gradient(top , transparent, transparent 25px,#F5F5F5 0);
+    background-size: 100% 50px;
+    background-attachment: local;
+    line-height: 25px !important;
+    padding: 0 13px;
+  }
+
+  #sidePanel .radio input[name=pageLocation] {
+    margin: 0 5px;
+  }
+
+  #sidePanel .radio {
+    margin: 0 10px;
+    text-align: right;
+  }
+
+  #tools-menu {
+    margin-bottom: 10px;
+  }
+
+  #historyList {
+    width: 240px;
+  }
+
+  #historyList .history-entry {
+    position: relative;
+  }
+
+  #historyList .history-entry.default {
+    display: none;
+  }
+
+  #historyList .history-entry-delete {
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 1px;
+    cursor: pointer;
+    width: 30px;
+    text-align: center;
+    opacity: 0.3;
+  }
+
+  #historyList .history-entry-delete:hover {
+    opacity: 1;
+  }
+
+  .minicolors {
+    border: none;
+    box-shadow: none;
+  }
+
+  .minicolors-theme-bootstrap .minicolors-swatch {
+    margin-top: 3px;
+    margin-left: 3px;
+  }
+
+  .input-lg.minicolors-input {
+    padding-left: 40px;
+    padding-right: 10px;
+    width: 118px;
+  }
+
+  .side-panel-footer {
+    text-align: right;
+    margin-top: 20px;
+    border-top: 1px #CCC solid;
+    padding-top: 20px;
+  }
+
+  #locationBottom {
+    margin-right: 0 !important;
+  }
+
+  #locationTop, #locationLeft, #locationBottom, #locationRight {
+    width: 45px;
+    padding: 6px 6px;
+    margin-left: 2px;
+    margin-right: 3px;
+    text-align: center;
+  }
+
+  #sidePanel #previewPageNumber {
+    width: 70px;
+    text-align: center;
+  }
+
+  .text-help-hint {
+    font-size: 13px;
+    color: #666;
+    line-height: 1;
+  }
+
+  .right-inputs {
+    float: right;
+    text-align: right;
+    display: inline-block;
+  }
+</style>
+
+<section id="task-content" data-task="watermark" data-multiple-files="pro">
+  <div class="container centered">
+    <div class="row">
+      <h1><%= __('Watermark PDF') %></h1>
+      <h2><%= __('Add image or text watermark to PDF documents') %></h2>
+    </div>
+  </div>
+
+  <%- include('partials/file-upload'); %>
+  <%- include('partials/loading'); %>
+  <%- include('partials/pdf-files-summary'); %>
+
+  <section class="scroll-here-step2">
+    <div class="centered" style="display: none" id="edit-pages-wrap">
+      <div id="global-help-hint" style="display: none"></div>
+      <div id="edit-pages">
+        <section id="tools-menu" class="tools-menu">
+          <div id="globalBtns">
+            <div aria-label="Tools" role="group" class="btn-group wrap">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default" title="Add text watermark" id="add-text-watermark-btn"><i class="fal fa-font"></i> Add Text</button>
+              </div>
+              <div class="btn-group">
+                  <span class="fileinput-link btn btn-default" id="upload-image-link" title="Add image watermark">
+                    <i class="fal fa-image"></i> <lift:locS>Add Image</lift:locS>
+                    <form id="imageUploadForm" action="" method="post" enctype="multipart/form-data">
+                    <input class="image-fileupload" type="file" name="file" data-url="" data-scope="editor-image" title="Add image watermark" accept="image/*">
+                    </form>
+                  </span>
+              </div>
+              <div class="btn-group">
+                <button type="button" id="watermarkTemplatesBtn" class="btn btn-default dropdown-toggle tooltip-single-line lift:locTooltip" title="Save or restore watermarks" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fal fa-history"></i> <span class="btn-caption"> <lift:locS>Templates</lift:locS></span>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu history-opts" id="historyList">
+                  <li class="history-entry default">
+                    <a href="javascript://"></a><span class="history-entry-delete">×</span>
+                  </li>
+                  <li role="separator" class="divider"></li>
+                  <li style="text-align: center; padding: 10px;">
+                    <button type="button" class="btn btn-default blue-btn save-new-template-btn">
+                      <i class="fal fa-save" style="margin-right: 5px;"></i> <lift:locS>Save new template</lift:locS>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="sidePanel" style="display: none">
+          <form class="form-inline" id="sidePanelForm">
+            <div class="form-group">
+              <label><lift:locS>Location on page</lift:locS></label>
+              <div class="right-inputs">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="pageLocation" value="centered" checked>
+                    <lift:locS>Centered</lift:locS>
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="pageLocation" value="custom">
+                    <lift:locS>Custom</lift:locS>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group custom-location-only">
+              <div class="right-inputs">
+                <label class="light">Left</label>
+                <input value="" placeholder="" class="form-control input-lg" id="locationLeft" type="text">
+                <label class="light">Right</label>
+                <input value="" placeholder="" class="form-control input-lg" id="locationRight" type="text">
+                <label class="light">Top</label>
+                <input value="" placeholder="" class="form-control input-lg" id="locationTop" type="text">
+                <label class="light">Bottom</label>
+                <input value="" placeholder="" class="form-control input-lg" id="locationBottom" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="opacityRange" style="margin-top: 5px"><lift:locS>Opacity</lift:locS></label>
+              <div class="right-inputs">
+                <input value="100" max="100" min="1" type="range" id="opacityRange">
+                <input type="text" class="form-control input-lg" id="opacityText" placeholder="">
+              </div>
+            </div>
+          </form>
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="rotationRange" style="margin-top: 5px"><lift:locS>Rotation</lift:locS></label>
+              <div class="right-inputs">
+                <input value="180" max="360" min="0" type="range" id="rotationRange">
+                <input type="text" class="form-control input-lg" id="rotationText" placeholder="">
+              </div>
+            </div>
+          </form>
+          <div class="form-group text-only">
+            <label><lift:locS>Watermark text</lift:locS></label>
+            <p class="text-help-hint"><lift:locS>To batch generate multiple versions of the same document / documents add multiple watermark texts, each on a new line</lift:locS>.</p>
+            <textarea value="" placeholder="eg: Multiple text watermarks, one per line" class="form-control input-lg" name="watermarkText" id="watermarkText" type="text"></textarea>
+          </div>
+          <div class="form-group text-only">
+            <label style="display: block"><lift:locS>Style</lift:locS></label>
+            <select class="form-control input-lg" id="fontFamilySelect">
+              <option value="helvetica">Helvetica</option>
+              <option value="courier">Courier</option>
+              <option value="times new roman">Times New Roman</option>
+            </select>
+            <input value="" placeholder="14" class="form-control input-lg" name="fontSize" id="fontSize" type="text">
+            <input type="text" name="color" class="form-control input-lg minicolors-input" value="#000000" size="7">
+          </div>
+          <div class="form-group image-only">
+            <label style="margin-top: 8px;"><lift:locS>Image</lift:locS></label>
+            <div class="right-inputs">
+              <label class="light">Width</label>
+              <input value="" placeholder="" class="form-control input-lg" name="imageWidth" id="imageWidth" type="text">
+              <label class="light">Height</label>
+              <input value="" placeholder="" class="form-control input-lg" name="imageHeight" id="imageHeight" type="text">
+            </div>
+          </div>
+          <hr style="border-color: #CCC;"/>
+          <div class="form-group">
+            <label for="opacityRange"><lift:locS>Preview page</lift:locS></label>
+            <input value="1" class="form-control input-lg" type="text" name="previewPageNumber" id="previewPageNumber">
+          </div>
+          <hr style="border-color: #CCC;"/>
+          <div class="form-group">
+            <label for="opacityRange"><lift:locS>Watermark specific pages</lift:locS></label>
+            <div class="input-group">
+              <input value="" min="1" placeholder="Examples: 1-10,13,14,100-"
+                     class="form-control input-lg thumbs-multiple-select tooltip-on-focus" type="text"
+                     id="specificPages" data-validator="page-ranges-or-empty">
+
+              <div class="input-group-addon input-help">
+                <i class="fal fa-question-circle lift:locTooltip" data-toggle="tooltip" data-placement="top" data-html="true"
+                   title="Specific pages to watermark. Type 2,3,10-20 to watermark pages 2,3 and all between 10 and 20. Leave blank to watermark all pages."></i>
+              </div>
+            </div>
+          </div>
+          <hr style="border-color: #CCC;"/>
+          <div class="form-group" style="text-align: right">
+            <button id="saveSettingsBtn" class="btn blue-btn btn-medium"><lift:locS>Save settings</lift:locS></button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <div class="centered step2 bottom-fixed" style="display:none; margin-top: 40px">
+    <form class="form-inline task-form" autocomplete="off">
+      <input type="hidden" name="type" value="watermark"/>
+      <input type="hidden" name="jsonData">
+      <input type="hidden" name="outputFilenamePattern" value="" />
+      <input type="hidden" name="pages" value="" />
+
+      <div class="container centered">
+        
+        <div class="row head-space">
+          <button id="task-submit-btn" type="submit" class="btn btn-default btn-medium"><lift:locS>Watermark PDF</lift:locS></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="image-editable-menu" class="image-editable-menu edit-menu" style="display: none">
+    <div class="btn-group" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fal fa-eye-slash" title="Adjust transparency" data-toggle="tooltip" data-placement="top"></i> <lift:locS>Opacity</lift:locS>&nbsp;<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu opacity-opts">
+          <li><input type="range" min="1" max="100" value="100" name="opacity"></li>
+        </ul>
+      </div>
+      <button class="btn btn-default recenter-opts">
+        <i class="fal fa-arrows-alt"></i> <lift:locS>Recenter</lift:locS>
+      </button>
+      <button class="btn btn-default delete-opts">
+        <i class="fal fa-trash-alt" title="Remove" data-toggle="tooltip" data-placement="top"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="text-editable-menu" class="text-editable-menu edit-menu" style="display: none">
+    <div class="btn-group" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fal fa-eye-slash" data-toggle="tooltip" data-placement="top"></i> <lift:locS>Opacity</lift:locS>&nbsp;<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu opacity-opts">
+          <li><input type="range" min="1" max="100" value="100" name="opacity"></li>
+        </ul>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <lift:locS>Color</lift:locS> <span class="caret"></span>
+        </button>
+        <div class="dropdown-menu color-opts">
+          <div class="color-swatch-col">
+            <a href="javascript://" class="color-swatch" style="background-color: #01579B"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #0277BD"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #0288D1"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #039BE5"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #03A9F4"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #29B6F6"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #4FC3F7"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #81D4FA"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #B3E5FC"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #E1F5FE"></a>
+          </div>
+          <div class="color-swatch-col">
+            <a href="javascript://" class="color-swatch" style="background-color: #1B5E20"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #2E7D32"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #388E3C"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #43A047"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #4CAF50"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #66BB6A"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #81C784"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #A5D6A7"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #C8E6C9"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #C8E6C9"></a>
+          </div>
+          <div class="color-swatch-col">
+            <a href="javascript://" class="color-swatch" style="background-color: #F57F17"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #F9A825"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FBC02D"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FDD835"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FFEB3B"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FFEE58"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FFF176"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FFF59D"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FFF9C4"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FFFDE7"></a>
+          </div>
+          <div class="color-swatch-col">
+            <a href="javascript://" class="color-swatch" style="background-color: #B71C1C"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #C62828"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #D32F2F"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #E53935"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #F44336"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #EF5350"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #E57373"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #EF9A9A"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FFCDD2"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FFEBEE"></a>
+          </div>
+          <div class="color-swatch-col">
+            <a href="javascript://" class="color-swatch" style="background-color: #4A148C"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #6A1B9A"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #7B1FA2"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #8E24AA"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #9C27B0"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #AB47BC"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #BA68C8"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #CE93D8"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #E1BEE7"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #F3E5F5"></a>
+          </div>
+          <div class="color-swatch-col">
+            <a href="javascript://" class="color-swatch" style="background-color: #3E2723"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #4E342E"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #5D4037"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #6D4C41"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #795548"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #8D6E63"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #A1887F"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #BCAAA4"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #D7CCC8"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #EFEBE9"></a>
+          </div>
+          <div class="color-swatch-col">
+            <a href="javascript://" class="color-swatch" style="background-color: #212121"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #424242"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #616161"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #757575"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #9E9E9E"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #BDBDBD"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #E0E0E0"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #EEEEEE"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #F5F5F5"></a>
+            <a href="javascript://" class="color-swatch" style="background-color: #FAFAFA"></a>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-default recenter-opts">
+        <i class="fal fa-arrows-alt"></i> <lift:locS>Recenter</lift:locS>
+      </button>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fal fa-font" data-toggle="tooltip" data-placement="top"></i> <lift:locS>Font</lift:locS> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu font-family-opts">
+          <li><a href="javascript://" class="helvetica" data-font="Helvetica,sans-serif">Helvetica</a></li>
+          <li><a href="javascript://" class="times-new-roman" data-font="'Times New Roman',serif">Times New Roman</a></li>
+          <li><a href="javascript://" class="courier" data-font="'Courier New',monospace">Courier</a></li>
+        </ul>
+      </div>
+      <button class="btn btn-default delete-opts" title="Remove watermark">
+        <i class="fal fa-trash-alt"></i>
+      </button>
+    </div>
+  </div>
+
+  <section>
+    <div style="display: none"><canvas id="image-rotation-canvas"></canvas><canvas id="image-resize-canvas"></canvas></div>
+  </section>
+
+  <section>
+    <div id="watermarkNamePrompt" class="modal app-modal" style="display: none">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-title">
+              <lift:locS>Save watermark</lift:locS>
+            </div>
+          </div>
+          <div class="modal-body">
+            <label><lift:locS>Watermark name</lift:locS></label>
+            <input type="text" class="form-control input-lg" id="watermarkTemplateName">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-xs btn-save"><lift:locS>Save</lift:locS></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script class="pageScripts" data-src="public/js/pages/watermark-pdf-desktop.min.obfuscated.js"></script>
+</section>
+
+
+<%- include('partials/task-common-output-options', { outputFilenameAffix: 'watermarked' }); %>
+<%- include('partials/task-screen-after'); %>
