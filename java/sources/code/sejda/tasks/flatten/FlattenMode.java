@@ -1,0 +1,13 @@
+package code.sejda.tasks.flatten;
+
+import scala.Option;
+import scala.reflect.ScalaSignature;
+
+/* compiled from: FlattenParameters.scala */
+@ScalaSignature(bytes = "\u0006\u0005\u00153q!\u0004\b\u0011\u0002G\u0005rcB\u0003E\u001d!\u00051EB\u0003\u000e\u001d!\u0005\u0001\u0005C\u0003\"\u0005\u0011\u0005!eB\u0003&\u0005!\u0005aEB\u0003)\u0005!\u0005\u0011\u0006C\u0003\"\u000b\u0011\u00051\u0006C\u0003-\u000b\u0011\u0005SfB\u0003:\u0005!\u0005!HB\u0003 \u0005!\u0005!\tC\u0003\"\u0013\u0011\u00051\tC\u0003-\u0013\u0011\u0005S\u0006C\u0003<\u0005\u0011\u0005AHA\u0006GY\u0006$H/\u001a8N_\u0012,'BA\b\u0011\u0003\u001d1G.\u0019;uK:T!!\u0005\n\u0002\u000bQ\f7o[:\u000b\u0005M!\u0012!B:fU\u0012\f'\"A\u000b\u0002\t\r|G-Z\u0002\u0001'\t\u0001\u0001\u0004\u0005\u0002\u001a95\t!DC\u0001\u001c\u0003\u0015\u00198-\u00197b\u0013\ti\"D\u0001\u0004B]f\u0014VMZ\u0015\u0004\u0001%)!aA!mYN\u0011!\u0001G\u0001\u0007y%t\u0017\u000e\u001e \u0015\u0003\r\u0002\"\u0001\n\u0002\u000e\u00039\t\u0011b\u00148ms\u001a{'/\\:\u0011\u0005\u001d*Q\"\u0001\u0002\u0003\u0013=sG.\u001f$pe6\u001c8cA\u0003\u0019UA\u0011A\u0005\u0001\u000b\u0002M\u0005AAo\\*ue&tw\rF\u0001/!\tycG\u0004\u00021iA\u0011\u0011GG\u0007\u0002e)\u00111GF\u0001\u0007yI|w\u000e\u001e \n\u0005UR\u0012A\u0002)sK\u0012,g-\u0003\u00028q\t11\u000b\u001e:j]\u001eT!!\u000e\u000e\u0002\u0007\u0005cG\u000e\u0005\u0002(\u0013\u0005QaM]8n'R\u0014\u0018N\\4\u0015\u0005u\u0002\u0005cA\r?U%\u0011qH\u0007\u0002\u0007\u001fB$\u0018n\u001c8\t\u000b\u0005c\u0001\u0019\u0001\u0018\u0002\u0003M\u001c2!\u0003\r+)\u0005Q\u0014a\u0003$mCR$XM\\'pI\u0016\u0004")
+/* loaded from: com.sejda.common-0.1-SNAPSHOT.jar:code/sejda/tasks/flatten/FlattenMode.class */
+public interface FlattenMode {
+    static Option<FlattenMode> fromString(final String s) {
+        return FlattenMode$.MODULE$.fromString(s);
+    }
+}

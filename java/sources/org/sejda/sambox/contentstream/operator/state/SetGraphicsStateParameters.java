@@ -1,0 +1,41 @@
+package org.sejda.sambox.contentstream.operator.state;
+
+import java.io.IOException;
+import java.util.List;
+import org.sejda.sambox.contentstream.operator.MissingOperandException;
+import org.sejda.sambox.contentstream.operator.Operator;
+import org.sejda.sambox.contentstream.operator.OperatorName;
+import org.sejda.sambox.contentstream.operator.OperatorProcessor;
+import org.sejda.sambox.cos.COSBase;
+import org.sejda.sambox.cos.COSName;
+import org.sejda.sambox.pdmodel.graphics.state.PDExtendedGraphicsState;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/* loaded from: org.sejda.sambox-3.0.24.jar:org/sejda/sambox/contentstream/operator/state/SetGraphicsStateParameters.class */
+public class SetGraphicsStateParameters extends OperatorProcessor {
+    private static final Logger LOG = LoggerFactory.getLogger(SetGraphicsStateParameters.class);
+
+    @Override // org.sejda.sambox.contentstream.operator.OperatorProcessor
+    public void process(Operator operator, List<COSBase> arguments) throws IOException {
+        if (arguments.isEmpty()) {
+            throw new MissingOperandException(operator, arguments);
+        }
+        COSBase base0 = arguments.get(0);
+        if (!(base0 instanceof COSName)) {
+            return;
+        }
+        COSName graphicsName = (COSName) base0;
+        PDExtendedGraphicsState gs = getContext().getResources().getExtGState(graphicsName);
+        if (gs == null) {
+            LOG.warn("name for 'gs' operator not found in resources: /" + graphicsName.getName());
+        } else {
+            gs.copyIntoGraphicsState(getContext().getGraphicsState());
+        }
+    }
+
+    @Override // org.sejda.sambox.contentstream.operator.OperatorProcessor
+    public String getName() {
+        return OperatorName.SET_GRAPHICS_STATE_PARAMS;
+    }
+}

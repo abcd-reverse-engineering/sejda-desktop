@@ -1,0 +1,14 @@
+package code.sejda.tasks.html;
+
+import org.sejda.model.exception.TaskException;
+import scala.Option;
+import scala.reflect.ScalaSignature;
+
+/* compiled from: HtmlToPdfConversionException.scala */
+@ScalaSignature(bytes = "\u0006\u0005-4Aa\u0003\u0007\u0001+!A\u0011\u0005\u0001B\u0001B\u0003%!\u0005\u0003\u00050\u0001\t\u0005\t\u0015!\u00031\u0011!I\u0004A!A!\u0002\u0013Q\u0004\"\u0002 \u0001\t\u0003ytaB#\r\u0003\u0003E\tA\u0012\u0004\b\u00171\t\t\u0011#\u0001H\u0011\u0015qd\u0001\"\u0001T\u0011\u001d!f!%A\u0005\u0002UCq\u0001\u0019\u0004\u0012\u0002\u0013\u0005\u0011\rC\u0004d\r\u0005\u0005I\u0011\u00023\u00039!#X\u000e\u001c+p!\u001247i\u001c8wKJ\u001c\u0018n\u001c8Fq\u000e,\u0007\u000f^5p]*\u0011QBD\u0001\u0005QRlGN\u0003\u0002\u0010!\u0005)A/Y:lg*\u0011\u0011CE\u0001\u0006g\u0016TG-\u0019\u0006\u0002'\u0005!1m\u001c3f\u0007\u0001\u0019\"\u0001\u0001\f\u0011\u0005]yR\"\u0001\r\u000b\u0005eQ\u0012!C3yG\u0016\u0004H/[8o\u0015\tYB$A\u0003n_\u0012,GN\u0003\u0002\u0012;)\ta$A\u0002pe\u001eL!\u0001\t\r\u0003\u001bQ\u000b7o[#yG\u0016\u0004H/[8o\u0003\ri7o\u001a\t\u0003G1r!\u0001\n\u0016\u0011\u0005\u0015BS\"\u0001\u0014\u000b\u0005\u001d\"\u0012A\u0002\u001fs_>$hHC\u0001*\u0003\u0015\u00198-\u00197b\u0013\tY\u0003&\u0001\u0004Qe\u0016$WMZ\u0005\u0003[9\u0012aa\u0015;sS:<'BA\u0016)\u0003\u0015\u0019\u0017-^:f!\t\tdG\u0004\u00023i9\u0011QeM\u0005\u0002S%\u0011Q\u0007K\u0001\ba\u0006\u001c7.Y4f\u0013\t9\u0004HA\u0005UQJ|w/\u00192mK*\u0011Q\u0007K\u0001\bo\"\fGo\u00149u!\rYDHI\u0007\u0002Q%\u0011Q\b\u000b\u0002\u0007\u001fB$\u0018n\u001c8\u0002\rqJg.\u001b;?)\u0011\u0001%i\u0011#\u0011\u0005\u0005\u0003Q\"\u0001\u0007\t\u000b\u0005\"\u0001\u0019\u0001\u0012\t\u000f=\"\u0001\u0013!a\u0001a!9\u0011\b\u0002I\u0001\u0002\u0004Q\u0014\u0001\b%u[2$v\u000e\u00153g\u0007>tg/\u001a:tS>tW\t_2faRLwN\u001c\t\u0003\u0003\u001a\u00192A\u0002%L!\tY\u0014*\u0003\u0002KQ\t1\u0011I\\=SK\u001a\u0004\"\u0001T)\u000e\u00035S!AT(\u0002\u0005%|'\"\u0001)\u0002\t)\fg/Y\u0005\u0003%6\u0013AbU3sS\u0006d\u0017N_1cY\u0016$\u0012AR\u0001\u001cI1,7o]5oSR$sM]3bi\u0016\u0014H\u0005Z3gCVdG\u000f\n\u001a\u0016\u0003YS#\u0001M,,\u0003a\u0003\"!\u00170\u000e\u0003iS!a\u0017/\u0002\u0013Ut7\r[3dW\u0016$'BA/)\u0003)\tgN\\8uCRLwN\\\u0005\u0003?j\u0013\u0011#\u001e8dQ\u0016\u001c7.\u001a3WCJL\u0017M\\2f\u0003m!C.Z:tS:LG\u000fJ4sK\u0006$XM\u001d\u0013eK\u001a\fW\u000f\u001c;%gU\t!M\u000b\u0002;/\u0006aqO]5uKJ+\u0007\u000f\\1dKR\tQ\r\u0005\u0002gS6\tqM\u0003\u0002i\u001f\u0006!A.\u00198h\u0013\tQwM\u0001\u0004PE*,7\r\u001e")
+/* loaded from: com.sejda.common-0.1-SNAPSHOT.jar:code/sejda/tasks/html/HtmlToPdfConversionException.class */
+public class HtmlToPdfConversionException extends TaskException {
+    public HtmlToPdfConversionException(final String msg, final Throwable cause, final Option<String> whatOpt) {
+        super(msg, cause);
+    }
+}
