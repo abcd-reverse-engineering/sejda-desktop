@@ -1,4 +1,4 @@
-# Sejda PDF Tools Desktop
+# Sejda PDF Editor/Tools Desktop
 通过 ASAR 解包工具和 JADX 逆向得到的 Sejda PDF 桌面编辑器的（伪）源代码
 
 > [!WARNING]
