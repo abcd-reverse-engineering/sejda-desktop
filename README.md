@@ -1,11 +1,7 @@
 # Sejda PDF Tools Desktop
-Sejda PDF Editor & Tools Desktop source code
-
-No modifications, no cracking. Some running errors in the program.
+通过 ASAR 解包工具和 JADX 逆向得到的 Sejda PDF 桌面编辑器的（伪）源代码
 
 > [!WARNING]
-> I used the ASAR unpacking tool to unpack resources/app.asar and resources/default_app.asar then obtained these files.
 >
-> Then I decompiled the JAR package using JADX.
-> 
-> I do not own the source code of Sejda Desktop. This repository is for learning purposes only. It is prohibited to use this source code for any software or for commercial purposes.
+> 本人并不拥有这些代码，本仓库仅供研究 Sejda PDF 编辑器工作原理，在未经 Sejda PDF 作者同意下禁止使用这些源代码。
+
