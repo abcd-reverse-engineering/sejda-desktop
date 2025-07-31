@@ -96,6 +96,8 @@ ch.qos.logback.logback-core-1.5.6.jar
 
 所以，除第三方包之外，需要逆向的包为（元数据 `META-INF/*` 均使用 JADX 提取）：
 
+> **注意**：逆向的源代码文件可能包含特定的数据类型无法解析、具名或匿名的内部类无法解析、语法错误等等意料之外的情形，需要根据编译报错信息对代码进行重构。
+
 - [x] `org.sejda.sejda-core-pro-5.1.10.1.jar`，反编译工具：ByteCode-Viewer: FernFlower
 
 - [x] `org.sejda.sejda-fonts-pro-5.1.10.1.jar`，反编译工具：ByteCode-Viewer: FernFlower
