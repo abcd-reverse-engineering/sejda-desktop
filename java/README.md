@@ -85,24 +85,24 @@ ch.qos.logback.logback-core-1.5.6.jar
 
 其中，标 `*` 号的是 Sejda 应用内部的软件包或内部引用的第三方包，其余为外部引用的第三方包。
 
-目前已确认，标 `*` 号的软件包中，有以下是开源的：
+目前已确认，标 `*` 号的软件包中，有以下是开源的（也就是上表中标 `*#` 号的软件包）：
 
-| 包名                                                                                                                                                                                     | 开源仓库地址                                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `org.sejda.imageio.webp-imageio-0.1.6.jar`                                                                                                                                             | [GitHub: sejda-pdf/webp-imageio](https://github.com/sejda-pdf/webp-imageio)（最新版本：`0.1.6`） |
-| `org.sejda.sambox-3.0.24.jar`                                                                                                                                                          | [GitHub: torakiki/sambox](https://github.com/torakiki/sambox)（包含版本 `3.0.24`）              |
-| `org.sejda.sejda-commons-3.0.0.jar`                                                                                                                                                    | [GitHub: torakiki/sejda-commons](https://github.com/torakiki/sejda-commons)（包含版本 `3.0.0`） |
-| `org.sejda.sejda-core-5.1.10.jar` `org.sejda.sejda-fonts-5.1.10.jar` `org.sejda.sejda-image-writers-5.1.10.jar` `org.sejda.sejda-model-5.1.10.jar` `org.sejda.sejda-sambox-5.1.10.jar` | [GitHub: torakiki/sejda](https://github.com/torakiki/sejda)（包含版本：`5.1.10`）                |
+| 包名                                                                                                                                                                                     | 开源仓库地址                                                                                           |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `org.sejda.imageio.webp-imageio-0.1.6.jar`                                                                                                                                             | [GitHub: sejda-pdf/webp-imageio](https://github.com/sejda-pdf/webp-imageio)（最新版本：`0.1.6`，貌似不再更新） |
+| `org.sejda.sambox-3.0.24.jar`                                                                                                                                                          | [GitHub: torakiki/sambox](https://github.com/torakiki/sambox)（包含版本 `3.0.24`）                     |
+| `org.sejda.sejda-commons-3.0.0.jar`                                                                                                                                                    | [GitHub: torakiki/sejda-commons](https://github.com/torakiki/sejda-commons)（包含版本 `3.0.0`）        |
+| `org.sejda.sejda-core-5.1.10.jar` `org.sejda.sejda-fonts-5.1.10.jar` `org.sejda.sejda-image-writers-5.1.10.jar` `org.sejda.sejda-model-5.1.10.jar` `org.sejda.sejda-sambox-5.1.10.jar` | [GitHub: torakiki/sejda](https://github.com/torakiki/sejda)（包含版本：`5.1.10`）                       |
 
-所以，除第三方包之外，需要逆向的包为：
+所以，除第三方包之外，需要逆向的包为（元数据 `META-INF/*` 均使用 JADX 提取）：
 
-- [x] `org.sejda.sejda-core-pro-5.1.10.1.jar`
+- [x] `org.sejda.sejda-core-pro-5.1.10.1.jar`，反编译工具：ByteCode-Viewer: FernFlower
 
-- [x] `org.sejda.sejda-fonts-pro-5.1.10.1.jar`
+- [x] `org.sejda.sejda-fonts-pro-5.1.10.1.jar`，反编译工具：ByteCode-Viewer: FernFlower
 
-- [x] `org.sejda.sejda-model-pro-5.1.10.1.jar`
+- [x] `org.sejda.sejda-model-pro-5.1.10.1.jar`，反编译工具：ByteCode-Viewer: FernFlower
 
-- [ ] `org.sejda.sejda-sambox-pro-5.1.10.1.jar`
+- [x] `org.sejda.sejda-sambox-pro-5.1.10.1.jar`，由于该软件包有匿名内部类，FernFlower 无法正确将内部类嵌入至主类中，因此使用 JADX 内置的反编译器处理，使用 FernFlower 反编译 `module-info.java` 元数据。
 
 - [ ] `com.sejda.common-0.1-SNAPSHOT.jar`
 
