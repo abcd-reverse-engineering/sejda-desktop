@@ -1,0 +1,432 @@
+INFO : output directory: com.sejda.pdf2html.pdf2html-0.0.72
+INFO : loading ...
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+INFO : Loaded classes: 34, methods: 392, instructions: 14309
+INFO : Resetting disk code cache, base dir: C:\Users\Manager\AppData\Local\skylot\jadx\cache\projects\com.sejda.pdf2html.pdf2html-0.0.72-4083d261f3b2d0ce302d0b4eb88da24d\code
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.$colon$colon and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.$colon$colon and scala.collection.immutable.List
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.$colon$colon and scala.collection.immutable.List
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.List
+WARN : Can't compare types, unknown hierarchy: org.jsoup.select.Elements and java.util.List
+INFO : No updates found
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.Concatenate
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.DrawObject
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.SetGraphicsStateParameters
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.Save
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.Restore
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.SetMatrix
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<com.sejda.pdf2html.Images2HTML$Position>
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.Concatenate and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.DrawObject and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.SetGraphicsStateParameters and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.Save and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.Restore and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.SetMatrix and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.pdmodel.graphics.form.PDFormXObject and org.sejda.sambox.pdmodel.graphics.PDXObject
+WARN : Can't compare types, unknown hierarchy: java.awt.image.BufferedImage and java.awt.image.RenderedImage
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.pdmodel.graphics.image.PDImageXObject and org.sejda.sambox.pdmodel.graphics.PDXObject
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.BufferedImage and java.awt.image.RenderedImage
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.text.TextPositionComparator and java.util.Comparator
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.ArraySeq$ofChar and scala.collection.IterableOnce
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.MatchError and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcI$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.reflect.ManifestFactory$IntManifest and scala.reflect.ClassTag
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.ArraySeq$ofChar and scala.collection.IterableOnce
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.MatchError and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcI$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.reflect.ManifestFactory$IntManifest and scala.reflect.ClassTag
+WARN : Can't compare types, unknown hierarchy: scala.Tuple2$mcII$sp and scala.Tuple2
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.xml.Elem
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.xml.Elem
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.xml.Elem
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.xml.Elem
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Elem and scala.xml.NodeSeq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Elem and scala.xml.NodeSeq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Elem and scala.xml.NodeSeq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Elem and scala.xml.NodeSeq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.text.TextPositionComparator and java.util.Comparator
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.Multiset<java.lang.Float> and com.google.common.collect.HashMultiset
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.util.List<org.sejda.sambox.text.TextPosition>>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.util.List<org.sejda.sambox.text.TextPosition>>
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction1$mcZF$sp and scala.Function1
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction1$mcZF$sp and scala.Function1
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcF$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction1$mcZF$sp and scala.Function1
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction1$mcZF$sp and scala.Function1
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcF$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.PrefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.MatchError and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.MatchError and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Seq and scala.collection.IterableOnce
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Seq and scala.collection.IterableOnce
+WARN : Can't compare types, unknown hierarchy: scala.MatchError and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Seq and scala.collection.immutable.Nil$
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.util.List<org.sejda.sambox.text.TextPosition>>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.util.List<org.sejda.sambox.text.TextPosition>>
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.Buffer<java.lang.String> and scala.collection.mutable.Growable
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.Buffer<java.lang.String> and scala.collection.IterableOnce
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction1$mcZI$sp and scala.Function1
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcI$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.Buffer<java.lang.String> and scala.collection.SeqOps
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.Buffer<java.lang.String> and scala.collection.SeqOps
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.Concatenate
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.DrawObject
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.SetGraphicsStateParameters
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.Save
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.Restore
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.OperatorProcessor and org.sejda.sambox.contentstream.operator.state.SetMatrix
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<com.sejda.pdf2html.Images2HTML$Position>
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.Concatenate and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.DrawObject and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.SetGraphicsStateParameters and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.Save and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.Restore and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.contentstream.operator.state.SetMatrix and org.sejda.sambox.contentstream.operator.OperatorProcessor
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.pdmodel.graphics.form.PDFormXObject and org.sejda.sambox.pdmodel.graphics.PDXObject
+WARN : Can't compare types, unknown hierarchy: java.awt.image.BufferedImage and java.awt.image.RenderedImage
+WARN : Can't compare types, unknown hierarchy: org.sejda.sambox.pdmodel.graphics.image.PDImageXObject and org.sejda.sambox.pdmodel.graphics.PDXObject
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.RenderedImage and java.awt.image.BufferedImage
+WARN : Can't compare types, unknown hierarchy: java.awt.image.BufferedImage and java.awt.image.RenderedImage
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.Multiset<java.lang.Float> and com.google.common.collect.HashMultiset
+WARN : Can't compare types, unknown hierarchy: com.google.common.collect.HashMultiset and com.google.common.collect.Multiset<java.lang.Float>
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.Buffer<java.lang.String> and scala.collection.mutable.Growable
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.Object>
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.Buffer<java.lang.String> and scala.collection.IterableOnce
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction1$mcZI$sp and scala.Function1
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcI$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.Buffer<java.lang.String> and scala.collection.SeqOps
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.mutable.Buffer<java.lang.String> and scala.collection.SeqOps
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.xml.Elem
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.xml.Elem
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.xml.Elem
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.xml.Elem
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Elem and scala.xml.NodeSeq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Elem and scala.xml.NodeSeq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Elem and scala.xml.NodeSeq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Elem and scala.xml.NodeSeq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.PrefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.Text and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.MatchError and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.MatchError and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Seq and scala.collection.IterableOnce
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Seq and scala.collection.IterableOnce
+WARN : Can't compare types, unknown hierarchy: scala.MatchError and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeBuffer and scala.collection.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.Null$ and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.UnprefixedAttribute and scala.xml.MetaData
+WARN : Can't compare types, unknown hierarchy: scala.xml.TopScope$ and scala.xml.NamespaceBinding
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.xml.NodeSeq and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Seq and scala.collection.immutable.Nil$
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.$colon$colon and scala.collection.immutable.Seq
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.$colon$colon and scala.collection.immutable.List
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.$colon$colon and scala.collection.immutable.List
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.List
+WARN : Can't compare types, unknown hierarchy: org.jsoup.select.Elements and java.util.List
+WARN : Can't compare types, unknown hierarchy: scala.$eq$colon$eq and scala.$less$colon$less
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcV$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcZ$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcZ$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.$eq$colon$eq and scala.$less$colon$less
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcV$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcZ$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcZ$sp and scala.Function0

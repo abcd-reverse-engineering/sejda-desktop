@@ -1,0 +1,22 @@
+<configuration debug="false">
+	<!-- Stop output INFO at start -->
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="code" level="WARN" />
+	<logger name="org.sejda" level="INFO" />
+	<logger name="org.sejda.sambox" level="WARN" />
+	<logger name="org.hibernate.validator" level="WARN" />
+	<logger name="org.apache.fontbox.util.autodetect.FontFileFinder" level="INFO" />
+	<logger name="org.apache.fontbox.ttf.CmapSubtable" level="ERROR"/>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

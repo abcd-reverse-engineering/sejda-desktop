@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Title: desktop-launcher
+Specification-Version: 1.0.0
+Specification-Vendor: com.sejda
+Implementation-Title: desktop-launcher
+Implementation-Version: 1.0.0
+Implementation-Vendor: com.sejda
+Implementation-Vendor-Id: com.sejda
+Main-Class: DesktopLauncher
+

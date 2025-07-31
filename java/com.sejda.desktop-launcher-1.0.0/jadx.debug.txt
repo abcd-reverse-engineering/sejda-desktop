@@ -1,0 +1,111 @@
+INFO : output directory: com.sejda.desktop-launcher-1.0.0
+INFO : loading ...
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: ScalaSig
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaInlineInfo
+WARN : Unknown java class attribute type: Scala
+WARN : Unknown java class attribute type: ScalaSig
+INFO : Loaded classes: 12, methods: 145, instructions: 3093
+INFO : Found 7 classes in disk cache, time: 2ms, dir: C:\Users\Manager\AppData\Local\skylot\jadx\cache\projects\com.sejda.desktop-launcher-1.0.0-4083d261f3b2d0ce302d0b4eb88da24d\code
+INFO : No updates found
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.Option and scala.None$
+WARN : Can't compare types, unknown hierarchy: scala.Option and scala.Some
+WARN : Can't compare types, unknown hierarchy: scala.Option and scala.None$
+WARN : Can't compare types, unknown hierarchy: scala.Option and scala.Some
+WARN : Can't compare types, unknown hierarchy: scala.Option and scala.Some
+WARN : Can't compare types, unknown hierarchy: scala.Option and scala.None$
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Some
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Some
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Some
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.None$
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.None$
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.None$
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<scala.Option<java.lang.String>>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<scala.Option<java.lang.String>>
+WARN : Code restructure failed: missing block: B:10:0x007e, code lost:
+
+    if (r0.equals(r1) != false) goto L11;
+ in method: code.limits.LicenseInformation$.fromJson(net.liftweb.json.JsonAST$JValue):code.limits.LicenseInformation, file: com.sejda.desktop-launcher-1.0.0.jar:code/limits/LicenseInformation$.class
+WARN : Can't scroll to position 3658
+java.lang.IllegalArgumentException: bad position: 3658
+	at java.desktop/javax.swing.text.JTextComponent.setCaretPosition(Unknown Source)
+	at jadx.gui.ui.codearea.AbstractCodeArea.scrollToPos(AbstractCodeArea.java:392)
+	at jadx.gui.ui.tab.TabbedPane.scrollToPos(TabbedPane.java:244)
+	at jadx.gui.ui.tab.TabbedPane.showCode(TabbedPane.java:231)
+	at jadx.gui.ui.tab.TabbedPane.onTabCodeJump(TabbedPane.java:434)
+	at jadx.gui.ui.tab.TabsController.lambda$codeJump$2(TabsController.java:186)
+	at java.base/java.util.ArrayList.forEach(Unknown Source)
+	at jadx.gui.ui.tab.TabsController.codeJump(TabsController.java:186)
+	at jadx.gui.ui.tab.TabsController.codeJump(TabsController.java:136)
+	at jadx.gui.ui.MainWindow.nodeClickAction(MainWindow.java:927)
+	at jadx.gui.ui.MainWindow$5.mousePressed(MainWindow.java:1408)
+	at java.desktop/java.awt.AWTEventMulticaster.mousePressed(Unknown Source)
+	at java.desktop/java.awt.AWTEventMulticaster.mousePressed(Unknown Source)
+	at java.desktop/java.awt.Component.processMouseEvent(Unknown Source)
+	at java.desktop/javax.swing.JComponent.processMouseEvent(Unknown Source)
+	at java.desktop/java.awt.Component.processEvent(Unknown Source)
+	at java.desktop/java.awt.Container.processEvent(Unknown Source)
+	at java.desktop/java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.desktop/java.awt.Component.dispatchEvent(Unknown Source)
+	at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+	at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+	at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.desktop/java.awt.Window.dispatchEventImpl(Unknown Source)
+	at java.desktop/java.awt.Component.dispatchEvent(Unknown Source)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.run(Unknown Source)
+WARN : Can't compare types, unknown hierarchy: org.sejda.model.notification.EventListener and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: code.util.Loggable and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.$colon$colon and scala.collection.immutable.List<code.util.ratelimit.DiskPersistentMeter>
+WARN : Can't compare types, unknown hierarchy: scala.concurrent.duration.FiniteDuration and scala.concurrent.duration.Duration
+WARN : Can't compare types, unknown hierarchy: scala.collection.immutable.Nil$ and scala.collection.immutable.List
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<java.lang.String>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: scala.None$ and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: DesktopLauncher$ and code.util.Loggable
+WARN : Can't compare types, unknown hierarchy: scala.Function0<scala.runtime.BoxedUnit> and DesktopLauncher$delayedInit$body
+WARN : Can't compare types, unknown hierarchy: DesktopLauncher$delayedInit$body and scala.Function0
+WARN : Can't compare types, unknown hierarchy: DesktopLauncher$ and code.util.Loggable
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option<code.limits.Upgrade>
+WARN : Can't compare types, unknown hierarchy: code.limits.UpgradeRequiredException and java.lang.Throwable
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option
+WARN : Can't compare types, unknown hierarchy: scala.runtime.java8.JFunction0$mcI$sp and scala.Function0
+WARN : Can't compare types, unknown hierarchy: scala.Some and scala.Option

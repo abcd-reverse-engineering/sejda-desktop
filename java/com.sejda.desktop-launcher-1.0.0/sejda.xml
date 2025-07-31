@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sejda validation="false">
+	<notification async="false" />
+	<tasks>
+		<task parameters="org.sejda.model.pro.parameter.DecryptParameters"
+			task="org.sejda.impl.sambox.pro.DecryptTask" />
+		<task parameters="org.sejda.model.pro.parameter.EncryptParameters"
+			task="org.sejda.impl.sambox.pro.EncryptTask" />
+		<task parameters="org.sejda.model.parameter.RotateParameters"
+			task="org.sejda.impl.sambox.RotateTask" />
+		<task
+			parameters="org.sejda.model.parameter.ViewerPreferencesParameters"
+			task="org.sejda.impl.sambox.ViewerPreferencesTask" />
+		<task
+			parameters="org.sejda.model.parameter.AlternateMixMultipleInputParameters"
+			task="org.sejda.impl.sambox.AlternateMixTask" />
+		<task parameters="org.sejda.model.parameter.UnpackParameters"
+			task="org.sejda.impl.sambox.UnpackTask" />
+		<task parameters="org.sejda.model.parameter.MergeParameters"
+			task="org.sejda.impl.sambox.MergeTask" />
+		<task
+			parameters="org.sejda.model.parameter.SplitByOutlineLevelParameters"
+			task="org.sejda.impl.sambox.SplitByOutlineLevelTask" />
+		<task parameters="org.sejda.model.parameter.ExtractByOutlineParameters"
+			  task="org.sejda.impl.sambox.ExtractByOutlineTask" />
+		<task
+			parameters="org.sejda.model.parameter.SplitBySizeParameters"
+			task="org.sejda.impl.sambox.SplitBySizeTask" />
+        <task
+            parameters="org.sejda.model.pro.parameter.SplitByTextContentParameters"
+            task="org.sejda.impl.sambox.pro.SplitByTextContentTask" />
+		<task
+			parameters="org.sejda.model.parameter.SplitByPagesParameters"
+			task="org.sejda.impl.sambox.SplitByPageNumbersTask" />
+		<task
+			parameters="org.sejda.model.parameter.SimpleSplitParameters"
+			task="org.sejda.impl.sambox.SplitByPageNumbersTask" />
+
+		<task parameters="org.sejda.model.parameter.SplitByEveryXPagesParameters"
+			  task="org.sejda.impl.sambox.SplitByPageNumbersTask" />
+		<task
+			parameters="org.sejda.model.parameter.ExtractPagesParameters"
+			task="org.sejda.impl.sambox.ExtractPagesTask" />
+		<task
+			parameters="org.sejda.model.pro.parameter.ExtractTextParameters"
+			task="org.sejda.impl.sambox.pro.ExtractTextTask" />
+		<task
+			parameters="org.sejda.model.parameter.SetMetadataParameters"
+			task="org.sejda.impl.sambox.SetMetadataTask" />
+		<task
+			parameters="org.sejda.model.parameter.SetPagesLabelParameters"
+			task="org.sejda.impl.sambox.SetPagesLabelTask" />
+		<task
+			parameters="org.sejda.model.parameter.SetPagesTransitionParameters"
+			task="org.sejda.impl.sambox.SetPagesTransitionTask" />
+
+        <task parameters="org.sejda.model.pro.parameter.CropParameters"
+			task="org.sejda.impl.sambox.pro.CropTask" />
+
+		<task parameters="code.sejda.tasks.doc.PdfToDocParameters"
+			  task="code.sejda.tasks.doc.PdfToLegibleDocTask" />
+
+		<task parameters="code.sejda.tasks.ocr.OcrParameters"
+			  task="code.sejda.tasks.ocr.OcrTask" />
+
+        <task
+            parameters="org.sejda.model.pro.parameter.SetHeaderFooterParameters"
+            task="org.sejda.impl.sambox.pro.SetHeaderFooterTask" />
+		<task
+			parameters="org.sejda.model.parameter.image.PdfToJpegParameters"
+			task="org.sejda.impl.sambox.PdfToMultipleImageTask" />
+
+		<task parameters="org.sejda.model.parameter.image.PdfToPngParameters" task="org.sejda.impl.sambox.PdfToMultipleImageTask" />
+		<task parameters="org.sejda.model.parameter.image.PdfToSingleTiffParameters" task="org.sejda.impl.sambox.PdfToSingleImageTask" />
+		<task parameters="org.sejda.model.parameter.image.PdfToMultipleTiffParameters" task="org.sejda.impl.sambox.PdfToMultipleImageTask" />
+
+        <task
+            parameters="org.sejda.model.pro.parameter.CombineReorderParameters"
+            task="org.sejda.impl.sambox.pro.CombineReorderTask" />
+
+        <task
+            parameters="org.sejda.model.pro.parameter.SplitDownTheMiddleParameters"
+            task="org.sejda.impl.sambox.pro.SplitDownTheMiddleTask"/>
+
+		<task parameters="org.sejda.model.pro.parameter.OptimizeParameters"
+				task="org.sejda.impl.sambox.pro.OptimizeTask"/>
+
+		<task parameters="code.sejda.tasks.edit.EditParameters"
+			  task="code.sejda.tasks.edit.EditTask"/>
+
+		<task parameters="org.sejda.model.pro.parameter.JpegToPdfParameters"
+			  task="org.sejda.impl.sambox.pro.JpegToPdfTask"/>
+
+		<task parameters="org.sejda.model.pro.parameter.NupParameters"
+			  task="org.sejda.impl.sambox.pro.NupTask"/>
+
+		<task parameters="code.sejda.tasks.excel.PdfToExcelNextParameters"
+			  task="code.sejda.tasks.excel.PdfToExcelNextTask"/>
+
+		<task parameters="org.sejda.model.pro.parameter.WatermarkParameters"
+			  task="org.sejda.impl.sambox.pro.WatermarkTask"/>
+
+		<task parameters="org.sejda.model.pro.parameter.ResizePagesParameters"
+			  task="org.sejda.impl.sambox.pro.ResizePagesTask"/>
+
+		<task parameters="org.sejda.model.pro.parameter.RepairParameters"
+			  task="org.sejda.impl.sambox.pro.RepairTask"/>
+
+		<task parameters="org.sejda.model.pro.parameter.ConvertToGrayscaleParameters"
+			  task="org.sejda.impl.sambox.pro.ConvertToGrayscaleTask"/>
+
+		<task parameters="code.sejda.tasks.flatten.FlattenParameters"
+			  task="code.sejda.tasks.flatten.FlattenTask"/>
+
+		<task parameters="code.sejda.tasks.image.ExtractImagesParameters"
+			  task="code.sejda.tasks.image.ExtractImagesTask"/>
+
+		<task parameters="code.sejda.tasks.deskew.DeskewParameters"
+			  task="code.sejda.tasks.deskew.DeskewTask"/>
+
+		<task parameters="code.sejda.tasks.rename.RenameByTextParameters"
+			  task="code.sejda.tasks.rename.RenameByTextTask"/>
+
+		<task parameters="code.sejda.tasks.bookmark.EditBookmarksParameters"
+			  task="code.sejda.tasks.bookmark.EditBookmarksTask"/>
+
+		<task parameters="code.sejda.tasks.annotation.DeleteAnnotationsParameters"
+			  task="code.sejda.tasks.annotation.DeleteAnnotationsTask"/>
+	</tasks>
+</sejda>

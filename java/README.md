@@ -98,18 +98,18 @@ ch.qos.logback.logback-core-1.5.6.jar
 
 > **注意**：逆向的源代码文件可能包含特定的数据类型无法解析、具名或匿名的内部类无法解析、语法错误等等意料之外的情形，需要根据编译报错信息对代码进行重构。
 
-- [x] `org.sejda.sejda-core-pro-5.1.10.1.jar`，反编译工具：ByteCode-Viewer: FernFlower
+- [x] `org.sejda.sejda-core-pro-5.1.10.1.jar`。反编译工具：ByteCode-Viewer: FernFlower
 
-- [x] `org.sejda.sejda-fonts-pro-5.1.10.1.jar`，反编译工具：ByteCode-Viewer: FernFlower
+- [x] `org.sejda.sejda-fonts-pro-5.1.10.1.jar`。反编译工具：ByteCode-Viewer: FernFlower
 
-- [x] `org.sejda.sejda-model-pro-5.1.10.1.jar`，反编译工具：ByteCode-Viewer: FernFlower
+- [x] `org.sejda.sejda-model-pro-5.1.10.1.jar`。反编译工具：ByteCode-Viewer: FernFlower
 
-- [x] `org.sejda.sejda-sambox-pro-5.1.10.1.jar`，由于该软件包有匿名内部类，FernFlower 无法正确将内部类嵌入至主类中，因此使用 JADX 内置的反编译器处理，使用 FernFlower 反编译 `module-info.java` 元数据。
+- [x] `org.sejda.sejda-sambox-pro-5.1.10.1.jar`。由于该软件包有匿名内部类，FernFlower 无法正确将内部类嵌入至主类中，因此使用 JADX 内置的反编译器处理，使用 FernFlower 反编译 `module-info.java` 元数据。
 
-- [ ] `com.sejda.common-0.1-SNAPSHOT.jar`
+- [ ] `com.sejda.common-0.1-SNAPSHOT.jar`。
 
-- [ ] `com.sejda.desktop-launcher-1.0.0.jar`
+- [x] `com.sejda.desktop-launcher-1.0.0.jar`
 
-- [ ] `com.sejda.desktop-launcher-1.0.0-classpath.jar`
+- [x] `com.sejda.desktop-launcher-1.0.0-classpath.jar`，该软件包只有一份清单文件：`META-INF/MANIFEST.MF`，记录了 Sejda PDF 编辑器要使用的所有 `jar` 包名称。
 
-- [ ] `com.sejda.pdf2html.pdf2html-0.0.72.jar`
+- [x] `com.sejda.pdf2html.pdf2html-0.0.72.jar`。`ClassName$.class` 疑似合成类或匿名内部类（编译器优化？）；该软件包没有 `module-info.class`。
