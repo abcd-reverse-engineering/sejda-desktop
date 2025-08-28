@@ -1,8 +1,6 @@
 # Sejda PDF Editor/Tools Desktop
 
-通过 ASAR 解包工具和各种 Java 反编译器逆向得到的 Sejda PDF 桌面编辑器的（伪）源代码【项目仍在施工】
-
-（@Sejda 作者：别忘了将 .DS_Store 添加至 Electron 打包工具的排除列表中哦！）
+通过 ASAR 解包工具和各种 Java 反编译器逆向得到的 Sejda PDF 桌面编辑器的（伪）源代码
 
 > [!WARNING]
 > 
