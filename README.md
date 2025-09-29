@@ -1,6 +1,8 @@
 # Sejda PDF Editor/Tools Desktop
 
-通过 ASAR 解包工具和各种 Java 反编译器逆向得到的 Sejda PDF 桌面编辑器的（伪）源代码
+通过 ASAR 解包工具和各种 Java 反编译器逆向得到的 Sejda PDF 桌面编辑器的（伪）源代码。
+
+当前版本：v7.8.8
 
 > [!WARNING]
 > 
